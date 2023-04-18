@@ -1105,7 +1105,7 @@
             }
             return dispatcher.useContext(Context);
           }
-          function useState4(initialState) {
+          function useState5(initialState) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useState(initialState);
           }
@@ -1907,7 +1907,7 @@
           exports.useMemo = useMemo2;
           exports.useReducer = useReducer;
           exports.useRef = useRef6;
-          exports.useState = useState4;
+          exports.useState = useState5;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
           exports.version = ReactVersion;
@@ -2403,9 +2403,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React19 = require_react();
+          var React21 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4010,7 +4010,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React19.Children.forEach(props.children, function(child) {
+                  React21.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12457,7 +12457,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React19.Component().refs;
+          var emptyRefsObject = new React21.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24761,7 +24761,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React19 = require_react();
+          var React21 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24787,7 +24787,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React19.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25646,10 +25646,13 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React18 = __toESM(require_react());
+  var React20 = __toESM(require_react());
 
-  // src/ImageEditor.tsx
-  var React17 = __toESM(require_react());
+  // src/App/ImageEditor.tsx
+  var React19 = __toESM(require_react());
+
+  // src/App/WelcomeScreen.tsx
+  var import_react11 = __toESM(require_react());
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -32160,13 +32163,68 @@ Please use another name.` : formatMuiErrorMessage(18));
   } : void 0;
   var Button_default = Button;
 
-  // node_modules/@mui/icons-material/esm/ShoppingCartRounded.js
+  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
   var import_jsx_runtime11 = __toESM(require_jsx_runtime());
-  var ShoppingCartRounded_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime11.jsx)("path", {
-    d: "M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 3c0 .55.45 1 1 1h1l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h11c.55 0 1-.45 1-1s-.45-1-1-1H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.67-1.43c-.16-.35-.52-.57-.9-.57H2c-.55 0-1 .45-1 1zm16 15c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
-  }), "ShoppingCartRounded");
+  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime11.jsx)("path", {
+    d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
+  }), "OpenInBrowser");
 
-  // src/ImageEditor.tsx
+  // src/App/WelcomeScreen.tsx
+  function openImageButtonOnClick(props) {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = (event) => {
+      if (event.target === null) {
+        console.log("Target is null");
+        return;
+      }
+      if (!(event.target instanceof HTMLInputElement)) {
+        console.log("Target is not HTMLInputElement");
+        return;
+      }
+      if (event.target.files === null) {
+        console.log("Files is null");
+        return;
+      }
+      if (event.target.files.length === 0) {
+        console.log("Files length is 0");
+        return;
+      }
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event2) => {
+        const image = new Image();
+        image.src = event2.target.result;
+        image.onload = () => {
+          props.onImageDone(image);
+        };
+      };
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  }
+  function WelcomeScreen(props) {
+    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement(Typography_default, null, "Welcome to Image Editor"), /* @__PURE__ */ import_react11.default.createElement(Typography_default, null, "Please select an image to edit"), /* @__PURE__ */ import_react11.default.createElement(
+      Button_default,
+      {
+        variant: "outlined",
+        startIcon: /* @__PURE__ */ import_react11.default.createElement(OpenInBrowser_default, null),
+        onClick: () => {
+          openImageButtonOnClick(props);
+        }
+      },
+      "Open Image"
+    ));
+  }
+
+  // src/App/EditorScreen.tsx
+  var import_react12 = __toESM(require_react());
+  function EditorScreen(props) {
+    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("h1", null, "Editor"), /* @__PURE__ */ import_react12.default.createElement("img", { src: props.image.src }));
+  }
+
+  // src/App/ImageEditor.tsx
   var head = document.getElementsByTagName("head")[0];
   var link = document.createElement("link");
   link.rel = "stylesheet";
@@ -32178,7 +32236,20 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");
     }
-    return /* @__PURE__ */ React17.createElement("div", null, /* @__PURE__ */ React17.createElement(Typography_default, null, "Image Editor"), /* @__PURE__ */ React17.createElement(Button_default, { variant: "text", startIcon: /* @__PURE__ */ React17.createElement(ShoppingCartRounded_default, null) }, "Add to Cart"), /* @__PURE__ */ React17.createElement(Button_default, { variant: "contained", startIcon: /* @__PURE__ */ React17.createElement(ShoppingCartRounded_default, null) }, "Add to Cart"), /* @__PURE__ */ React17.createElement(Button_default, { variant: "outlined", startIcon: /* @__PURE__ */ React17.createElement(ShoppingCartRounded_default, null) }, "Add to Cart"), /* @__PURE__ */ React17.createElement("img", { src: props.image }));
+    if (typeof props.image === "string") {
+      console.log("ImageEditor: image is string");
+      props.image = new Image();
+      props.image.src = props.image;
+    }
+    if (props.image instanceof HTMLImageElement) {
+      console.log("ImageEditor: image is HTMLImageElement");
+    }
+    const [image, setImage] = React19.useState(props.image);
+    function handleImageDone(image2) {
+      console.log("ImageEditor: handleImageDone");
+      setImage(image2);
+    }
+    return image === void 0 ? /* @__PURE__ */ React19.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React19.createElement(EditorScreen, { image });
   }
   var ImageEditor_default = ImageEditor;
 
@@ -32186,7 +32257,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React18.createElement(React18.StrictMode, null, /* @__PURE__ */ React18.createElement(ImageEditor_default, null))
+      /* @__PURE__ */ React20.createElement(React20.StrictMode, null, /* @__PURE__ */ React20.createElement(ImageEditor_default, null))
     );
     console.log("App.tsx: App() rendered");
   }

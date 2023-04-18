@@ -1,6 +1,7 @@
 import {createRoot} from "react-dom/client";
 import * as React from "react";
-import ImageEditor from "./ImageEditor";
+import ImageEditor from "./App/ImageEditor";
+
 
 export function bindElement(element: HTMLElement) {
     const root = createRoot(element);
