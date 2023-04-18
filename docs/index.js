@@ -32267,6 +32267,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function main() {
     return __async(this, null, function* () {
       const root = document.getElementById("root");
+      root.innerHTML = "";
       bindElement(root);
     });
   }
