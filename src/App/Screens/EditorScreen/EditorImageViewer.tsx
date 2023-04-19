@@ -8,12 +8,8 @@ export interface EditorImageViewerProps {
 
 export function EditorImageViewer(props: EditorImageViewerProps) {
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
-    const divRef = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
         if (canvasRef.current === null) {
-            return;
-        }
-        if (divRef.current === null) {
             return;
         }
         const canvas = canvasRef.current;
@@ -34,25 +30,14 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
     });
 
     return (
-        <div style={
-            {
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
+        <canvas
+            ref={canvasRef}
+            style={
+                {
+                    width: `${props.canvasWidth}px`,
+                    height: `${props.canvasHeight}px`,
+                }
             }
-        }
-        ref={divRef}>
-            <canvas ref={canvasRef}
-                    style={
-                        {
-                            width: `${props.canvasWidth}px`,
-                            height: `${props.canvasHeight}px`,
-                        }
-                    }
-            ></canvas>
-        </div>
+        ></canvas>
     );
 }

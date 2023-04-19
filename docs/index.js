@@ -25651,7 +25651,18 @@
   // src/App/ImageEditor.tsx
   var React21 = __toESM(require_react());
 
-  // src/App/WelcomeScreen.tsx
+  // src/App/SetupDependencies.ts
+  function SetupDependencies() {
+    const head = document.getElementsByTagName("head")[0];
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+    link.media = "all";
+    head.appendChild(link);
+  }
+
+  // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
   var import_react11 = __toESM(require_react());
 
   // node_modules/@mui/material/colors/common.js
@@ -32413,7 +32424,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
   }), "OpenInBrowser");
 
-  // src/App/WelcomeScreen.tsx
+  // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
   function openImageButtonOnClick(props) {
     const input = document.createElement("input");
     input.type = "file";
@@ -32516,7 +32527,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
-  // src/App/EditorScreen.tsx
+  // src/App/Screens/EditorScreen/EditorScreen.tsx
   var import_react13 = __toESM(require_react());
 
   // node_modules/react-resizable-panels/dist/react-resizable-panels.module.js
@@ -33558,16 +33569,12 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
   $971f2c37f9d2b98e$export$8829ecf6b6b15484.displayName = "PanelResizeHandle";
 
-  // src/App/EditorImageViewer.tsx
+  // src/App/Screens/EditorScreen/EditorImageViewer.tsx
   var import_react12 = __toESM(require_react());
   function EditorImageViewer(props) {
     const canvasRef = import_react12.default.useRef(null);
-    const divRef = import_react12.default.useRef(null);
     import_react12.default.useEffect(() => {
       if (canvasRef.current === null) {
-        return;
-      }
-      if (divRef.current === null) {
         return;
       }
       const canvas = canvasRef.current;
@@ -33587,32 +33594,18 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
     });
     return /* @__PURE__ */ import_react12.default.createElement(
-      "div",
+      "canvas",
       {
+        ref: canvasRef,
         style: {
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        ref: divRef
-      },
-      /* @__PURE__ */ import_react12.default.createElement(
-        "canvas",
-        {
-          ref: canvasRef,
-          style: {
-            width: `${props.canvasWidth}px`,
-            height: `${props.canvasHeight}px`
-          }
+          width: `${props.canvasWidth}px`,
+          height: `${props.canvasHeight}px`
         }
-      )
+      }
     );
   }
 
-  // src/App/EditorScreen.tsx
+  // src/App/Screens/EditorScreen/EditorScreen.tsx
   function EditorScreen(props) {
     const [canvasWidth, setCanvasWidth] = import_react13.default.useState(0);
     const [canvasHeight, setCanvasHeight] = import_react13.default.useState(0);
@@ -33654,18 +33647,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           }
         )
       )
-    ), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, null, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
-  }
-
-  // src/App/SetupDependencies.ts
-  function SetupDependencies() {
-    const head = document.getElementsByTagName("head")[0];
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.type = "text/css";
-    link.href = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
-    link.media = "all";
-    head.appendChild(link);
+    ), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
   }
 
   // src/App/ImageEditor.tsx
@@ -33700,12 +33682,19 @@ Please use another name.` : formatMuiErrorMessage(18));
   var ImageEditor_default = ImageEditor;
 
   // src/Binder.tsx
+  var testImage = (() => {
+    const image = new Image();
+    image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Pleiades_large.jpg/1024px-Pleiades_large.jpg";
+    return image;
+  })();
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
       /* @__PURE__ */ React22.createElement(React22.StrictMode, null, /* @__PURE__ */ React22.createElement(
         ImageEditor_default,
-        null
+        {
+          image: testImage
+        }
       ))
     );
     console.log("Binder: bindElement");

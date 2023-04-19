@@ -47,9 +47,6 @@ function openImageButtonOnClick(props: WelcomeScreenProps) {
 export function WelcomeScreen(props: WelcomeScreenProps) {
 
     const [dragging, setDragging] = React.useState(false);
-
-
-
     return (
         <div
         style={

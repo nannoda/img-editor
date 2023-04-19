@@ -5,7 +5,6 @@ import {EditorImageViewer} from "./EditorImageViewer";
 
 export interface EditorScreenProps {
     image: HTMLImageElement;
-
 }
 
 export function EditorScreen(props: EditorScreenProps) {
@@ -59,7 +58,7 @@ export function EditorScreen(props: EditorScreenProps) {
                     />
                 </div>
             </Panel>
-            <PanelResizeHandle>
+            <PanelResizeHandle onDragging={handleOnDrag}>
                 <Divider orientation="vertical"/>
             </PanelResizeHandle>
             <Panel defaultSize={25}>
