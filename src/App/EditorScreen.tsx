@@ -10,22 +10,56 @@ export interface EditorScreenProps {
 
 export function EditorScreen(props: EditorScreenProps) {
 
+
+    const [canvasWidth, setCanvasWidth] = React.useState(0);
+    const [canvasHeight, setCanvasHeight] = React.useState(0);
+    const canvasDivRef = React.useRef<HTMLDivElement>(null);
+
+
     function handleOnDrag() {
         console.log("EditorScreen: handleOnDrag");
+
+        if (canvasDivRef.current === null) {
+            return;
+        }
+        const canvasDiv = canvasDivRef.current;
+        const canvasDivWidth = canvasDiv.clientWidth;
+        const canvasDivHeight = canvasDiv.clientHeight;
+        setCanvasWidth(canvasDivWidth);
+        setCanvasHeight(canvasDivHeight);
     }
+    // setCanvasHeight(100);
+    // setCanvasWidth(100);
 
 
     return (
         <PanelGroup direction="horizontal">
-            <Panel >
-                <EditorImageViewer
-                    image={props.image}
-                    resizeCallback={() => {
+            <Panel
 
-                    }}
-                />
+            onResize={
+                () => {
+                    console.log("EditorScreen: onResize");
+                    handleOnDrag();
+                }
+            }>
+                <div ref={
+                    canvasDivRef
+                }
+                style={
+                    {
+                        width: "100%",
+                        height: "100%",
+                    }
+                }
+                >
+                    <EditorImageViewer
+                        image={props.image}
+                        canvasWidth={canvasWidth}
+                        canvasHeight={canvasHeight}
+                    />
+                </div>
             </Panel>
-            <PanelResizeHandle onDragging={handleOnDrag}>
+            <PanelResizeHandle>
                 <Divider orientation="vertical"/>
             </PanelResizeHandle>
             <Panel defaultSize={25}>

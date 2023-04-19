@@ -2,6 +2,7 @@ import * as React from 'react';
 import {WelcomeScreen} from "./WelcomeScreen";
 import {EditorScreen} from "./EditorScreen";
 import {SetupDependencies} from "./SetupDependencies";
+import {useEffect} from "react";
 
 SetupDependencies();
 

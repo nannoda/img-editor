@@ -33575,8 +33575,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (context === null) {
         return;
       }
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      canvas.width = props.canvasWidth;
+      canvas.height = props.canvasHeight;
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(props.image, 0, 0, canvas.width, canvas.height);
       for (let i = 0; i < canvas.width; i += 10) {
@@ -33604,8 +33604,8 @@ Please use another name.` : formatMuiErrorMessage(18));
         {
           ref: canvasRef,
           style: {
-            width: "100%",
-            height: "100%"
+            width: `${props.canvasWidth}px`,
+            height: `${props.canvasHeight}px`
           }
         }
       )
@@ -33614,17 +33614,47 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/App/EditorScreen.tsx
   function EditorScreen(props) {
+    const [canvasWidth, setCanvasWidth] = import_react13.default.useState(0);
+    const [canvasHeight, setCanvasHeight] = import_react13.default.useState(0);
+    const canvasDivRef = import_react13.default.useRef(null);
     function handleOnDrag() {
       console.log("EditorScreen: handleOnDrag");
-    }
-    return /* @__PURE__ */ import_react13.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, null, /* @__PURE__ */ import_react13.default.createElement(
-      EditorImageViewer,
-      {
-        image: props.image,
-        resizeCallback: () => {
-        }
+      if (canvasDivRef.current === null) {
+        return;
       }
-    )), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
+      const canvasDiv = canvasDivRef.current;
+      const canvasDivWidth = canvasDiv.clientWidth;
+      const canvasDivHeight = canvasDiv.clientHeight;
+      setCanvasWidth(canvasDivWidth);
+      setCanvasHeight(canvasDivHeight);
+    }
+    return /* @__PURE__ */ import_react13.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react13.default.createElement(
+      $c33df6d7c39fd3ee$export$2ddb90ad54e5f587,
+      {
+        onResize: () => {
+          console.log("EditorScreen: onResize");
+          handleOnDrag();
+        }
+      },
+      /* @__PURE__ */ import_react13.default.createElement(
+        "div",
+        {
+          ref: canvasDivRef,
+          style: {
+            width: "100%",
+            height: "100%"
+          }
+        },
+        /* @__PURE__ */ import_react13.default.createElement(
+          EditorImageViewer,
+          {
+            image: props.image,
+            canvasWidth,
+            canvasHeight
+          }
+        )
+      )
+    ), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, null, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
   }
 
   // src/App/SetupDependencies.ts

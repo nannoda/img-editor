@@ -2,16 +2,13 @@ import React from "react";
 
 export interface EditorImageViewerProps {
     image: HTMLImageElement;
-    resizeCallback: (
-        callback: (width: number, height: number) => void
-    )=>void;
+    canvasWidth: number;
+    canvasHeight: number;
 }
 
 export function EditorImageViewer(props: EditorImageViewerProps) {
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
     const divRef = React.useRef<HTMLDivElement>(null);
-
-
     React.useEffect(() => {
         if (canvasRef.current === null) {
             return;
@@ -24,8 +21,8 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
         if (context === null) {
             return;
         }
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        canvas.width = props.canvasWidth;
+        canvas.height = props.canvasHeight;
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(props.image, 0, 0, canvas.width, canvas.height);
         for (let i = 0; i < canvas.width; i += 10) {
@@ -51,8 +48,8 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
             <canvas ref={canvasRef}
                     style={
                         {
-                            width: "100%",
-                            height: "100%",
+                            width: `${props.canvasWidth}px`,
+                            height: `${props.canvasHeight}px`,
                         }
                     }
             ></canvas>
