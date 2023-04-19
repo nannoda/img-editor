@@ -1117,7 +1117,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect5(create, deps) {
+          function useEffect6(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1899,7 +1899,7 @@
           exports.useContext = useContext6;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect5;
+          exports.useEffect = useEffect6;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle3;
           exports.useInsertionEffect = useInsertionEffect3;
@@ -2403,9 +2403,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React22 = require_react();
+          var React23 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React23.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4010,7 +4010,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React22.Children.forEach(props.children, function(child) {
+                  React23.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12457,7 +12457,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React22.Component().refs;
+          var emptyRefsObject = new React23.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24761,7 +24761,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React22 = require_react();
+          var React23 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24787,7 +24787,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React23.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25646,10 +25646,10 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React21 = __toESM(require_react());
+  var React22 = __toESM(require_react());
 
   // src/App/ImageEditor.tsx
-  var React20 = __toESM(require_react());
+  var React21 = __toESM(require_react());
 
   // src/App/WelcomeScreen.tsx
   var import_react11 = __toESM(require_react());
@@ -32449,21 +32449,75 @@ Please use another name.` : formatMuiErrorMessage(18));
     input.click();
   }
   function WelcomeScreen(props) {
-    return /* @__PURE__ */ import_react11.default.createElement("div", null, /* @__PURE__ */ import_react11.default.createElement(Typography_default, null, "Welcome to Image Editor"), /* @__PURE__ */ import_react11.default.createElement(Typography_default, null, "Please select an image to edit"), /* @__PURE__ */ import_react11.default.createElement(
-      Button_default,
+    const [dragging, setDragging] = import_react11.default.useState(false);
+    return /* @__PURE__ */ import_react11.default.createElement(
+      "div",
       {
-        variant: "outlined",
-        startIcon: /* @__PURE__ */ import_react11.default.createElement(OpenInBrowser_default, null),
-        onClick: () => {
-          openImageButtonOnClick(props);
+        style: {
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: dragging ? blue_default[50] : "white"
+        },
+        onDragEnter: (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          console.log("DragEnter");
+          setDragging(true);
+        },
+        onDragLeave: (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          console.log("DragEnd");
+          setDragging(false);
+        },
+        onDragOver: (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          console.log("DragOver");
+          setDragging(true);
+        },
+        onDrop: (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          console.log("Drop");
+          setDragging(false);
+          const files = event.dataTransfer.files;
+          if (files.length === 0) {
+            console.log("Files length is 0");
+            return;
+          }
+          const file = files[0];
+          const reader = new FileReader();
+          reader.onload = (event2) => {
+            const image = new Image();
+            image.src = event2.target.result;
+            image.onload = () => {
+              props.onImageDone(image);
+            };
+          };
+          reader.readAsDataURL(file);
         }
       },
-      "Open Image"
-    ));
+      /* @__PURE__ */ import_react11.default.createElement(
+        Button_default,
+        {
+          variant: "outlined",
+          startIcon: /* @__PURE__ */ import_react11.default.createElement(OpenInBrowser_default, null),
+          onClick: () => {
+            openImageButtonOnClick(props);
+          }
+        },
+        "Open Image"
+      )
+    );
   }
 
   // src/App/EditorScreen.tsx
-  var import_react12 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
 
   // node_modules/react-resizable-panels/dist/react-resizable-panels.module.js
   var $jhddX$react = __toESM(require_react());
@@ -33504,19 +33558,73 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
   $971f2c37f9d2b98e$export$8829ecf6b6b15484.displayName = "PanelResizeHandle";
 
-  // src/App/EditorScreen.tsx
-  function EditorScreen(props) {
-    return /* @__PURE__ */ import_react12.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react12.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, null, /* @__PURE__ */ import_react12.default.createElement(
-      "img",
+  // src/App/EditorImageViewer.tsx
+  var import_react12 = __toESM(require_react());
+  function EditorImageViewer(props) {
+    const canvasRef = import_react12.default.useRef(null);
+    const divRef = import_react12.default.useRef(null);
+    import_react12.default.useEffect(() => {
+      if (canvasRef.current === null) {
+        return;
+      }
+      if (divRef.current === null) {
+        return;
+      }
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      if (context === null) {
+        return;
+      }
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(props.image, 0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < canvas.width; i += 10) {
+        context.beginPath();
+        context.moveTo(i, 0);
+        context.lineTo(i, canvas.height);
+        context.stroke();
+      }
+    });
+    return /* @__PURE__ */ import_react12.default.createElement(
+      "div",
       {
-        src: props.image.src,
         style: {
           width: "100%",
           height: "100%",
-          objectFit: "contain"
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center"
+        },
+        ref: divRef
+      },
+      /* @__PURE__ */ import_react12.default.createElement(
+        "canvas",
+        {
+          ref: canvasRef,
+          style: {
+            width: "100%",
+            height: "100%"
+          }
+        }
+      )
+    );
+  }
+
+  // src/App/EditorScreen.tsx
+  function EditorScreen(props) {
+    function handleOnDrag() {
+      console.log("EditorScreen: handleOnDrag");
+    }
+    return /* @__PURE__ */ import_react13.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, null, /* @__PURE__ */ import_react13.default.createElement(
+      EditorImageViewer,
+      {
+        image: props.image,
+        resizeCallback: () => {
         }
       }
-    )), /* @__PURE__ */ import_react12.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, null, /* @__PURE__ */ import_react12.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react12.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react12.default.createElement(Typography_default, null, "Panel 2")));
+    )), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
   }
 
   // src/App/SetupDependencies.ts
@@ -33536,20 +33644,18 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");
     }
-    if (typeof props.image === "string") {
-      console.log("ImageEditor: image is string");
-      props.image = new Image();
-      props.image.src = props.image;
-    }
-    if (props.image instanceof HTMLImageElement) {
-      console.log("ImageEditor: image is HTMLImageElement");
-    }
-    const [image, setImage] = React20.useState(props.image);
+    const [image, setImage] = React21.useState(props.image);
     function handleImageDone(image2) {
       console.log("ImageEditor: handleImageDone");
       setImage(image2);
     }
-    return /* @__PURE__ */ React20.createElement(
+    if (props.image) {
+      props.image.onload = () => {
+        console.log("ImageEditor: props.image.onload");
+        setImage(props.image);
+      };
+    }
+    return /* @__PURE__ */ React21.createElement(
       "div",
       {
         style: {
@@ -33558,7 +33664,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           overflow: "scroll"
         }
       },
-      image === void 0 ? /* @__PURE__ */ React20.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React20.createElement(EditorScreen, { image })
+      image === void 0 ? /* @__PURE__ */ React21.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React21.createElement(EditorScreen, { image })
     );
   }
   var ImageEditor_default = ImageEditor;
@@ -33567,7 +33673,10 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React21.createElement(React21.StrictMode, null, /* @__PURE__ */ React21.createElement(ImageEditor_default, null))
+      /* @__PURE__ */ React22.createElement(React22.StrictMode, null, /* @__PURE__ */ React22.createElement(
+        ImageEditor_default,
+        null
+      ))
     );
     console.log("Binder: bindElement");
   }

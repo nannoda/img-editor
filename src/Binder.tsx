@@ -7,7 +7,15 @@ export function bindElement(element: HTMLElement) {
     const root = createRoot(element);
     root.render(
         <React.StrictMode>
-            <ImageEditor/>
+            <ImageEditor
+            //     image={
+            //     (() => {
+            //         const image = new Image();
+            //         image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cat_poster_1.jpg/1200px-Cat_poster_1.jpg";
+            //         return image;
+            //     })()
+            // }
+            />
         </React.StrictMode>
     );
     console.log("Binder: bindElement");

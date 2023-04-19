@@ -1,27 +1,31 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Divider, Typography} from "@mui/material";
-import {Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
+import {ImperativePanelHandle, Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
+import {EditorImageViewer} from "./EditorImageViewer";
 
 export interface EditorScreenProps {
     image: HTMLImageElement;
+
 }
 
 export function EditorScreen(props: EditorScreenProps) {
+
+    function handleOnDrag() {
+        console.log("EditorScreen: handleOnDrag");
+    }
+
+
     return (
         <PanelGroup direction="horizontal">
-            <Panel>
-                <img src={props.image.src}
-                style={
-                    {
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
+            <Panel >
+                <EditorImageViewer
+                    image={props.image}
+                    resizeCallback={() => {
 
-                    }
-                }
+                    }}
                 />
             </Panel>
-            <PanelResizeHandle>
+            <PanelResizeHandle onDragging={handleOnDrag}>
                 <Divider orientation="vertical"/>
             </PanelResizeHandle>
             <Panel defaultSize={25}>

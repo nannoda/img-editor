@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Typography} from "@mui/material";
 import {OpenInBrowser} from "@mui/icons-material";
+import { blue } from '@mui/material/colors';
 
 export interface WelcomeScreenProps {
     onImageDone: (
@@ -44,17 +45,80 @@ function openImageButtonOnClick(props: WelcomeScreenProps) {
 }
 
 export function WelcomeScreen(props: WelcomeScreenProps) {
+
+    const [dragging, setDragging] = React.useState(false);
+
+
+
     return (
-        <div>
-            <Typography>Welcome to Image Editor</Typography>
-            <Typography>Please select an image to edit</Typography>
+        <div
+        style={
+            {
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: dragging ? blue[50]: "white",
+            }
+        }
+        onDragEnter={
+            (event: React.DragEvent<HTMLDivElement>) => {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log("DragEnter")
+                setDragging(true);
+            }
+        }
+        onDragLeave={
+            (event: React.DragEvent<HTMLDivElement>) => {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log("DragEnd")
+                setDragging(false);
+            }
+        }
+        onDragOver={
+            (event: React.DragEvent<HTMLDivElement>) => {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log("DragOver")
+                setDragging(true);
+            }
+        }
+        onDrop={
+            (event: React.DragEvent<HTMLDivElement>) => {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log("Drop")
+                setDragging(false);
+                const files = event.dataTransfer.files;
+                if (files.length === 0) {
+                    console.log("Files length is 0")
+                    return;
+                }
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = (event: any) => {
+                    const image = new Image();
+                    image.src = event.target.result;
+                    image.onload = () => {
+                        props.onImageDone(image);
+                    };
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        >
             <Button variant="outlined"
                     startIcon={<OpenInBrowser/>}
                     onClick={
                         () => {
                             openImageButtonOnClick(props);
                         }
-                    }>
+                    }
+            >
                 Open Image
             </Button>
         </div>

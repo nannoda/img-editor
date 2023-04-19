@@ -6,20 +6,12 @@ import {SetupDependencies} from "./SetupDependencies";
 SetupDependencies();
 
 export interface ImageEditorProps {
-    image?: string | HTMLImageElement;
+    image?: HTMLImageElement;
 }
 
 function ImageEditor(props: ImageEditorProps) {
     if (props.image === undefined) {
         console.log("ImageEditor: image is undefined");
-    }
-    if (typeof props.image === "string") {
-        console.log("ImageEditor: image is string");
-        props.image = new Image();
-        props.image.src = (props.image as any);
-    }
-    if (props.image instanceof HTMLImageElement) {
-        console.log("ImageEditor: image is HTMLImageElement");
     }
 
     const [image, setImage] = React.useState(props.image);
@@ -29,17 +21,28 @@ function ImageEditor(props: ImageEditorProps) {
         setImage(image);
     }
 
+    if (props.image) {
+        props.image.onload = () => {
+            console.log("ImageEditor: props.image.onload")
+            setImage(props.image);
+        }
+    }
+
     return (
         <div
-        style={
-            {
-                width: "100%",
-                height: "100%",
-                overflow: "scroll",
+            style={
+                {
+                    width: "100%",
+                    height: "100%",
+                    overflow: "scroll",
+                }
             }
-        }
         >
-            {image === undefined ? <WelcomeScreen onImageDone={handleImageDone}/> : <EditorScreen image={image}/>}
+            {
+                image === undefined ?
+                    <WelcomeScreen onImageDone={handleImageDone}/> :
+                    <EditorScreen image={image}/>
+            }
         </div>
     );
 }
