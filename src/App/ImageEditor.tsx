@@ -30,9 +30,17 @@ function ImageEditor(props: ImageEditorProps) {
     }
 
     return (
-        image === undefined ?
-            <WelcomeScreen onImageDone={handleImageDone}/> :
-            <EditorScreen image={image}/>
+        <div
+        style={
+            {
+                width: "100%",
+                height: "100%",
+                overflow: "scroll",
+            }
+        }
+        >
+            {image === undefined ? <WelcomeScreen onImageDone={handleImageDone}/> : <EditorScreen image={image}/>}
+        </div>
     );
 }
 

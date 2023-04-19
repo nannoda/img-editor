@@ -992,7 +992,7 @@
             }
             return lazyType;
           }
-          function forwardRef8(render) {
+          function forwardRef9(render) {
             {
               if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
                 error("forwardRef requires a render function but received a `memo` component. Instead of forwardRef(memo(...)), use memo(forwardRef(...)).");
@@ -1889,7 +1889,7 @@
           exports.createElement = createElement$1;
           exports.createFactory = createFactory;
           exports.createRef = createRef;
-          exports.forwardRef = forwardRef8;
+          exports.forwardRef = forwardRef9;
           exports.isValidElement = isValidElement2;
           exports.lazy = lazy;
           exports.memo = memo2;
@@ -2403,9 +2403,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React21 = require_react();
+          var React22 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4010,7 +4010,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React21.Children.forEach(props.children, function(child) {
+                  React22.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12457,7 +12457,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React21.Component().refs;
+          var emptyRefsObject = new React22.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24761,7 +24761,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React21 = require_react();
+          var React22 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24787,7 +24787,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React21.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React22.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25646,10 +25646,10 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React20 = __toESM(require_react());
+  var React21 = __toESM(require_react());
 
   // src/App/ImageEditor.tsx
-  var React19 = __toESM(require_react());
+  var React20 = __toESM(require_react());
 
   // src/App/WelcomeScreen.tsx
   var import_react11 = __toESM(require_react());
@@ -32163,9 +32163,253 @@ Please use another name.` : formatMuiErrorMessage(18));
   } : void 0;
   var Button_default = Button;
 
-  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
+  // node_modules/@mui/material/Divider/Divider.js
+  var React17 = __toESM(require_react());
+  var import_prop_types11 = __toESM(require_prop_types());
+
+  // node_modules/@mui/material/Divider/dividerClasses.js
+  function getDividerUtilityClass(slot) {
+    return generateUtilityClass("MuiDivider", slot);
+  }
+  var dividerClasses = generateUtilityClasses("MuiDivider", ["root", "absolute", "fullWidth", "inset", "middle", "flexItem", "light", "vertical", "withChildren", "withChildrenVertical", "textAlignRight", "textAlignLeft", "wrapper", "wrapperVertical"]);
+
+  // node_modules/@mui/material/Divider/Divider.js
   var import_jsx_runtime11 = __toESM(require_jsx_runtime());
-  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime11.jsx)("path", {
+  var _excluded15 = ["absolute", "children", "className", "component", "flexItem", "light", "orientation", "role", "textAlign", "variant"];
+  var useUtilityClasses5 = (ownerState) => {
+    const {
+      absolute,
+      children,
+      classes,
+      flexItem,
+      light: light2,
+      orientation,
+      textAlign,
+      variant
+    } = ownerState;
+    const slots = {
+      root: ["root", absolute && "absolute", variant, light2 && "light", orientation === "vertical" && "vertical", flexItem && "flexItem", children && "withChildren", children && orientation === "vertical" && "withChildrenVertical", textAlign === "right" && orientation !== "vertical" && "textAlignRight", textAlign === "left" && orientation !== "vertical" && "textAlignLeft"],
+      wrapper: ["wrapper", orientation === "vertical" && "wrapperVertical"]
+    };
+    return composeClasses(slots, getDividerUtilityClass, classes);
+  };
+  var DividerRoot = styled_default("div", {
+    name: "MuiDivider",
+    slot: "Root",
+    overridesResolver: (props, styles) => {
+      const {
+        ownerState
+      } = props;
+      return [styles.root, ownerState.absolute && styles.absolute, styles[ownerState.variant], ownerState.light && styles.light, ownerState.orientation === "vertical" && styles.vertical, ownerState.flexItem && styles.flexItem, ownerState.children && styles.withChildren, ownerState.children && ownerState.orientation === "vertical" && styles.withChildrenVertical, ownerState.textAlign === "right" && ownerState.orientation !== "vertical" && styles.textAlignRight, ownerState.textAlign === "left" && ownerState.orientation !== "vertical" && styles.textAlignLeft];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    margin: 0,
+    // Reset browser default style.
+    flexShrink: 0,
+    borderWidth: 0,
+    borderStyle: "solid",
+    borderColor: (theme.vars || theme).palette.divider,
+    borderBottomWidth: "thin"
+  }, ownerState.absolute && {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%"
+  }, ownerState.light && {
+    borderColor: theme.vars ? `rgba(${theme.vars.palette.dividerChannel} / 0.08)` : alpha(theme.palette.divider, 0.08)
+  }, ownerState.variant === "inset" && {
+    marginLeft: 72
+  }, ownerState.variant === "middle" && ownerState.orientation === "horizontal" && {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2)
+  }, ownerState.variant === "middle" && ownerState.orientation === "vertical" && {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  }, ownerState.orientation === "vertical" && {
+    height: "100%",
+    borderBottomWidth: 0,
+    borderRightWidth: "thin"
+  }, ownerState.flexItem && {
+    alignSelf: "stretch",
+    height: "auto"
+  }), ({
+    theme,
+    ownerState
+  }) => _extends({}, ownerState.children && {
+    display: "flex",
+    whiteSpace: "nowrap",
+    textAlign: "center",
+    border: 0,
+    "&::before, &::after": {
+      position: "relative",
+      width: "100%",
+      borderTop: `thin solid ${(theme.vars || theme).palette.divider}`,
+      top: "50%",
+      content: '""',
+      transform: "translateY(50%)"
+    }
+  }), ({
+    theme,
+    ownerState
+  }) => _extends({}, ownerState.children && ownerState.orientation === "vertical" && {
+    flexDirection: "column",
+    "&::before, &::after": {
+      height: "100%",
+      top: "0%",
+      left: "50%",
+      borderTop: 0,
+      borderLeft: `thin solid ${(theme.vars || theme).palette.divider}`,
+      transform: "translateX(0%)"
+    }
+  }), ({
+    ownerState
+  }) => _extends({}, ownerState.textAlign === "right" && ownerState.orientation !== "vertical" && {
+    "&::before": {
+      width: "90%"
+    },
+    "&::after": {
+      width: "10%"
+    }
+  }, ownerState.textAlign === "left" && ownerState.orientation !== "vertical" && {
+    "&::before": {
+      width: "10%"
+    },
+    "&::after": {
+      width: "90%"
+    }
+  }));
+  var DividerWrapper = styled_default("span", {
+    name: "MuiDivider",
+    slot: "Wrapper",
+    overridesResolver: (props, styles) => {
+      const {
+        ownerState
+      } = props;
+      return [styles.wrapper, ownerState.orientation === "vertical" && styles.wrapperVertical];
+    }
+  })(({
+    theme,
+    ownerState
+  }) => _extends({
+    display: "inline-block",
+    paddingLeft: `calc(${theme.spacing(1)} * 1.2)`,
+    paddingRight: `calc(${theme.spacing(1)} * 1.2)`
+  }, ownerState.orientation === "vertical" && {
+    paddingTop: `calc(${theme.spacing(1)} * 1.2)`,
+    paddingBottom: `calc(${theme.spacing(1)} * 1.2)`
+  }));
+  var Divider = /* @__PURE__ */ React17.forwardRef(function Divider2(inProps, ref) {
+    const props = useThemeProps2({
+      props: inProps,
+      name: "MuiDivider"
+    });
+    const {
+      absolute = false,
+      children,
+      className,
+      component = children ? "div" : "hr",
+      flexItem = false,
+      light: light2 = false,
+      orientation = "horizontal",
+      role = component !== "hr" ? "separator" : void 0,
+      textAlign = "center",
+      variant = "fullWidth"
+    } = props, other = _objectWithoutPropertiesLoose(props, _excluded15);
+    const ownerState = _extends({}, props, {
+      absolute,
+      component,
+      flexItem,
+      light: light2,
+      orientation,
+      role,
+      textAlign,
+      variant
+    });
+    const classes = useUtilityClasses5(ownerState);
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DividerRoot, _extends({
+      as: component,
+      className: clsx_m_default(classes.root, className),
+      role,
+      ref,
+      ownerState
+    }, other, {
+      children: children ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DividerWrapper, {
+        className: classes.wrapper,
+        ownerState,
+        children
+      }) : null
+    }));
+  });
+  true ? Divider.propTypes = {
+    // ----------------------------- Warning --------------------------------
+    // | These PropTypes are generated from the TypeScript type definitions |
+    // |     To update them edit the d.ts file and run "yarn proptypes"     |
+    // ----------------------------------------------------------------------
+    /**
+     * Absolutely position the element.
+     * @default false
+     */
+    absolute: import_prop_types11.default.bool,
+    /**
+     * The content of the component.
+     */
+    children: import_prop_types11.default.node,
+    /**
+     * Override or extend the styles applied to the component.
+     */
+    classes: import_prop_types11.default.object,
+    /**
+     * @ignore
+     */
+    className: import_prop_types11.default.string,
+    /**
+     * The component used for the root node.
+     * Either a string to use a HTML element or a component.
+     */
+    component: import_prop_types11.default.elementType,
+    /**
+     * If `true`, a vertical divider will have the correct height when used in flex container.
+     * (By default, a vertical divider will have a calculated height of `0px` if it is the child of a flex container.)
+     * @default false
+     */
+    flexItem: import_prop_types11.default.bool,
+    /**
+     * If `true`, the divider will have a lighter color.
+     * @default false
+     */
+    light: import_prop_types11.default.bool,
+    /**
+     * The component orientation.
+     * @default 'horizontal'
+     */
+    orientation: import_prop_types11.default.oneOf(["horizontal", "vertical"]),
+    /**
+     * @ignore
+     */
+    role: import_prop_types11.default.string,
+    /**
+     * The system prop that allows defining system overrides as well as additional CSS styles.
+     */
+    sx: import_prop_types11.default.oneOfType([import_prop_types11.default.arrayOf(import_prop_types11.default.oneOfType([import_prop_types11.default.func, import_prop_types11.default.object, import_prop_types11.default.bool])), import_prop_types11.default.func, import_prop_types11.default.object]),
+    /**
+     * The text alignment.
+     * @default 'center'
+     */
+    textAlign: import_prop_types11.default.oneOf(["center", "left", "right"]),
+    /**
+     * The variant to use.
+     * @default 'fullWidth'
+     */
+    variant: import_prop_types11.default.oneOfType([import_prop_types11.default.oneOf(["fullWidth", "inset", "middle"]), import_prop_types11.default.string])
+  } : void 0;
+  var Divider_default = Divider;
+
+  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime());
+  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime12.jsx)("path", {
     d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
   }), "OpenInBrowser");
 
@@ -32220,8 +32464,1059 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/App/EditorScreen.tsx
   var import_react12 = __toESM(require_react());
+
+  // node_modules/react-resizable-panels/dist/react-resizable-panels.module.js
+  var $jhddX$react = __toESM(require_react());
+  var { createElement: $ef07efbe5fa7d87e$export$c8a8987d4410bf2d, createContext: $ef07efbe5fa7d87e$export$fd42f52fd3ae1109, forwardRef: $ef07efbe5fa7d87e$export$257a8862b851cb5b, useCallback: $ef07efbe5fa7d87e$export$35808ee640e87ca7, useContext: $ef07efbe5fa7d87e$export$fae74005e78b1a27, useEffect: $ef07efbe5fa7d87e$export$6d9c69b0de29b591, useImperativeHandle: $ef07efbe5fa7d87e$export$d5a552a76deda3c2, useLayoutEffect: $ef07efbe5fa7d87e$export$e5c5a5f917a5871c, useMemo: $ef07efbe5fa7d87e$export$1538c33de8887b59, useRef: $ef07efbe5fa7d87e$export$b8f5890fc79d6aca, useState: $ef07efbe5fa7d87e$export$60241385465d0a34 } = $jhddX$react;
+  var $ef07efbe5fa7d87e$export$f680877a34711e37 = $jhddX$react["useId".toString()];
+  var $3f95d3e171760903$var$canUseEffectHooks = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
+  var $3f95d3e171760903$var$useIsomorphicLayoutEffect = $3f95d3e171760903$var$canUseEffectHooks ? (0, $ef07efbe5fa7d87e$export$e5c5a5f917a5871c) : () => {
+  };
+  var $3f95d3e171760903$export$2e2bcd8739ae039 = $3f95d3e171760903$var$useIsomorphicLayoutEffect;
+  var $e504a2438473eda9$var$wrappedUseId = typeof (0, $ef07efbe5fa7d87e$export$f680877a34711e37) === "function" ? (0, $ef07efbe5fa7d87e$export$f680877a34711e37) : () => null;
+  var $e504a2438473eda9$var$counter = 0;
+  function $e504a2438473eda9$export$2e2bcd8739ae039(idFromParams = null) {
+    const idFromUseId = $e504a2438473eda9$var$wrappedUseId();
+    const idRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(idFromParams || idFromUseId || null);
+    if (idRef.current === null)
+      idRef.current = "" + $e504a2438473eda9$var$counter++;
+    return idRef.current;
+  }
+  var $af466b485b9d515d$export$7d8c6d083caec74a = (0, $ef07efbe5fa7d87e$export$fd42f52fd3ae1109)(null);
+  $af466b485b9d515d$export$7d8c6d083caec74a.displayName = "PanelGroupContext";
+  function $c33df6d7c39fd3ee$var$PanelWithForwardedRef({ children = null, className: classNameFromProps = "", collapsible = false, defaultSize = null, forwardedRef, id: idFromProps = null, maxSize = 100, minSize = 10, onCollapse = null, onResize = null, order = null, style: styleFromProps = {}, tagName: Type = "div" }) {
+    const context = (0, $ef07efbe5fa7d87e$export$fae74005e78b1a27)((0, $af466b485b9d515d$export$7d8c6d083caec74a));
+    if (context === null)
+      throw Error(`Panel components must be rendered within a PanelGroup container`);
+    const panelId = (0, $e504a2438473eda9$export$2e2bcd8739ae039)(idFromProps);
+    const { collapsePanel, expandPanel, getPanelStyle, registerPanel, resizePanel, unregisterPanel } = context;
+    const callbacksRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)({
+      onCollapse,
+      onResize
+    });
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      callbacksRef.current.onCollapse = onCollapse;
+      callbacksRef.current.onResize = onResize;
+    });
+    if (minSize < 0 || minSize > 100)
+      throw Error(`Panel minSize must be between 0 and 100, but was ${minSize}`);
+    else if (maxSize < 0 || maxSize > 100)
+      throw Error(`Panel maxSize must be between 0 and 100, but was ${maxSize}`);
+    else if (defaultSize !== null) {
+      if (defaultSize < 0 || defaultSize > 100)
+        throw Error(`Panel defaultSize must be between 0 and 100, but was ${defaultSize}`);
+      else if (minSize > defaultSize && !collapsible) {
+        console.error(`Panel minSize ${minSize} cannot be greater than defaultSize ${defaultSize}`);
+        defaultSize = minSize;
+      }
+    }
+    (0, $3f95d3e171760903$export$2e2bcd8739ae039)(() => {
+      const panel = {
+        callbacksRef,
+        collapsible,
+        defaultSize,
+        id: panelId,
+        maxSize,
+        minSize,
+        order
+      };
+      registerPanel(panelId, panel);
+      return () => {
+        unregisterPanel(panelId);
+      };
+    }, [
+      collapsible,
+      defaultSize,
+      panelId,
+      maxSize,
+      minSize,
+      order,
+      registerPanel,
+      unregisterPanel
+    ]);
+    const style3 = getPanelStyle(panelId);
+    const committedValuesRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)({
+      size: $c33df6d7c39fd3ee$var$parseSizeFromStyle(style3)
+    });
+    (0, $3f95d3e171760903$export$2e2bcd8739ae039)(() => {
+      committedValuesRef.current.size = $c33df6d7c39fd3ee$var$parseSizeFromStyle(style3);
+    });
+    (0, $ef07efbe5fa7d87e$export$d5a552a76deda3c2)(forwardedRef, () => ({
+      collapse: () => collapsePanel(panelId),
+      expand: () => expandPanel(panelId),
+      getCollapsed() {
+        return committedValuesRef.current.size === 0;
+      },
+      getSize() {
+        return committedValuesRef.current.size;
+      },
+      resize: (percentage) => resizePanel(panelId, percentage)
+    }), [
+      collapsePanel,
+      expandPanel,
+      panelId,
+      resizePanel
+    ]);
+    return (0, $ef07efbe5fa7d87e$export$c8a8987d4410bf2d)(Type, {
+      children,
+      className: classNameFromProps,
+      "data-panel": "",
+      "data-panel-collapsible": collapsible || void 0,
+      "data-panel-id": panelId,
+      "data-panel-size": parseFloat("" + style3.flexGrow).toFixed(1),
+      id: `data-panel-id-${panelId}`,
+      style: {
+        ...style3,
+        ...styleFromProps
+      }
+    });
+  }
+  var $c33df6d7c39fd3ee$export$2ddb90ad54e5f587 = (0, $ef07efbe5fa7d87e$export$257a8862b851cb5b)((props, ref) => (0, $ef07efbe5fa7d87e$export$c8a8987d4410bf2d)($c33df6d7c39fd3ee$var$PanelWithForwardedRef, {
+    ...props,
+    forwardedRef: ref
+  }));
+  $c33df6d7c39fd3ee$var$PanelWithForwardedRef.displayName = "Panel";
+  $c33df6d7c39fd3ee$export$2ddb90ad54e5f587.displayName = "forwardRef(Panel)";
+  function $c33df6d7c39fd3ee$var$parseSizeFromStyle(style3) {
+    const { flexGrow } = style3;
+    if (typeof flexGrow === "string")
+      return parseFloat(flexGrow);
+    else
+      return flexGrow;
+  }
+  function $6889c3a3ed41cfd1$var$getSerializationKey(panels) {
+    return panels.map((panel) => {
+      const { minSize, order } = panel;
+      return order ? `${order}:${minSize}` : `${minSize}`;
+    }).sort((a, b) => a.localeCompare(b)).join(",");
+  }
+  function $6889c3a3ed41cfd1$var$loadSerializedPanelGroupState(autoSaveId, storage) {
+    try {
+      const serialized = storage.getItem(`PanelGroup:sizes:${autoSaveId}`);
+      if (serialized) {
+        const parsed = JSON.parse(serialized);
+        if (typeof parsed === "object" && parsed != null)
+          return parsed;
+      }
+    } catch (error) {
+    }
+    return null;
+  }
+  function $6889c3a3ed41cfd1$export$9c80c6617f0386da(autoSaveId, panels, storage) {
+    const state = $6889c3a3ed41cfd1$var$loadSerializedPanelGroupState(autoSaveId, storage);
+    if (state) {
+      const key = $6889c3a3ed41cfd1$var$getSerializationKey(panels);
+      var _state_key;
+      return (_state_key = state[key]) !== null && _state_key !== void 0 ? _state_key : null;
+    }
+    return null;
+  }
+  function $6889c3a3ed41cfd1$export$af183b313c61be4f(autoSaveId, panels, sizes, storage) {
+    const key = $6889c3a3ed41cfd1$var$getSerializationKey(panels);
+    const state = $6889c3a3ed41cfd1$var$loadSerializedPanelGroupState(autoSaveId, storage) || {};
+    state[key] = sizes;
+    try {
+      storage.setItem(`PanelGroup:sizes:${autoSaveId}`, JSON.stringify(state));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  var $a8e83be196252871$export$d6d3992f3becc879 = 10;
+  function $d6f7e4c3aa9e02d7$export$f50bae335f53943c(event, panels, idBefore, idAfter, delta, prevSizes, panelSizeBeforeCollapse, initialDragState) {
+    const { sizes: initialSizes } = initialDragState || {};
+    const baseSizes = initialSizes || prevSizes;
+    if (delta === 0)
+      return baseSizes;
+    const panelsArray = $d6f7e4c3aa9e02d7$export$a861c0ad45885494(panels);
+    const nextSizes = baseSizes.concat();
+    let deltaApplied = 0;
+    {
+      const pivotId2 = delta < 0 ? idAfter : idBefore;
+      const index2 = panelsArray.findIndex((panel2) => panel2.id === pivotId2);
+      const panel = panelsArray[index2];
+      const baseSize = baseSizes[index2];
+      const nextSize = $d6f7e4c3aa9e02d7$var$safeResizePanel(panel, Math.abs(delta), baseSize, event);
+      if (baseSize === nextSize)
+        return baseSizes;
+      else {
+        if (nextSize === 0 && baseSize > 0)
+          panelSizeBeforeCollapse.set(pivotId2, baseSize);
+        delta = delta < 0 ? baseSize - nextSize : nextSize - baseSize;
+      }
+    }
+    let pivotId = delta < 0 ? idBefore : idAfter;
+    let index = panelsArray.findIndex((panel) => panel.id === pivotId);
+    while (true) {
+      const panel = panelsArray[index];
+      const baseSize = baseSizes[index];
+      const deltaRemaining = Math.abs(delta) - Math.abs(deltaApplied);
+      const nextSize = $d6f7e4c3aa9e02d7$var$safeResizePanel(panel, 0 - deltaRemaining, baseSize, event);
+      if (baseSize !== nextSize) {
+        if (nextSize === 0 && baseSize > 0)
+          panelSizeBeforeCollapse.set(panel.id, baseSize);
+        deltaApplied += baseSize - nextSize;
+        nextSizes[index] = nextSize;
+        if (deltaApplied.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)).localeCompare(Math.abs(delta).toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)), void 0, {
+          numeric: true
+        }) >= 0)
+          break;
+      }
+      if (delta < 0) {
+        if (--index < 0)
+          break;
+      } else {
+        if (++index >= panelsArray.length)
+          break;
+      }
+    }
+    if (deltaApplied === 0)
+      return baseSizes;
+    pivotId = delta < 0 ? idAfter : idBefore;
+    index = panelsArray.findIndex((panel) => panel.id === pivotId);
+    nextSizes[index] = baseSizes[index] + deltaApplied;
+    return nextSizes;
+  }
+  function $d6f7e4c3aa9e02d7$export$b8e48269e4faa934(panelsArray, prevSizes, nextSizes) {
+    nextSizes.forEach((nextSize, index) => {
+      const prevSize = prevSizes[index];
+      if (prevSize !== nextSize) {
+        const { callbacksRef, collapsible } = panelsArray[index];
+        const { onCollapse, onResize } = callbacksRef.current;
+        if (onResize)
+          onResize(nextSize);
+        if (collapsible && onCollapse) {
+          if (!prevSize && nextSize !== 0)
+            onCollapse(false);
+          else if (prevSize !== 0 && nextSize === 0)
+            onCollapse(true);
+        }
+      }
+    });
+  }
+  function $d6f7e4c3aa9e02d7$export$5a5b0c1d38c23c3b(id, panelsArray) {
+    if (panelsArray.length < 2)
+      return [
+        null,
+        null
+      ];
+    const index = panelsArray.findIndex((panel) => panel.id === id);
+    if (index < 0)
+      return [
+        null,
+        null
+      ];
+    const isLastPanel = index === panelsArray.length - 1;
+    const idBefore = isLastPanel ? panelsArray[index - 1].id : id;
+    const idAfter = isLastPanel ? id : panelsArray[index + 1].id;
+    return [
+      idBefore,
+      idAfter
+    ];
+  }
+  function $d6f7e4c3aa9e02d7$export$6f43503e166de6fb(panels, id, sizes) {
+    if (panels.size === 1)
+      return "100";
+    const panelsArray = $d6f7e4c3aa9e02d7$export$a861c0ad45885494(panels);
+    const index = panelsArray.findIndex((panel) => panel.id === id);
+    const size = sizes[index];
+    if (size == null)
+      return "0";
+    return size.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879));
+  }
+  function $d6f7e4c3aa9e02d7$export$7361ed18ff57179e(id) {
+    const element = document.querySelector(`[data-panel-id="${id}"]`);
+    if (element)
+      return element;
+    return null;
+  }
+  function $d6f7e4c3aa9e02d7$export$5e67632cf3550a9c(id) {
+    const element = document.querySelector(`[data-panel-group-id="${id}"]`);
+    if (element)
+      return element;
+    return null;
+  }
+  function $d6f7e4c3aa9e02d7$export$2e27d3a347680388(id) {
+    const element = document.querySelector(`[data-panel-resize-handle-id="${id}"]`);
+    if (element)
+      return element;
+    return null;
+  }
+  function $d6f7e4c3aa9e02d7$export$96a40be80fb6c3c8(id) {
+    const handles = $d6f7e4c3aa9e02d7$export$8d0cd3c32ddc045e();
+    const index = handles.findIndex((handle) => handle.getAttribute("data-panel-resize-handle-id") === id);
+    return index !== null && index !== void 0 ? index : null;
+  }
+  function $d6f7e4c3aa9e02d7$export$8d0cd3c32ddc045e() {
+    return Array.from(document.querySelectorAll(`[data-panel-resize-handle-id]`));
+  }
+  function $d6f7e4c3aa9e02d7$export$ae14931f0a0256a3(groupId) {
+    return Array.from(document.querySelectorAll(`[data-panel-resize-handle-id][data-panel-group-id="${groupId}"]`));
+  }
+  function $d6f7e4c3aa9e02d7$export$68d3a33c21dfbe27(groupId, handleId, panelsArray) {
+    var _panelsArray_index, _panelsArray_;
+    const handle = $d6f7e4c3aa9e02d7$export$2e27d3a347680388(handleId);
+    const handles = $d6f7e4c3aa9e02d7$export$ae14931f0a0256a3(groupId);
+    const index = handle ? handles.indexOf(handle) : -1;
+    var _panelsArray_index_id;
+    const idBefore = (_panelsArray_index_id = (_panelsArray_index = panelsArray[index]) === null || _panelsArray_index === void 0 ? void 0 : _panelsArray_index.id) !== null && _panelsArray_index_id !== void 0 ? _panelsArray_index_id : null;
+    var _panelsArray__id;
+    const idAfter = (_panelsArray__id = (_panelsArray_ = panelsArray[index + 1]) === null || _panelsArray_ === void 0 ? void 0 : _panelsArray_.id) !== null && _panelsArray__id !== void 0 ? _panelsArray__id : null;
+    return [
+      idBefore,
+      idAfter
+    ];
+  }
+  function $d6f7e4c3aa9e02d7$export$a861c0ad45885494(panels) {
+    return Array.from(panels.values()).sort((panelA, panelB) => {
+      const orderA = panelA.order;
+      const orderB = panelB.order;
+      if (orderA == null && orderB == null)
+        return 0;
+      else if (orderA == null)
+        return -1;
+      else if (orderB == null)
+        return 1;
+      else
+        return orderA - orderB;
+    });
+  }
+  function $d6f7e4c3aa9e02d7$var$safeResizePanel(panel, delta, prevSize, event) {
+    const nextSizeUnsafe = prevSize + delta;
+    if (panel.collapsible) {
+      if (prevSize > 0) {
+        if (nextSizeUnsafe <= 0)
+          return 0;
+      } else {
+        var _event_type;
+        const isKeyboardEvent = event === null || event === void 0 ? void 0 : (_event_type = event.type) === null || _event_type === void 0 ? void 0 : _event_type.startsWith("key");
+        if (!isKeyboardEvent) {
+          if (nextSizeUnsafe < panel.minSize)
+            return 0;
+        }
+      }
+    }
+    const nextSize = Math.min(panel.maxSize, Math.max(panel.minSize, nextSizeUnsafe));
+    return nextSize;
+  }
+  function $8f51c2d77bf1da88$export$ec391ce65b083ed4(event, handleId, direction, initialOffset = 0, initialHandleElementRect = null) {
+    const isHorizontal = direction === "horizontal";
+    let pointerOffset = 0;
+    if ($8f51c2d77bf1da88$export$764db16956f554f8(event))
+      pointerOffset = isHorizontal ? event.clientX : event.clientY;
+    else if ($8f51c2d77bf1da88$export$c4dfce035d43d1e0(event)) {
+      const firstTouch = event.touches[0];
+      pointerOffset = isHorizontal ? firstTouch.screenX : firstTouch.screenY;
+    } else
+      return 0;
+    const handleElement = (0, $d6f7e4c3aa9e02d7$export$2e27d3a347680388)(handleId);
+    const rect = initialHandleElementRect || handleElement.getBoundingClientRect();
+    const elementOffset = isHorizontal ? rect.left : rect.top;
+    return pointerOffset - elementOffset - initialOffset;
+  }
+  function $8f51c2d77bf1da88$export$354b17c0684607ed(event, groupId, handleId, panelsArray, direction, prevSizes, initialDragState) {
+    const { dragOffset = 0, dragHandleRect, sizes: initialSizes } = initialDragState || {};
+    const baseSizes = initialSizes || prevSizes;
+    if ($8f51c2d77bf1da88$export$e7bf60a870f429b0(event)) {
+      const isHorizontal = direction === "horizontal";
+      const groupElement = (0, $d6f7e4c3aa9e02d7$export$5e67632cf3550a9c)(groupId);
+      const rect = groupElement.getBoundingClientRect();
+      const groupSizeInPixels = isHorizontal ? rect.width : rect.height;
+      const denominator = event.shiftKey ? 10 : 100;
+      const delta = groupSizeInPixels / denominator;
+      let movement = 0;
+      switch (event.key) {
+        case "ArrowDown":
+          movement = isHorizontal ? 0 : delta;
+          break;
+        case "ArrowLeft":
+          movement = isHorizontal ? -delta : 0;
+          break;
+        case "ArrowRight":
+          movement = isHorizontal ? delta : 0;
+          break;
+        case "ArrowUp":
+          movement = isHorizontal ? 0 : -delta;
+          break;
+        case "End":
+          movement = groupSizeInPixels;
+          break;
+        case "Home":
+          movement = -groupSizeInPixels;
+          break;
+      }
+      const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$68d3a33c21dfbe27)(groupId, handleId, panelsArray);
+      const targetPanelId = movement < 0 ? idBefore : idAfter;
+      const targetPanelIndex = panelsArray.findIndex((panel) => panel.id === targetPanelId);
+      const targetPanel = panelsArray[targetPanelIndex];
+      if (targetPanel.collapsible) {
+        const baseSize = baseSizes[targetPanelIndex];
+        if (baseSize === 0 || baseSize.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)) === targetPanel.minSize.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)))
+          movement = movement < 0 ? -targetPanel.minSize * groupSizeInPixels : targetPanel.minSize * groupSizeInPixels;
+      }
+      return movement;
+    } else
+      return $8f51c2d77bf1da88$export$ec391ce65b083ed4(event, handleId, direction, dragOffset, dragHandleRect);
+  }
+  function $8f51c2d77bf1da88$export$e7bf60a870f429b0(event) {
+    return event.type === "keydown";
+  }
+  function $8f51c2d77bf1da88$export$764db16956f554f8(event) {
+    return event.type.startsWith("mouse");
+  }
+  function $8f51c2d77bf1da88$export$c4dfce035d43d1e0(event) {
+    return event.type.startsWith("touch");
+  }
+  function $5f33910cd46e8ae7$export$a7a9523472993e97(expectedCondition, message = "Assertion failed!") {
+    if (!expectedCondition) {
+      console.error(message);
+      throw Error(message);
+    }
+  }
+  function $4a90471e7083b52f$export$d9fcbe062527d159({ committedValuesRef, groupId, panels, setSizes, sizes, panelSizeBeforeCollapse }) {
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      const { direction, panels: panels2 } = committedValuesRef.current;
+      const groupElement = (0, $d6f7e4c3aa9e02d7$export$5e67632cf3550a9c)(groupId);
+      const { height: height2, width: width2 } = groupElement.getBoundingClientRect();
+      const handles = (0, $d6f7e4c3aa9e02d7$export$ae14931f0a0256a3)(groupId);
+      const cleanupFunctions = handles.map((handle) => {
+        const handleId = handle.getAttribute("data-panel-resize-handle-id");
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+        const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$68d3a33c21dfbe27)(groupId, handleId, panelsArray);
+        if (idBefore == null || idAfter == null)
+          return () => {
+          };
+        let minSize = 0;
+        let maxSize = 100;
+        let totalMinSize = 0;
+        let totalMaxSize = 0;
+        panelsArray.forEach((panelData) => {
+          if (panelData.id === idBefore) {
+            maxSize = panelData.maxSize;
+            minSize = panelData.minSize;
+          } else {
+            totalMinSize += panelData.minSize;
+            totalMaxSize += panelData.maxSize;
+          }
+        });
+        const ariaValueMax = Math.min(maxSize, 100 - totalMinSize);
+        const ariaValueMin = Math.max(minSize, (panelsArray.length - 1) * 100 - totalMaxSize);
+        const flexGrow = (0, $d6f7e4c3aa9e02d7$export$6f43503e166de6fb)(panels2, idBefore, sizes);
+        handle.setAttribute("aria-valuemax", "" + Math.round(ariaValueMax));
+        handle.setAttribute("aria-valuemin", "" + Math.round(ariaValueMin));
+        handle.setAttribute("aria-valuenow", "" + Math.round(parseInt(flexGrow)));
+        const onKeyDown = (event) => {
+          if (event.defaultPrevented)
+            return;
+          switch (event.key) {
+            case "Enter": {
+              event.preventDefault();
+              const index = panelsArray.findIndex((panel) => panel.id === idBefore);
+              if (index >= 0) {
+                const panelData = panelsArray[index];
+                const size = sizes[index];
+                if (size != null) {
+                  let delta = 0;
+                  if (size.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)) <= panelData.minSize.toPrecision((0, $a8e83be196252871$export$d6d3992f3becc879)))
+                    delta = direction === "horizontal" ? width2 : height2;
+                  else
+                    delta = -(direction === "horizontal" ? width2 : height2);
+                  const nextSizes = (0, $d6f7e4c3aa9e02d7$export$f50bae335f53943c)(event, panels2, idBefore, idAfter, delta, sizes, panelSizeBeforeCollapse.current, null);
+                  if (sizes !== nextSizes)
+                    setSizes(nextSizes);
+                }
+              }
+              break;
+            }
+          }
+        };
+        handle.addEventListener("keydown", onKeyDown);
+        const panelBefore = (0, $d6f7e4c3aa9e02d7$export$7361ed18ff57179e)(idBefore);
+        if (panelBefore != null)
+          handle.setAttribute("aria-controls", panelBefore.id);
+        return () => {
+          handle.removeAttribute("aria-valuemax");
+          handle.removeAttribute("aria-valuemin");
+          handle.removeAttribute("aria-valuenow");
+          handle.removeEventListener("keydown", onKeyDown);
+          if (panelBefore != null)
+            handle.removeAttribute("aria-controls");
+        };
+      });
+      return () => {
+        cleanupFunctions.forEach((cleanupFunction) => cleanupFunction());
+      };
+    }, [
+      committedValuesRef,
+      groupId,
+      panels,
+      panelSizeBeforeCollapse,
+      setSizes,
+      sizes
+    ]);
+  }
+  function $4a90471e7083b52f$export$33b0bea6ac3ffb03({ disabled, handleId, resizeHandler }) {
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      if (disabled || resizeHandler == null)
+        return;
+      const handleElement = (0, $d6f7e4c3aa9e02d7$export$2e27d3a347680388)(handleId);
+      if (handleElement == null)
+        return;
+      const onKeyDown = (event) => {
+        if (event.defaultPrevented)
+          return;
+        switch (event.key) {
+          case "ArrowDown":
+          case "ArrowLeft":
+          case "ArrowRight":
+          case "ArrowUp":
+          case "End":
+          case "Home":
+            event.preventDefault();
+            resizeHandler(event);
+            break;
+          case "F6": {
+            event.preventDefault();
+            const handles = (0, $d6f7e4c3aa9e02d7$export$8d0cd3c32ddc045e)();
+            const index = (0, $d6f7e4c3aa9e02d7$export$96a40be80fb6c3c8)(handleId);
+            (0, $5f33910cd46e8ae7$export$a7a9523472993e97)(index !== null);
+            const nextIndex = event.shiftKey ? index > 0 ? index - 1 : handles.length - 1 : index + 1 < handles.length ? index + 1 : 0;
+            const nextHandle = handles[nextIndex];
+            nextHandle.focus();
+            break;
+          }
+        }
+      };
+      handleElement.addEventListener("keydown", onKeyDown);
+      return () => {
+        handleElement.removeEventListener("keydown", onKeyDown);
+      };
+    }, [
+      disabled,
+      handleId,
+      resizeHandler
+    ]);
+  }
+  var $8d9d88bebf1a8ace$var$currentState = null;
+  var $8d9d88bebf1a8ace$var$element = null;
+  function $8d9d88bebf1a8ace$export$fa35f3322c52262f(state) {
+    switch (state) {
+      case "horizontal":
+        return "col-resize";
+      case "horizontal-max":
+        return "w-resize";
+      case "horizontal-min":
+        return "e-resize";
+      case "vertical":
+        return "row-resize";
+      case "vertical-max":
+        return "n-resize";
+      case "vertical-min":
+        return "s-resize";
+    }
+  }
+  function $8d9d88bebf1a8ace$export$b61932ee18f96e08() {
+    if ($8d9d88bebf1a8ace$var$element !== null) {
+      document.head.removeChild($8d9d88bebf1a8ace$var$element);
+      $8d9d88bebf1a8ace$var$currentState = null;
+      $8d9d88bebf1a8ace$var$element = null;
+    }
+  }
+  function $8d9d88bebf1a8ace$export$d395b5dfd066a659(state) {
+    if ($8d9d88bebf1a8ace$var$currentState === state)
+      return;
+    $8d9d88bebf1a8ace$var$currentState = state;
+    const style3 = $8d9d88bebf1a8ace$export$fa35f3322c52262f(state);
+    if ($8d9d88bebf1a8ace$var$element === null) {
+      $8d9d88bebf1a8ace$var$element = document.createElement("style");
+      document.head.appendChild($8d9d88bebf1a8ace$var$element);
+    }
+    $8d9d88bebf1a8ace$var$element.innerHTML = `*{cursor: ${style3}!important;}`;
+  }
+  function $f7d932e9304c1581$export$2e2bcd8739ae039(callback, durationMs = 10) {
+    let timeoutId = null;
+    let callable = (...args) => {
+      if (timeoutId !== null)
+        clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        callback(...args);
+      }, durationMs);
+    };
+    return callable;
+  }
+  function $c892f0f705e6ded5$export$b141efd0b0fb9174(arrayA, arrayB) {
+    if (arrayA.length !== arrayB.length)
+      return false;
+    for (let index = 0; index < arrayA.length; index++) {
+      if (arrayA[index] !== arrayB[index])
+        return false;
+    }
+    return true;
+  }
+  var $3daa5d4c086ea816$var$savePanelGroupLayoutDebounced = (0, $f7d932e9304c1581$export$2e2bcd8739ae039)((0, $6889c3a3ed41cfd1$export$af183b313c61be4f), 100);
+  function $3daa5d4c086ea816$var$throwServerError() {
+    throw new Error('PanelGroup "storage" prop required for server rendering.');
+  }
+  var $3daa5d4c086ea816$var$defaultStorage = {
+    getItem: typeof localStorage !== "undefined" ? (name) => localStorage.getItem(name) : $3daa5d4c086ea816$var$throwServerError,
+    setItem: typeof localStorage !== "undefined" ? (name, value) => localStorage.setItem(name, value) : $3daa5d4c086ea816$var$throwServerError
+  };
+  function $3daa5d4c086ea816$export$1d05749f6f573bb({ autoSaveId, children = null, className: classNameFromProps = "", direction, disablePointerEventsDuringResize = false, id: idFromProps = null, onLayout, storage = $3daa5d4c086ea816$var$defaultStorage, style: styleFromProps = {}, tagName: Type = "div" }) {
+    const groupId = (0, $e504a2438473eda9$export$2e2bcd8739ae039)(idFromProps);
+    const [activeHandleId, setActiveHandleId] = (0, $ef07efbe5fa7d87e$export$60241385465d0a34)(null);
+    const [panels, setPanels] = (0, $ef07efbe5fa7d87e$export$60241385465d0a34)(/* @__PURE__ */ new Map());
+    const initialDragStateRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(null);
+    const callbacksRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)({
+      onLayout
+    });
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      callbacksRef.current.onLayout = onLayout;
+    });
+    const [sizes, setSizes] = (0, $ef07efbe5fa7d87e$export$60241385465d0a34)([]);
+    const panelSizeBeforeCollapse = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(/* @__PURE__ */ new Map());
+    const prevDeltaRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(0);
+    const committedValuesRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)({
+      direction,
+      panels,
+      sizes
+    });
+    (0, $3f95d3e171760903$export$2e2bcd8739ae039)(() => {
+      committedValuesRef.current.direction = direction;
+      committedValuesRef.current.panels = panels;
+      committedValuesRef.current.sizes = sizes;
+    });
+    (0, $4a90471e7083b52f$export$d9fcbe062527d159)({
+      committedValuesRef,
+      groupId,
+      panels,
+      setSizes,
+      sizes,
+      panelSizeBeforeCollapse
+    });
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      const { onLayout: onLayout2 } = callbacksRef.current;
+      if (onLayout2) {
+        const { sizes: sizes2 } = committedValuesRef.current;
+        if (sizes2.length > 0)
+          onLayout2(sizes2);
+      }
+    }, [
+      sizes
+    ]);
+    const didNotifyCallbacksAfterMountRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(false);
+    (0, $3f95d3e171760903$export$2e2bcd8739ae039)(() => {
+      if (didNotifyCallbacksAfterMountRef.current)
+        return;
+      const { panels: panels2, sizes: sizes2 } = committedValuesRef.current;
+      if (sizes2.length > 0) {
+        didNotifyCallbacksAfterMountRef.current = true;
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+        (0, $d6f7e4c3aa9e02d7$export$b8e48269e4faa934)(panelsArray, [], sizes2);
+      }
+    }, [
+      sizes
+    ]);
+    (0, $3f95d3e171760903$export$2e2bcd8739ae039)(() => {
+      const sizes2 = committedValuesRef.current.sizes;
+      if (sizes2.length === panels.size)
+        return;
+      let defaultSizes = null;
+      if (autoSaveId) {
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels);
+        defaultSizes = (0, $6889c3a3ed41cfd1$export$9c80c6617f0386da)(autoSaveId, panelsArray, storage);
+      }
+      if (defaultSizes != null)
+        setSizes(defaultSizes);
+      else {
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels);
+        let panelsWithNullDefaultSize = 0;
+        let totalDefaultSize = 0;
+        let totalMinSize = 0;
+        panelsArray.forEach((panel) => {
+          totalMinSize += panel.minSize;
+          if (panel.defaultSize === null)
+            panelsWithNullDefaultSize++;
+          else
+            totalDefaultSize += panel.defaultSize;
+        });
+        if (totalDefaultSize > 100)
+          throw new Error(`The sum of the defaultSize of all panels in a group cannot exceed 100.`);
+        else if (totalMinSize > 100)
+          throw new Error(`The sum of the minSize of all panels in a group cannot exceed 100.`);
+        setSizes(panelsArray.map((panel) => {
+          if (panel.defaultSize === null)
+            return (100 - totalDefaultSize) / panelsWithNullDefaultSize;
+          return panel.defaultSize;
+        }));
+      }
+    }, [
+      autoSaveId,
+      panels,
+      storage
+    ]);
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      if (autoSaveId) {
+        if (sizes.length === 0 || sizes.length !== panels.size)
+          return;
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels);
+        $3daa5d4c086ea816$var$savePanelGroupLayoutDebounced(autoSaveId, panelsArray, sizes, storage);
+      }
+    }, [
+      autoSaveId,
+      panels,
+      sizes,
+      storage
+    ]);
+    const getPanelStyle = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id) => {
+      const { panels: panels2 } = committedValuesRef.current;
+      if (panels2.size === 0)
+        return {
+          flexBasis: "auto",
+          flexGrow: 1,
+          flexShrink: 1,
+          // Without this, Panel sizes may be unintentionally overridden by their content.
+          overflow: "hidden"
+        };
+      const flexGrow = (0, $d6f7e4c3aa9e02d7$export$6f43503e166de6fb)(panels2, id, sizes);
+      return {
+        flexBasis: 0,
+        flexGrow,
+        flexShrink: 1,
+        // Without this, Panel sizes may be unintentionally overridden by their content.
+        overflow: "hidden",
+        // Disable pointer events inside of a panel during resize.
+        // This avoid edge cases like nested iframes.
+        pointerEvents: disablePointerEventsDuringResize && activeHandleId !== null ? "none" : void 0
+      };
+    }, [
+      activeHandleId,
+      disablePointerEventsDuringResize,
+      sizes
+    ]);
+    const registerPanel = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id, panel) => {
+      setPanels((prevPanels) => {
+        if (prevPanels.has(id))
+          return prevPanels;
+        const nextPanels = new Map(prevPanels);
+        nextPanels.set(id, panel);
+        return nextPanels;
+      });
+    }, []);
+    const registerResizeHandle = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((handleId) => {
+      const resizeHandler = (event) => {
+        event.preventDefault();
+        const { direction: direction2, panels: panels2, sizes: prevSizes } = committedValuesRef.current;
+        const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+        const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$68d3a33c21dfbe27)(groupId, handleId, panelsArray);
+        if (idBefore == null || idAfter == null)
+          return;
+        const movement = (0, $8f51c2d77bf1da88$export$354b17c0684607ed)(event, groupId, handleId, panelsArray, direction2, prevSizes, initialDragStateRef.current);
+        if (movement === 0)
+          return;
+        const groupElement = (0, $d6f7e4c3aa9e02d7$export$5e67632cf3550a9c)(groupId);
+        const rect = groupElement.getBoundingClientRect();
+        const isHorizontal = direction2 === "horizontal";
+        const size = isHorizontal ? rect.width : rect.height;
+        const delta = movement / size * 100;
+        const nextSizes = (0, $d6f7e4c3aa9e02d7$export$f50bae335f53943c)(event, panels2, idBefore, idAfter, delta, prevSizes, panelSizeBeforeCollapse.current, initialDragStateRef.current);
+        const sizesChanged = !(0, $c892f0f705e6ded5$export$b141efd0b0fb9174)(prevSizes, nextSizes);
+        if ((0, $8f51c2d77bf1da88$export$764db16956f554f8)(event) || (0, $8f51c2d77bf1da88$export$c4dfce035d43d1e0)(event)) {
+          if (prevDeltaRef.current != delta) {
+            if (!sizesChanged) {
+              if (isHorizontal)
+                (0, $8d9d88bebf1a8ace$export$d395b5dfd066a659)(movement < 0 ? "horizontal-min" : "horizontal-max");
+              else
+                (0, $8d9d88bebf1a8ace$export$d395b5dfd066a659)(movement < 0 ? "vertical-min" : "vertical-max");
+            } else
+              (0, $8d9d88bebf1a8ace$export$d395b5dfd066a659)(isHorizontal ? "horizontal" : "vertical");
+          }
+        }
+        if (sizesChanged) {
+          (0, $d6f7e4c3aa9e02d7$export$b8e48269e4faa934)(panelsArray, prevSizes, nextSizes);
+          setSizes(nextSizes);
+        }
+        prevDeltaRef.current = delta;
+      };
+      return resizeHandler;
+    }, [
+      groupId
+    ]);
+    const unregisterPanel = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id) => {
+      setPanels((prevPanels) => {
+        if (!prevPanels.has(id))
+          return prevPanels;
+        const nextPanels = new Map(prevPanels);
+        nextPanels.delete(id);
+        return nextPanels;
+      });
+    }, []);
+    const collapsePanel = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id) => {
+      const { panels: panels2, sizes: prevSizes } = committedValuesRef.current;
+      const panel = panels2.get(id);
+      if (panel == null || !panel.collapsible)
+        return;
+      const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+      const index = panelsArray.indexOf(panel);
+      if (index < 0)
+        return;
+      const currentSize = prevSizes[index];
+      if (currentSize === 0)
+        return;
+      panelSizeBeforeCollapse.current.set(id, currentSize);
+      const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$5a5b0c1d38c23c3b)(id, panelsArray);
+      if (idBefore == null || idAfter == null)
+        return;
+      const isLastPanel = index === panelsArray.length - 1;
+      const delta = isLastPanel ? currentSize : 0 - currentSize;
+      const nextSizes = (0, $d6f7e4c3aa9e02d7$export$f50bae335f53943c)(null, panels2, idBefore, idAfter, delta, prevSizes, panelSizeBeforeCollapse.current, null);
+      if (prevSizes !== nextSizes) {
+        (0, $d6f7e4c3aa9e02d7$export$b8e48269e4faa934)(panelsArray, prevSizes, nextSizes);
+        setSizes(nextSizes);
+      }
+    }, []);
+    const expandPanel = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id) => {
+      const { panels: panels2, sizes: prevSizes } = committedValuesRef.current;
+      const panel = panels2.get(id);
+      if (panel == null)
+        return;
+      const sizeBeforeCollapse = panelSizeBeforeCollapse.current.get(id) || panel.minSize;
+      if (!sizeBeforeCollapse)
+        return;
+      const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+      const index = panelsArray.indexOf(panel);
+      if (index < 0)
+        return;
+      const currentSize = prevSizes[index];
+      if (currentSize !== 0)
+        return;
+      const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$5a5b0c1d38c23c3b)(id, panelsArray);
+      if (idBefore == null || idAfter == null)
+        return;
+      const isLastPanel = index === panelsArray.length - 1;
+      const delta = isLastPanel ? 0 - sizeBeforeCollapse : sizeBeforeCollapse;
+      const nextSizes = (0, $d6f7e4c3aa9e02d7$export$f50bae335f53943c)(null, panels2, idBefore, idAfter, delta, prevSizes, panelSizeBeforeCollapse.current, null);
+      if (prevSizes !== nextSizes) {
+        (0, $d6f7e4c3aa9e02d7$export$b8e48269e4faa934)(panelsArray, prevSizes, nextSizes);
+        setSizes(nextSizes);
+      }
+    }, []);
+    const resizePanel = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)((id, nextSize) => {
+      const { panels: panels2, sizes: prevSizes } = committedValuesRef.current;
+      const panel = panels2.get(id);
+      if (panel == null)
+        return;
+      const panelsArray = (0, $d6f7e4c3aa9e02d7$export$a861c0ad45885494)(panels2);
+      const index = panelsArray.indexOf(panel);
+      if (index < 0)
+        return;
+      const currentSize = prevSizes[index];
+      if (currentSize === nextSize)
+        return;
+      if (panel.collapsible && nextSize === 0)
+        ;
+      else
+        nextSize = Math.min(panel.maxSize, Math.max(panel.minSize, nextSize));
+      const [idBefore, idAfter] = (0, $d6f7e4c3aa9e02d7$export$5a5b0c1d38c23c3b)(id, panelsArray);
+      if (idBefore == null || idAfter == null)
+        return;
+      const isLastPanel = index === panelsArray.length - 1;
+      const delta = isLastPanel ? currentSize - nextSize : nextSize - currentSize;
+      const nextSizes = (0, $d6f7e4c3aa9e02d7$export$f50bae335f53943c)(null, panels2, idBefore, idAfter, delta, prevSizes, panelSizeBeforeCollapse.current, null);
+      if (prevSizes !== nextSizes) {
+        (0, $d6f7e4c3aa9e02d7$export$b8e48269e4faa934)(panelsArray, prevSizes, nextSizes);
+        setSizes(nextSizes);
+      }
+    }, []);
+    const context = (0, $ef07efbe5fa7d87e$export$1538c33de8887b59)(() => ({
+      activeHandleId,
+      collapsePanel,
+      direction,
+      expandPanel,
+      getPanelStyle,
+      groupId,
+      registerPanel,
+      registerResizeHandle,
+      resizePanel,
+      startDragging: (id, event) => {
+        setActiveHandleId(id);
+        if ((0, $8f51c2d77bf1da88$export$764db16956f554f8)(event) || (0, $8f51c2d77bf1da88$export$c4dfce035d43d1e0)(event)) {
+          const handleElement = (0, $d6f7e4c3aa9e02d7$export$2e27d3a347680388)(id);
+          initialDragStateRef.current = {
+            dragHandleRect: handleElement.getBoundingClientRect(),
+            dragOffset: (0, $8f51c2d77bf1da88$export$ec391ce65b083ed4)(event, id, direction),
+            sizes: committedValuesRef.current.sizes
+          };
+        }
+      },
+      stopDragging: () => {
+        (0, $8d9d88bebf1a8ace$export$b61932ee18f96e08)();
+        setActiveHandleId(null);
+        initialDragStateRef.current = null;
+      },
+      unregisterPanel
+    }), [
+      activeHandleId,
+      collapsePanel,
+      direction,
+      expandPanel,
+      getPanelStyle,
+      groupId,
+      registerPanel,
+      registerResizeHandle,
+      resizePanel,
+      unregisterPanel
+    ]);
+    const style3 = {
+      display: "flex",
+      flexDirection: direction === "horizontal" ? "row" : "column",
+      height: "100%",
+      overflow: "hidden",
+      width: "100%"
+    };
+    return (0, $ef07efbe5fa7d87e$export$c8a8987d4410bf2d)((0, $af466b485b9d515d$export$7d8c6d083caec74a).Provider, {
+      children: (0, $ef07efbe5fa7d87e$export$c8a8987d4410bf2d)(Type, {
+        children,
+        className: classNameFromProps,
+        "data-panel-group": "",
+        "data-panel-group-direction": direction,
+        "data-panel-group-id": groupId,
+        style: {
+          ...style3,
+          ...styleFromProps
+        }
+      }),
+      value: context
+    });
+  }
+  $3daa5d4c086ea816$export$1d05749f6f573bb.displayName = "PanelGroup";
+  function $971f2c37f9d2b98e$export$8829ecf6b6b15484({ children = null, className: classNameFromProps = "", disabled = false, id: idFromProps = null, onDragging, style: styleFromProps = {}, tagName: Type = "div" }) {
+    const divElementRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)(null);
+    const callbacksRef = (0, $ef07efbe5fa7d87e$export$b8f5890fc79d6aca)({
+      onDragging
+    });
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      callbacksRef.current.onDragging = onDragging;
+    });
+    const panelGroupContext = (0, $ef07efbe5fa7d87e$export$fae74005e78b1a27)((0, $af466b485b9d515d$export$7d8c6d083caec74a));
+    if (panelGroupContext === null)
+      throw Error(`PanelResizeHandle components must be rendered within a PanelGroup container`);
+    const { activeHandleId, direction, groupId, registerResizeHandle, startDragging, stopDragging } = panelGroupContext;
+    const resizeHandleId = (0, $e504a2438473eda9$export$2e2bcd8739ae039)(idFromProps);
+    const isDragging = activeHandleId === resizeHandleId;
+    const [isFocused, setIsFocused] = (0, $ef07efbe5fa7d87e$export$60241385465d0a34)(false);
+    const [resizeHandler, setResizeHandler] = (0, $ef07efbe5fa7d87e$export$60241385465d0a34)(null);
+    const stopDraggingAndBlur = (0, $ef07efbe5fa7d87e$export$35808ee640e87ca7)(() => {
+      const div = divElementRef.current;
+      div.blur();
+      stopDragging();
+      const { onDragging: onDragging2 } = callbacksRef.current;
+      if (onDragging2)
+        onDragging2(false);
+    }, [
+      stopDragging
+    ]);
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      if (disabled)
+        setResizeHandler(null);
+      else {
+        const resizeHandler2 = registerResizeHandle(resizeHandleId);
+        setResizeHandler(() => resizeHandler2);
+      }
+    }, [
+      disabled,
+      resizeHandleId,
+      registerResizeHandle
+    ]);
+    (0, $ef07efbe5fa7d87e$export$6d9c69b0de29b591)(() => {
+      if (disabled || resizeHandler == null || !isDragging)
+        return;
+      const onMove = (event) => {
+        resizeHandler(event);
+      };
+      const onMouseLeave = (event) => {
+        resizeHandler(event);
+      };
+      const divElement = divElementRef.current;
+      const targetDocument = divElement.ownerDocument;
+      targetDocument.body.addEventListener("contextmenu", stopDraggingAndBlur);
+      targetDocument.body.addEventListener("mousemove", onMove);
+      targetDocument.body.addEventListener("touchmove", onMove);
+      targetDocument.body.addEventListener("mouseleave", onMouseLeave);
+      window.addEventListener("mouseup", stopDraggingAndBlur);
+      window.addEventListener("touchend", stopDraggingAndBlur);
+      return () => {
+        targetDocument.body.removeEventListener("contextmenu", stopDraggingAndBlur);
+        targetDocument.body.removeEventListener("mousemove", onMove);
+        targetDocument.body.removeEventListener("touchmove", onMove);
+        targetDocument.body.removeEventListener("mouseleave", onMouseLeave);
+        window.removeEventListener("mouseup", stopDraggingAndBlur);
+        window.removeEventListener("touchend", stopDraggingAndBlur);
+      };
+    }, [
+      direction,
+      disabled,
+      isDragging,
+      resizeHandler,
+      stopDraggingAndBlur
+    ]);
+    (0, $4a90471e7083b52f$export$33b0bea6ac3ffb03)({
+      disabled,
+      handleId: resizeHandleId,
+      resizeHandler
+    });
+    const style3 = {
+      cursor: (0, $8d9d88bebf1a8ace$export$fa35f3322c52262f)(direction),
+      touchAction: "none",
+      userSelect: "none"
+    };
+    return (0, $ef07efbe5fa7d87e$export$c8a8987d4410bf2d)(Type, {
+      children,
+      className: classNameFromProps,
+      "data-resize-handle-active": isDragging ? "pointer" : isFocused ? "keyboard" : void 0,
+      "data-panel-group-direction": direction,
+      "data-panel-group-id": groupId,
+      "data-panel-resize-handle-enabled": !disabled,
+      "data-panel-resize-handle-id": resizeHandleId,
+      onBlur: () => setIsFocused(false),
+      onFocus: () => setIsFocused(true),
+      onMouseDown: (event) => {
+        startDragging(resizeHandleId, event.nativeEvent);
+        const { onDragging: onDragging2 } = callbacksRef.current;
+        if (onDragging2)
+          onDragging2(true);
+      },
+      onMouseUp: stopDraggingAndBlur,
+      onTouchCancel: stopDraggingAndBlur,
+      onTouchEnd: stopDraggingAndBlur,
+      onTouchStart: (event) => {
+        startDragging(resizeHandleId, event.nativeEvent);
+        const { onDragging: onDragging2 } = callbacksRef.current;
+        if (onDragging2)
+          onDragging2(true);
+      },
+      ref: divElementRef,
+      role: "separator",
+      style: {
+        ...style3,
+        ...styleFromProps
+      },
+      tabIndex: 0
+    });
+  }
+  $971f2c37f9d2b98e$export$8829ecf6b6b15484.displayName = "PanelResizeHandle";
+
+  // src/App/EditorScreen.tsx
   function EditorScreen(props) {
-    return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("h1", null, "Editor"), /* @__PURE__ */ import_react12.default.createElement("img", { src: props.image.src }));
+    return /* @__PURE__ */ import_react12.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react12.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, null, /* @__PURE__ */ import_react12.default.createElement(
+      "img",
+      {
+        src: props.image.src,
+        style: {
+          width: "100%",
+          height: "100%",
+          objectFit: "contain"
+        }
+      }
+    )), /* @__PURE__ */ import_react12.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, null, /* @__PURE__ */ import_react12.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react12.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react12.default.createElement(Typography_default, null, "Panel 2")));
   }
 
   // src/App/SetupDependencies.ts
@@ -32249,12 +33544,22 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (props.image instanceof HTMLImageElement) {
       console.log("ImageEditor: image is HTMLImageElement");
     }
-    const [image, setImage] = React19.useState(props.image);
+    const [image, setImage] = React20.useState(props.image);
     function handleImageDone(image2) {
       console.log("ImageEditor: handleImageDone");
       setImage(image2);
     }
-    return image === void 0 ? /* @__PURE__ */ React19.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React19.createElement(EditorScreen, { image });
+    return /* @__PURE__ */ React20.createElement(
+      "div",
+      {
+        style: {
+          width: "100%",
+          height: "100%",
+          overflow: "scroll"
+        }
+      },
+      image === void 0 ? /* @__PURE__ */ React20.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React20.createElement(EditorScreen, { image })
+    );
   }
   var ImageEditor_default = ImageEditor;
 
@@ -32262,7 +33567,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React20.createElement(React20.StrictMode, null, /* @__PURE__ */ React20.createElement(ImageEditor_default, null))
+      /* @__PURE__ */ React21.createElement(React21.StrictMode, null, /* @__PURE__ */ React21.createElement(ImageEditor_default, null))
     );
     console.log("Binder: bindElement");
   }

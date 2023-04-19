@@ -1,4 +1,6 @@
 import React from "react";
+import {Divider, Typography} from "@mui/material";
+import {Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
 
 export interface EditorScreenProps {
     image: HTMLImageElement;
@@ -6,10 +8,25 @@ export interface EditorScreenProps {
 
 export function EditorScreen(props: EditorScreenProps) {
     return (
-        <div>
-            <h1>Editor</h1>
+        <PanelGroup direction="horizontal">
+            <Panel>
+                <img src={props.image.src}
+                style={
+                    {
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
 
-            <img src={props.image.src}/>
-        </div>
+                    }
+                }
+                />
+            </Panel>
+            <PanelResizeHandle>
+                <Divider orientation="vertical"/>
+            </PanelResizeHandle>
+            <Panel defaultSize={25}>
+                <Typography>Panel 2</Typography>
+            </Panel>
+        </PanelGroup>
     );
 }

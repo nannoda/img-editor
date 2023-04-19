@@ -2,7 +2,9 @@ import * as esbuild from 'esbuild'
 
 console.log("build.js is running");
 
-async function main() {
+async function main(
+    mode = "watch" // "watch", "build", or "serve"
+) {
     const buildCtx = await esbuild.context({
         entryPoints: ["src/index.ts"],
         outdir: "docs",
@@ -10,11 +12,27 @@ async function main() {
         bundle: true,
         logLevel: "info",
     })
-    await buildCtx.serve({
-        servedir: "docs",
-        port: 8080,
-        host: "localhost",
-    })
+    if (mode === "watch") {
+        await buildCtx.watch()
+        return
+    }
+    if (mode === "build") {
+        await buildCtx.rebuild()
+        return
+    }
+    if (mode === "serve") {
+        await buildCtx.serve({
+            servedir: "docs",
+            port: 8080,
+            host: "localhost",
+        })
+        return
+    }
+    // await buildCtx.serve({
+    //     servedir: "docs",
+    //     port: 8080,
+    //     host: "localhost",
+    // })
 }
 
 main().then(() => {
