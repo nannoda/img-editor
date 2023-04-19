@@ -1,26 +1,9 @@
 import * as React from 'react';
-import {Button, Typography} from "@mui/material";
-// import '@fontsource/roboto/300.css';
-// import '@fontsource/roboto/400.css';
-// import '@fontsource/roboto/500.css';
-// import '@fontsource/roboto/700.css';
-import {Label, OpenInBrowser, ShoppingCartRounded} from "@mui/icons-material";
 import {WelcomeScreen} from "./WelcomeScreen";
 import {EditorScreen} from "./EditorScreen";
+import {SetupDependencies} from "./SetupDependencies";
 
-// add <link
-//   rel="stylesheet"
-//   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-// /> to index.html
-
-const head = document.getElementsByTagName('head')[0];
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap';
-link.media = 'all';
-head.appendChild(link);
-
+SetupDependencies();
 
 export interface ImageEditorProps {
     image?: string | HTMLImageElement;

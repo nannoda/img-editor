@@ -10,5 +10,5 @@ export function bindElement(element: HTMLElement) {
             <ImageEditor/>
         </React.StrictMode>
     );
-    console.log("App.tsx: App() rendered");
+    console.log("Binder: bindElement");
 }

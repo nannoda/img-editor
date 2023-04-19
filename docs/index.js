@@ -32224,14 +32224,19 @@ Please use another name.` : formatMuiErrorMessage(18));
     return /* @__PURE__ */ import_react12.default.createElement("div", null, /* @__PURE__ */ import_react12.default.createElement("h1", null, "Editor"), /* @__PURE__ */ import_react12.default.createElement("img", { src: props.image.src }));
   }
 
+  // src/App/SetupDependencies.ts
+  function SetupDependencies() {
+    const head = document.getElementsByTagName("head")[0];
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+    link.media = "all";
+    head.appendChild(link);
+  }
+
   // src/App/ImageEditor.tsx
-  var head = document.getElementsByTagName("head")[0];
-  var link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
-  link.media = "all";
-  head.appendChild(link);
+  SetupDependencies();
   function ImageEditor(props) {
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");
@@ -32259,11 +32264,10 @@ Please use another name.` : formatMuiErrorMessage(18));
     root.render(
       /* @__PURE__ */ React20.createElement(React20.StrictMode, null, /* @__PURE__ */ React20.createElement(ImageEditor_default, null))
     );
-    console.log("App.tsx: App() rendered");
+    console.log("Binder: bindElement");
   }
 
   // src/index.ts
-  console.log("index.ts");
   function main() {
     return __async(this, null, function* () {
       const root = document.getElementById("root");
@@ -32272,7 +32276,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     });
   }
   main().then(() => {
-    console.log("main done!");
+    console.log("main done");
   });
 })();
 /*! Bundled license information:
