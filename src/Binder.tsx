@@ -15,7 +15,7 @@ export function bindElement(element: HTMLElement) {
     root.render(
         <React.StrictMode>
             <ImageEditor
-                image={testImage}
+                // image={testImage}
             />
         </React.StrictMode>
     );

@@ -27,14 +27,22 @@ export function EditorScreen(props: EditorScreenProps) {
         setCanvasWidth(canvasDivWidth);
         setCanvasHeight(canvasDivHeight);
     }
-    // setCanvasHeight(100);
-    // setCanvasWidth(100);
 
+    useEffect(() => {
+        handleOnDrag();
+    });
+
+    // add a resize listener to the window
+    useEffect(() => {
+        window.addEventListener("resize", handleOnDrag);
+        return () => {
+            window.removeEventListener("resize", handleOnDrag);
+        };
+    });
 
     return (
         <PanelGroup direction="horizontal">
             <Panel
-
             onResize={
                 () => {
                     console.log("EditorScreen: onResize");
