@@ -15,7 +15,7 @@ function ImageEditor(props: ImageEditorProps) {
         console.log("ImageEditor: image is undefined");
     }
 
-    const [image, setImage] = React.useState(props.image);
+    const [image, setImage] = React.useState(undefined as HTMLImageElement | undefined);
 
     function handleImageDone(image: HTMLImageElement) {
         console.log("ImageEditor: handleImageDone")

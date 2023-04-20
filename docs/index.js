@@ -2403,9 +2403,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React23 = require_react();
+          var React24 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React23.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React24.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4010,7 +4010,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React23.Children.forEach(props.children, function(child) {
+                  React24.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12457,7 +12457,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React23.Component().refs;
+          var emptyRefsObject = new React24.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24761,7 +24761,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React23 = require_react();
+          var React24 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24787,7 +24787,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React23.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React24.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25646,10 +25646,10 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React22 = __toESM(require_react());
+  var React23 = __toESM(require_react());
 
   // src/App/ImageEditor.tsx
-  var React21 = __toESM(require_react());
+  var React22 = __toESM(require_react());
 
   // src/App/SetupDependencies.ts
   function SetupDependencies() {
@@ -25663,7 +25663,7 @@
   }
 
   // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
-  var import_react11 = __toESM(require_react());
+  var import_react12 = __toESM(require_react());
 
   // node_modules/@mui/material/colors/common.js
   var common = {
@@ -32418,48 +32418,21 @@ Please use another name.` : formatMuiErrorMessage(18));
   } : void 0;
   var Divider_default = Divider;
 
-  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
+  // node_modules/@mui/icons-material/esm/ContentPaste.js
   var import_jsx_runtime12 = __toESM(require_jsx_runtime());
-  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime12.jsx)("path", {
+  var ContentPaste_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime12.jsx)("path", {
+    d: "M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z"
+  }), "ContentPaste");
+
+  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
+  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", {
     d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
   }), "OpenInBrowser");
 
-  // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
-  function openImageButtonOnClick(props) {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/*";
-    input.onchange = (event) => {
-      if (event.target === null) {
-        console.log("Target is null");
-        return;
-      }
-      if (!(event.target instanceof HTMLInputElement)) {
-        console.log("Target is not HTMLInputElement");
-        return;
-      }
-      if (event.target.files === null) {
-        console.log("Files is null");
-        return;
-      }
-      if (event.target.files.length === 0) {
-        console.log("Files length is 0");
-        return;
-      }
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (event2) => {
-        const image = new Image();
-        image.src = event2.target.result;
-        image.onload = () => {
-          props.onImageDone(image);
-        };
-      };
-      reader.readAsDataURL(file);
-    };
-    input.click();
-  }
-  function WelcomeScreen(props) {
+  // src/App/Screens/WelcomeScreen/DropZone.tsx
+  var import_react11 = __toESM(require_react());
+  function DropZone(props) {
     const [dragging, setDragging] = import_react11.default.useState(false);
     return /* @__PURE__ */ import_react11.default.createElement(
       "div",
@@ -32507,28 +32480,114 @@ Please use another name.` : formatMuiErrorMessage(18));
             const image = new Image();
             image.src = event2.target.result;
             image.onload = () => {
-              props.onImageDone(image);
+              props.onDrop(image);
             };
           };
           reader.readAsDataURL(file);
         }
       },
-      /* @__PURE__ */ import_react11.default.createElement(
+      props.children
+    );
+  }
+
+  // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
+  function openImageButtonOnClick(props) {
+    return __async(this, null, function* () {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.onchange = (event) => {
+        if (event.target === null) {
+          console.log("Target is null");
+          return;
+        }
+        if (!(event.target instanceof HTMLInputElement)) {
+          console.log("Target is not HTMLInputElement");
+          return;
+        }
+        if (event.target.files === null) {
+          console.log("Files is null");
+          return;
+        }
+        if (event.target.files.length === 0) {
+          console.log("Files length is 0");
+          return;
+        }
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (event2) => {
+          const image = new Image();
+          image.src = event2.target.result;
+          image.onload = () => {
+            props.onImageDone(image);
+          };
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    });
+  }
+  function pasteImageButtonOnClick(props) {
+    return __async(this, null, function* () {
+      const permission = yield navigator.permissions.query({
+        // @ts-ignore
+        name: "clipboard-read"
+      });
+      if (permission.state === "denied") {
+        throw new Error("Not allowed to read clipboard.");
+      }
+      const clipboardContents = yield navigator.clipboard.read();
+      if (clipboardContents.length === 0) {
+        throw new Error("Clipboard is empty.");
+      }
+      const clipboardItem = clipboardContents[0];
+      if (!clipboardItem.types.includes("image/png")) {
+        throw new Error("Clipboard does not contain an image.");
+      }
+      const blob = yield clipboardItem.getType("image/png");
+      const image = new Image();
+      image.src = URL.createObjectURL(blob);
+      image.onload = () => {
+        props.onImageDone(image);
+      };
+    });
+  }
+  function WelcomeScreen(props) {
+    const [dragging, setDragging] = import_react12.default.useState(false);
+    return /* @__PURE__ */ import_react12.default.createElement(
+      DropZone,
+      {
+        onDrop: (image) => {
+          props.onImageDone(image);
+        }
+      },
+      /* @__PURE__ */ import_react12.default.createElement(
         Button_default,
         {
           variant: "outlined",
-          startIcon: /* @__PURE__ */ import_react11.default.createElement(OpenInBrowser_default, null),
-          onClick: () => {
-            openImageButtonOnClick(props);
-          }
+          startIcon: /* @__PURE__ */ import_react12.default.createElement(OpenInBrowser_default, null),
+          onClick: () => __async(this, null, function* () {
+            yield openImageButtonOnClick(props);
+          })
         },
         "Open Image"
+      ),
+      /* @__PURE__ */ import_react12.default.createElement(
+        Button_default,
+        {
+          variant: "outlined",
+          startIcon: /* @__PURE__ */ import_react12.default.createElement(ContentPaste_default, null),
+          onClick: () => __async(this, null, function* () {
+            yield pasteImageButtonOnClick(props);
+          })
+        },
+        "Paste Image"
       )
     );
   }
 
   // src/App/Screens/EditorScreen/EditorScreen.tsx
-  var import_react13 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
 
   // node_modules/react-resizable-panels/dist/react-resizable-panels.module.js
   var $jhddX$react = __toESM(require_react());
@@ -33570,10 +33629,10 @@ Please use another name.` : formatMuiErrorMessage(18));
   $971f2c37f9d2b98e$export$8829ecf6b6b15484.displayName = "PanelResizeHandle";
 
   // src/App/Screens/EditorScreen/EditorImageViewer.tsx
-  var import_react12 = __toESM(require_react());
+  var import_react13 = __toESM(require_react());
   function EditorImageViewer(props) {
-    const canvasRef = import_react12.default.useRef(null);
-    import_react12.default.useEffect(() => {
+    const canvasRef = import_react13.default.useRef(null);
+    import_react13.default.useEffect(() => {
       if (canvasRef.current === null) {
         return;
       }
@@ -33593,7 +33652,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         context.stroke();
       }
     });
-    return /* @__PURE__ */ import_react12.default.createElement(
+    return /* @__PURE__ */ import_react13.default.createElement(
       "canvas",
       {
         ref: canvasRef,
@@ -33607,9 +33666,9 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/App/Screens/EditorScreen/EditorScreen.tsx
   function EditorScreen(props) {
-    const [canvasWidth, setCanvasWidth] = import_react13.default.useState(0);
-    const [canvasHeight, setCanvasHeight] = import_react13.default.useState(0);
-    const canvasDivRef = import_react13.default.useRef(null);
+    const [canvasWidth, setCanvasWidth] = import_react14.default.useState(0);
+    const [canvasHeight, setCanvasHeight] = import_react14.default.useState(0);
+    const canvasDivRef = import_react14.default.useRef(null);
     function handleOnDrag() {
       console.log("EditorScreen: handleOnDrag");
       if (canvasDivRef.current === null) {
@@ -33621,7 +33680,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       setCanvasWidth(canvasDivWidth);
       setCanvasHeight(canvasDivHeight);
     }
-    return /* @__PURE__ */ import_react13.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react13.default.createElement(
+    return /* @__PURE__ */ import_react14.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal" }, /* @__PURE__ */ import_react14.default.createElement(
       $c33df6d7c39fd3ee$export$2ddb90ad54e5f587,
       {
         onResize: () => {
@@ -33629,7 +33688,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           handleOnDrag();
         }
       },
-      /* @__PURE__ */ import_react13.default.createElement(
+      /* @__PURE__ */ import_react14.default.createElement(
         "div",
         {
           ref: canvasDivRef,
@@ -33638,7 +33697,7 @@ Please use another name.` : formatMuiErrorMessage(18));
             height: "100%"
           }
         },
-        /* @__PURE__ */ import_react13.default.createElement(
+        /* @__PURE__ */ import_react14.default.createElement(
           EditorImageViewer,
           {
             image: props.image,
@@ -33647,7 +33706,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           }
         )
       )
-    ), /* @__PURE__ */ import_react13.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react13.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react13.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react13.default.createElement(Typography_default, null, "Panel 2")));
+    ), /* @__PURE__ */ import_react14.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react14.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react14.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react14.default.createElement(Typography_default, null, "Panel 2")));
   }
 
   // src/App/ImageEditor.tsx
@@ -33656,7 +33715,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");
     }
-    const [image, setImage] = React21.useState(props.image);
+    const [image, setImage] = React22.useState(void 0);
     function handleImageDone(image2) {
       console.log("ImageEditor: handleImageDone");
       setImage(image2);
@@ -33667,7 +33726,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         setImage(props.image);
       };
     }
-    return /* @__PURE__ */ React21.createElement(
+    return /* @__PURE__ */ React22.createElement(
       "div",
       {
         style: {
@@ -33676,7 +33735,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           overflow: "scroll"
         }
       },
-      image === void 0 ? /* @__PURE__ */ React21.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React21.createElement(EditorScreen, { image })
+      image === void 0 ? /* @__PURE__ */ React22.createElement(WelcomeScreen, { onImageDone: handleImageDone }) : /* @__PURE__ */ React22.createElement(EditorScreen, { image })
     );
   }
   var ImageEditor_default = ImageEditor;
@@ -33690,7 +33749,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React22.createElement(React22.StrictMode, null, /* @__PURE__ */ React22.createElement(
+      /* @__PURE__ */ React23.createElement(React23.StrictMode, null, /* @__PURE__ */ React23.createElement(
         ImageEditor_default,
         {
           image: testImage
