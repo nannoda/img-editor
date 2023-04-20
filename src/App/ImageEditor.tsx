@@ -3,11 +3,13 @@ import {useEffect} from "react";
 import {SetupDependencies} from "./SetupDependencies";
 import {WelcomeScreen} from "./Screens/WelcomeScreen/WelcomeScreen";
 import {EditorScreen} from "./Screens/EditorScreen/EditorScreen";
+import {createTheme, Theme, ThemeProvider} from "@mui/material";
 
 SetupDependencies();
 
 export interface ImageEditorProps {
     image?: HTMLImageElement;
+    theme?: Theme;
 }
 
 function ImageEditor(props: ImageEditorProps) {
@@ -28,23 +30,30 @@ function ImageEditor(props: ImageEditorProps) {
             setImage(props.image);
         }
     }
+    let theme = props.theme;
+    if (theme === undefined) {
+        theme = createTheme()
+    }
 
     return (
-        <div
-            style={
-                {
-                    width: "100%",
-                    height: "100%",
-                    overflow: "scroll",
+        <ThemeProvider theme={theme}>
+            <div
+                style={
+                    {
+                        width: "100%",
+                        height: "100%",
+                        overflow: "scroll",
+                    }
                 }
-            }
-        >
-            {
-                image === undefined ?
-                    <WelcomeScreen onImageDone={handleImageDone}/> :
-                    <EditorScreen image={image}/>
-            }
-        </div>
+            >
+                {
+                    image === undefined ?
+                        <WelcomeScreen onImageDone={handleImageDone}/> :
+                        <EditorScreen image={image}/>
+                }
+            </div>
+        </ThemeProvider>
+
     );
 }
 

@@ -1,6 +1,7 @@
 import {createRoot} from "react-dom/client";
 import * as React from "react";
 import ImageEditor from "./App/ImageEditor";
+import {colors, createTheme} from "@mui/material";
 
 const testImage =(
     (() => {
@@ -15,6 +16,17 @@ export function bindElement(element: HTMLElement) {
     root.render(
         <React.StrictMode>
             <ImageEditor
+                theme={
+                createTheme(
+                    {
+                        palette: {
+                            primary: {
+                                main: colors.cyan[900],
+                            }
+                        }
+                    }
+                )
+                }
                 // image={testImage}
             />
         </React.StrictMode>

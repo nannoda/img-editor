@@ -1,5 +1,5 @@
 import React from "react";
-import {blue} from "@mui/material/colors";
+import {useTheme} from "@mui/material";
 
 export interface DropZoneProps {
     onDrop: (file: HTMLImageElement) => void;
@@ -9,6 +9,7 @@ export interface DropZoneProps {
 
 export function DropZone(props: DropZoneProps){
     const [dragging, setDragging] = React.useState(false);
+    const theme = useTheme();
     return (
         <div
             style={
@@ -19,7 +20,7 @@ export function DropZone(props: DropZoneProps){
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: dragging ? blue[50]: "white",
+                    backgroundColor: dragging ? theme.palette.action.hover : "transparent",
                 }
             }
             onDragEnter={
