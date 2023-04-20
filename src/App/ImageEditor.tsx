@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {SetupDependencies} from "./SetupDependencies";
 import {WelcomeScreen} from "./Screens/WelcomeScreen/WelcomeScreen";
 import {EditorScreen} from "./Screens/EditorScreen/EditorScreen";
-import {createTheme, Theme, ThemeProvider} from "@mui/material";
+import {Box, Container, createTheme, Theme, ThemeProvider} from "@mui/material";
 
 SetupDependencies();
 
@@ -37,12 +37,12 @@ function ImageEditor(props: ImageEditorProps) {
 
     return (
         <ThemeProvider theme={theme}>
-            <div
+            <Box
                 style={
                     {
                         width: "100%",
                         height: "100%",
-                        overflow: "scroll",
+                        // overflow: "scroll",
                     }
                 }
             >
@@ -51,7 +51,7 @@ function ImageEditor(props: ImageEditorProps) {
                         <WelcomeScreen onImageDone={handleImageDone}/> :
                         <EditorScreen image={image}/>
                 }
-            </div>
+            </Box>
         </ThemeProvider>
 
     );
