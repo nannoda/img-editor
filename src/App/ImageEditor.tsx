@@ -3,21 +3,35 @@ import {useEffect} from "react";
 import {SetupDependencies} from "./SetupDependencies";
 import {WelcomeScreen} from "./Screens/WelcomeScreen/WelcomeScreen";
 import {EditorScreen} from "./Screens/EditorScreen/EditorScreen";
-import {Box, Container, createTheme, Theme, ThemeProvider} from "@mui/material";
+import {Box, createTheme, Theme, ThemeProvider, useTheme} from "@mui/material";
+import {EditorPlugin} from "./EditorPlugin";
+import {MessageSnackbarPlugin} from "./MessageSnackbar";
+import {OpenFilePlugin} from "./Screens/WelcomeScreen/OpenFilePlugin";
+import {PasteImagePlugin} from "./Screens/WelcomeScreen/PasteImagePlugin";
 
 SetupDependencies();
 
 export interface ImageEditorProps {
   image?: HTMLImageElement;
   theme?: Theme;
+  onEditDone?: (image: HTMLImageElement) => void;
+  plugins?: EditorPlugin[];
 }
+
+const defaultPlugins: EditorPlugin[] = [
+  MessageSnackbarPlugin(),
+  OpenFilePlugin(),
+  PasteImagePlugin(),
+];
 
 function ImageEditor(props: ImageEditorProps) {
   if (props.image === undefined) {
     console.log("ImageEditor: image is undefined");
   }
 
-  const [image, setImage] = React.useState(undefined as HTMLImageElement | undefined);
+  const [image,
+    setImage] =
+    React.useState(undefined as HTMLImageElement | undefined);
 
   function handleImageDone(image: HTMLImageElement) {
     console.log("ImageEditor: handleImageDone")
@@ -32,9 +46,16 @@ function ImageEditor(props: ImageEditorProps) {
   }
   let theme = props.theme;
   if (theme === undefined) {
-    theme = createTheme()
+    theme = useTheme() || createTheme();
   }
 
+  const plugins = props.plugins || defaultPlugins;
+
+  const items = plugins.map((plugin) => {
+    if (plugin.getGlobalItem) {
+      return plugin.getGlobalItem(props);
+    }
+  })
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -42,18 +63,17 @@ function ImageEditor(props: ImageEditorProps) {
           {
             width: "100%",
             height: "100%",
-            // overflow: "scroll",
           }
         }
       >
+        {...items}
         {
           image === undefined ?
-            <WelcomeScreen onImageDone={handleImageDone}/> :
-            <EditorScreen image={image}/>
+            <WelcomeScreen onImageDone={handleImageDone} plugins={plugins}/> :
+            <EditorScreen image={image} onEditDone={props.onEditDone} plugins={plugins}/>
         }
       </Box>
     </ThemeProvider>
-
   );
 }
 

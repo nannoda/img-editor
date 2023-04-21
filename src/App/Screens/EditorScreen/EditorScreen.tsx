@@ -2,22 +2,21 @@ import React, {useEffect} from "react";
 import {Divider, Typography} from "@mui/material";
 import {ImperativePanelHandle, Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
 import {EditorImageViewer} from "./EditorImageViewer";
+import {EditorPlugin} from "../../EditorPlugin";
 
 export interface EditorScreenProps {
   image: HTMLImageElement;
+  onEditDone?: (image: HTMLImageElement) => void;
+  plugins: EditorPlugin[];
 }
 
 export function EditorScreen(props: EditorScreenProps) {
-
-
   const [canvasWidth, setCanvasWidth] = React.useState(0);
   const [canvasHeight, setCanvasHeight] = React.useState(0);
   const canvasDivRef = React.useRef<HTMLDivElement>(null);
 
-
   function handleOnDrag() {
     console.log("EditorScreen: handleOnDrag");
-
     if (canvasDivRef.current === null) {
       return;
     }
@@ -45,7 +44,7 @@ export function EditorScreen(props: EditorScreenProps) {
       <Panel
         onResize={
           () => {
-            console.log("EditorScreen: onResize");
+            // console.log("EditorScreen: onResize");
             handleOnDrag();
           }
         }>
