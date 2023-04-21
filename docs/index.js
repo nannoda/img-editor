@@ -36038,20 +36038,26 @@ Please use another name.` : formatMuiErrorMessage(18));
       props.image.width * scale,
       props.image.height * scale
     );
-    console.log("EditorImageViewer: canvasUpdate");
   }
   function setupOnScrollEvent(props) {
     const canvas = props.canvas;
-    canvas.onwheel = (event) => {
-      const dy = event.deltaY * -1 / 100;
-      const x = event.offsetX;
-      const y = event.offsetY;
-      console.log("EditorImageViewer: onwheel: dy: " + dy);
-      console.log("EditorImageViewer: onwheel: x: " + x);
-      console.log("EditorImageViewer: onwheel: y: " + y);
-      props.imageScale += dy;
-      props.imageOffsetX += (x - props.imageOffsetX) * dy;
-      props.imageOffsetY -= (y - props.imageOffsetY) * dy;
+    canvas.onwheel = (e) => {
+      e.preventDefault();
+      const scale = 1 - e.deltaY / 1e3;
+      const targetScale = props.imageScale * scale;
+      if (targetScale < 0.1) {
+        return;
+      }
+      if (targetScale > 10) {
+        return;
+      }
+      props.imageScale = targetScale;
+      const absoluteX = (e.clientX - canvas.offsetLeft) * props.deviceScale;
+      const absoluteY = (e.clientY - canvas.offsetTop) * props.deviceScale;
+      const relativeX = absoluteX - props.imageOffsetX;
+      const relativeY = absoluteY - props.imageOffsetY;
+      props.imageOffsetX = absoluteX - relativeX * scale;
+      props.imageOffsetY = absoluteY - relativeY * scale;
     };
   }
   function initializeCanvas(props, canvas) {
@@ -36067,8 +36073,9 @@ Please use another name.` : formatMuiErrorMessage(18));
       canvasWidth: props.canvasWidth,
       canvasHeight: props.canvasHeight,
       imageScale: props.imageScale || 1,
-      imageOffsetX: props.imageOffsetX || props.canvasWidth / 2 - props.image.width * (props.imageScale || 1) / 2,
-      imageOffsetY: props.imageOffsetY || props.canvasHeight / 2 - props.image.height * (props.imageScale || 1) / 2
+      imageOffsetX: props.imageOffsetX || props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
+      imageOffsetY: props.imageOffsetY || props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
+      deviceScale: window.devicePixelRatio
     };
     const currentScale = window.devicePixelRatio;
     context.scale(currentScale, currentScale);
@@ -36354,6 +36361,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     OpenFilePlugin(),
     PasteImagePlugin()
   ];
+  var fullPlugins = [
+    MessageSnackbarPlugin(),
+    OpenFilePlugin(),
+    PasteImagePlugin()
+  ];
   function ImageEditor(props) {
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");
@@ -36422,8 +36434,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       /* @__PURE__ */ React41.createElement(React41.StrictMode, null, /* @__PURE__ */ React41.createElement(
         ImageEditor_default,
         {
-          theme: testTheme,
-          image: testImage
+          theme: testTheme
         }
       ))
     );

@@ -24,6 +24,12 @@ const defaultPlugins: EditorPlugin[] = [
   PasteImagePlugin(),
 ];
 
+const fullPlugins: EditorPlugin[] = [
+  MessageSnackbarPlugin(),
+  OpenFilePlugin(),
+  PasteImagePlugin(),
+];
+
 function ImageEditor(props: ImageEditorProps) {
   if (props.image === undefined) {
     console.log("ImageEditor: image is undefined");
@@ -71,8 +77,7 @@ function ImageEditor(props: ImageEditorProps) {
             width: "100%",
             height: "100%",
           }
-        }
-      >
+        }>
         {...items}
         {
           image === undefined ?

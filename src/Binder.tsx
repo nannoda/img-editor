@@ -27,7 +27,7 @@ export function bindElement(element: HTMLElement) {
     <React.StrictMode>
       <ImageEditor
         theme={testTheme}
-        image={testImage}
+        // image={testImage}
       />
     </React.StrictMode>
   );

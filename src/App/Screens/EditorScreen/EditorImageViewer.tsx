@@ -13,7 +13,7 @@ interface CanvasProps extends EditorImageViewerProps {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   imageScale: number;
-  // canvasScale: number;
+  deviceScale: number;
   imageOffsetX: number;
   imageOffsetY: number;
 }
@@ -34,24 +34,34 @@ function canvasUpdate(props: CanvasProps) {
     props.image.height * scale
   );
 
-  console.log("EditorImageViewer: canvasUpdate")
+  // console.log("EditorImageViewer: canvasUpdate")
 }
 
 function setupOnScrollEvent(props: CanvasProps) {
   const canvas = props.canvas;
-  canvas.onwheel = (event) => {
-    const dy = (event.deltaY * -1) / 100;
-    const x = event.offsetX;
-    const y = event.offsetY;
+  canvas.onwheel = (e) => {
+    e.preventDefault();
+    const scale = 1 - e.deltaY / 1000;
 
+    const targetScale = props.imageScale * scale;
 
-    console.log("EditorImageViewer: onwheel: dy: " + dy)
-    console.log("EditorImageViewer: onwheel: x: " + x)
-    console.log("EditorImageViewer: onwheel: y: " + y)
+    if (targetScale < 0.1) {
+      return;
+    }
+    if (targetScale > 10) {
+      return;
+    }
 
-    props.imageScale += dy;
-    props.imageOffsetX += (x - props.imageOffsetX) * dy;
-    props.imageOffsetY -= (y - props.imageOffsetY) * dy;
+    props.imageScale = targetScale;
+
+    const absoluteX = (e.clientX - canvas.offsetLeft) * props.deviceScale;
+    const absoluteY = (e.clientY - canvas.offsetTop) * props.deviceScale;
+
+    const relativeX = absoluteX - props.imageOffsetX;
+    const relativeY = absoluteY - props.imageOffsetY;
+
+    props.imageOffsetX = absoluteX - relativeX * scale;
+    props.imageOffsetY = absoluteY - relativeY * scale;
   }
 }
 
@@ -62,6 +72,9 @@ function initializeCanvas(props: EditorImageViewerProps,
   if (context === null) {
     throw new Error("EditorImageViewer: initializeCanvas: context is null");
   }
+
+
+
   const canvasProps: CanvasProps = {
     canvas: canvas,
     ctx: context,
@@ -69,8 +82,11 @@ function initializeCanvas(props: EditorImageViewerProps,
     canvasWidth: props.canvasWidth,
     canvasHeight: props.canvasHeight,
     imageScale: props.imageScale || 1,
-    imageOffsetX: props.imageOffsetX || props.canvasWidth / 2 - props.image.width * (props.imageScale || 1) / 2,
-    imageOffsetY: props.imageOffsetY || props.canvasHeight / 2 - props.image.height * (props.imageScale || 1) / 2,
+    imageOffsetX: props.imageOffsetX ||
+      props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
+    imageOffsetY: props.imageOffsetY ||
+      props.canvasHeight * window.devicePixelRatio/ 2 - props.image.height / 2,
+    deviceScale: window.devicePixelRatio,
   }
   const currentScale = window.devicePixelRatio;
   context.scale(currentScale, currentScale);
