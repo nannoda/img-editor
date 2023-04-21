@@ -98,9 +98,17 @@ export function EditorScreen(props: EditorScreenProps) {
          }
     >
       <Box ref={tabBoxRef}
+           style={
+             {
+               width: "100%",
+               display: "flex",
+               flexDirection: "row",
+
+             }
+           }
       >
         <Tabs value={value} onChange={handleChange}>
-          <Tab icon={<Start/>} iconPosition="start" label="start"/>
+          <Tab label="start"/>
           <Tab label="Item Two"/>
           <Tab label="Item Three"/>
         </Tabs>
@@ -134,7 +142,11 @@ function TabPanel(props: TabPanelProps) {
       style={{
         width: "100%",
         height: "100%",
-        visibility: value === index ? "visible" : "hidden",
+        //
+        display: value === index ? "block" : "none",
+
+        // overflow: "hidden",
+        // visibility: value === index ? "visible" : "hidden",
       }}
     >
       {

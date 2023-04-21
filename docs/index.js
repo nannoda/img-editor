@@ -37579,30 +37579,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
-  // node_modules/@mui/icons-material/esm/Close.js
-  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
-  var Close_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", {
-    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-  }), "Close");
-
-  // node_modules/@mui/icons-material/esm/ContentPaste.js
-  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
-  var ContentPaste_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime31.jsx)("path", {
-    d: "M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z"
-  }), "ContentPaste");
-
-  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
-  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
-  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime32.jsx)("path", {
-    d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
-  }), "OpenInBrowser");
-
-  // node_modules/@mui/icons-material/esm/Start.js
-  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
-  var Start_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime33.jsx)("path", {
-    d: "M14.59 7.41 18.17 11H6v2h12.17l-3.59 3.59L16 18l6-6-6-6-1.41 1.41zM2 6v12h2V6H2z"
-  }), "Start");
-
   // src/App/Screens/EditorScreen/EditorScreen.tsx
   function EditorScreen(props) {
     const [canvasWidth, setCanvasWidth] = import_react15.default.useState(0);
@@ -37678,9 +37654,14 @@ Please use another name.` : formatMuiErrorMessage(18));
       /* @__PURE__ */ import_react15.default.createElement(
         Box_default,
         {
-          ref: tabBoxRef
+          ref: tabBoxRef,
+          style: {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row"
+          }
         },
-        /* @__PURE__ */ import_react15.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react15.default.createElement(Tab_default, { icon: /* @__PURE__ */ import_react15.default.createElement(Start_default, null), iconPosition: "start", label: "start" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Three" }))
+        /* @__PURE__ */ import_react15.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Three" }))
       ),
       /* @__PURE__ */ import_react15.default.createElement(Divider_default, null),
       /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 0 }, testNode),
@@ -37698,7 +37679,10 @@ Please use another name.` : formatMuiErrorMessage(18));
         style: {
           width: "100%",
           height: "100%",
-          visibility: value === index ? "visible" : "hidden"
+          //
+          display: value === index ? "block" : "none"
+          // overflow: "hidden",
+          // visibility: value === index ? "visible" : "hidden",
         }
       },
       value === index && children
@@ -37707,6 +37691,26 @@ Please use another name.` : formatMuiErrorMessage(18));
 
   // src/App/MessageSnackbar.tsx
   var import_react16 = __toESM(require_react());
+
+  // node_modules/@mui/icons-material/esm/Close.js
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  var Close_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime30.jsx)("path", {
+    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+  }), "Close");
+
+  // node_modules/@mui/icons-material/esm/ContentPaste.js
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  var ContentPaste_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime31.jsx)("path", {
+    d: "M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z"
+  }), "ContentPaste");
+
+  // node_modules/@mui/icons-material/esm/OpenInBrowser.js
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
+  var OpenInBrowser_default = createSvgIcon(/* @__PURE__ */ (0, import_jsx_runtime32.jsx)("path", {
+    d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
+  }), "OpenInBrowser");
+
+  // src/App/MessageSnackbar.tsx
   var _showError;
   var showError = (error) => {
     if (_showError) {
