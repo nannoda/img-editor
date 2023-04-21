@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
-import {Divider, Typography} from "@mui/material";
-import {ImperativePanelHandle, Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
+import {Box, Divider, Tab, Tabs, Typography} from "@mui/material";
+import {Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
 import {EditorImageViewer} from "./EditorImageViewer";
 import {EditorPlugin} from "../../EditorPlugin";
+import {Crop, Start} from "@mui/icons-material";
 
 export interface EditorScreenProps {
   image: HTMLImageElement;
@@ -14,22 +15,26 @@ export function EditorScreen(props: EditorScreenProps) {
   const [canvasWidth, setCanvasWidth] = React.useState(0);
   const [canvasHeight, setCanvasHeight] = React.useState(0);
   const canvasDivRef = React.useRef<HTMLDivElement>(null);
+  const tabBoxRef = React.useRef<HTMLDivElement>(null);
 
   function handleOnDrag() {
     console.log("EditorScreen: handleOnDrag");
     if (canvasDivRef.current === null) {
       return;
     }
+    if (tabBoxRef.current === null) {
+      return;
+    }
     const canvasDiv = canvasDivRef.current;
+
+    const tabBox = tabBoxRef.current;
+
     const canvasDivWidth = canvasDiv.clientWidth;
-    const canvasDivHeight = canvasDiv.clientHeight;
+    const canvasDivHeight = canvasDiv.clientHeight - tabBox.clientHeight;
     setCanvasWidth(canvasDivWidth);
     setCanvasHeight(canvasDivHeight);
   }
 
-  useEffect(() => {
-    handleOnDrag();
-  });
 
   // add a resize listener to the window
   useEffect(() => {
@@ -39,18 +44,21 @@ export function EditorScreen(props: EditorScreenProps) {
     };
   });
 
-  return (
-    <PanelGroup direction="horizontal">
+
+  const testNode = (
+    <PanelGroup direction="horizontal" style={
+      {
+        width: "100%",
+        height: "100%",
+      }
+    }>
       <Panel
         onResize={
           () => {
-            // console.log("EditorScreen: onResize");
             handleOnDrag();
           }
         }>
-        <div ref={
-          canvasDivRef
-        }
+        <div ref={canvasDivRef}
              style={
                {
                  width: "100%",
@@ -72,5 +80,68 @@ export function EditorScreen(props: EditorScreenProps) {
         <Typography>Panel 2</Typography>
       </Panel>
     </PanelGroup>
+  )
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+  return (
+    <Box sx={{
+      width: '100%',
+      height: "100%"
+    }}
+         style={
+           {
+             width: "100%",
+             height: "100%",
+           }
+         }
+    >
+      <Box ref={tabBoxRef}
+      >
+        <Tabs value={value} onChange={handleChange}>
+          <Tab icon={<Start/>} iconPosition="start" label="start"/>
+          <Tab label="Item Two"/>
+          <Tab label="Item Three"/>
+        </Tabs>
+      </Box>
+      <Divider/>
+      <TabPanel value={value} index={0}>
+        {testNode}
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+    </Box>
+  );
+}
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const {children, value, index, ...other} = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      style={{
+        width: "100%",
+        height: "100%",
+        visibility: value === index ? "visible" : "hidden",
+      }}
+    >
+      {
+        value === index && (
+          children
+        )
+      }
+    </div>
   );
 }

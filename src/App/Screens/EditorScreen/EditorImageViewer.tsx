@@ -7,6 +7,7 @@ export interface EditorImageViewerProps {
   imageScale?: number;
   imageOffsetX?: number;
   imageOffsetY?: number;
+  canvasPainter?: (props: CanvasProps) => void;
 }
 
 interface CanvasProps extends EditorImageViewerProps {
@@ -33,6 +34,9 @@ function canvasUpdate(props: CanvasProps) {
     props.image.width * scale,
     props.image.height * scale
   );
+  if (props.canvasPainter) {
+    props.canvasPainter(props);
+  }
 }
 
 function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
@@ -47,13 +51,11 @@ function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
   let touchBoundY = false;
 
   const imageTopIsVisible = targetY < rHeight;
-  console.log("imageTopIsVisible", imageTopIsVisible);
   if (!imageTopIsVisible) {
     props.imageOffsetY = rHeight;
     touchBoundY = true;
   }
   const imageBottomIsVisible = targetY + imageHeight > 0;
-  console.log("imageBottomIsVisible", imageBottomIsVisible);
   if (!imageBottomIsVisible) {
     props.imageOffsetY = 0 - imageHeight;
     touchBoundY = true;
@@ -63,14 +65,11 @@ function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
     props.imageOffsetX = rWidth;
     touchBoundX = true;
   }
-  console.log("imageLeftIsVisible", imageLeftIsVisible);
   const imageRightIsVisible = targetX + imageWidth > 0;
   if (!imageRightIsVisible) {
     props.imageOffsetX = 0 - imageWidth;
     touchBoundX = true;
   }
-  console.log("imageRightIsVisible", imageRightIsVisible);
-
   if (!touchBoundY) {
     props.imageOffsetY = targetY;
   }
@@ -82,32 +81,7 @@ function shiftImage(props: CanvasProps, dx: number, dy: number) {
   const targetX = props.imageOffsetX - dx;
   const targetY = props.imageOffsetY - dy;
   setImageXY(props, targetX, targetY);
-  // let touchBoundX = false;
-  // let touchBoundY = false;
-  // if (targetX < bound) {
-  //   props.imageOffsetX = bound;
-  //   touchBoundX = true;
-  // }
-  // if (targetY < bound) {
-  //   props.imageOffsetY = bound;
-  //   touchBoundY = true;
-  // }
-  // if (targetX + imageWidth > rWidth - bound) {
-  //   props.imageOffsetX = rWidth - bound - imageWidth;
-  //   touchBoundX = true;
-  // }
-  // if (targetY + imageHeight > rHeight - bound) {
-  //   props.imageOffsetY = rHeight - bound - imageHeight;
-  //   touchBoundY = true;
-  // }
-  // if (!touchBoundX) {
-  //   props.imageOffsetX = targetX;
-  // }
-  // if (!touchBoundY) {
-  //   props.imageOffsetY = targetY;
-  // }
 }
-
 function scaleCanvas(props: CanvasProps,
                      dScale: number,
                      pointerX: number,
@@ -152,27 +126,6 @@ function setupOnScrollEvent(props: CanvasProps) {
       // props.imageOffsetY -= e.deltaY;
       shiftImage(props, e.deltaX, e.deltaY);
     }
-    // const scale = 1 - e.deltaY / 1000;
-    //
-    // const targetScale = props.imageScale * scale;
-    //
-    // if (targetScale < 0.1) {
-    //   return;
-    // }
-    // if (targetScale > 10) {
-    //   return;
-    // }
-    //
-    // props.imageScale = targetScale;
-    //
-    // const absoluteX = (e.clientX - canvas.offsetLeft) * props.deviceScale;
-    // const absoluteY = (e.clientY - canvas.offsetTop) * props.deviceScale;
-    //
-    // const relativeX = absoluteX - props.imageOffsetX;
-    // const relativeY = absoluteY - props.imageOffsetY;
-    //
-    // props.imageOffsetX = absoluteX - relativeX * scale;
-    // props.imageOffsetY = absoluteY - relativeY * scale;
   }
 }
 
@@ -207,8 +160,6 @@ function initializeCanvas(props: EditorImageViewerProps,
 }
 
 export function EditorImageViewer(props: EditorImageViewerProps) {
-
-
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
   React.useEffect(() => {
