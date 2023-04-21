@@ -37572,8 +37572,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       {
         ref: canvasRef,
         style: {
-          width: `${props.canvasWidth}px`,
-          height: `${props.canvasHeight}px`
+          width: "100%",
+          height: "100%"
         }
       }
     );
@@ -37596,7 +37596,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       const canvasDiv = canvasDivRef.current;
       const tabBox = tabBoxRef.current;
       const canvasDivWidth = canvasDiv.clientWidth;
-      const canvasDivHeight = canvasDiv.clientHeight - 4;
+      const canvasDivHeight = canvasDiv.clientHeight;
       setCanvasWidth(canvasDivWidth);
       setCanvasHeight(canvasDivHeight);
     }

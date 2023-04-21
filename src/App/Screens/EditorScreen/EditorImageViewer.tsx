@@ -187,8 +187,8 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
       ref={canvasRef}
       style={
         {
-          width: `${props.canvasWidth}px`,
-          height: `${props.canvasHeight}px`,
+          width: "100%",
+          height: "100%",
         }
       }
     ></canvas>

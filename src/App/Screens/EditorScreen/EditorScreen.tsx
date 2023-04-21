@@ -28,7 +28,7 @@ export function EditorScreen(props: EditorScreenProps) {
     const canvasDiv = canvasDivRef.current;
     const tabBox = tabBoxRef.current;
     const canvasDivWidth = canvasDiv.clientWidth;
-    const canvasDivHeight = canvasDiv.clientHeight - 4; // ok, this is a hack
+    const canvasDivHeight = canvasDiv.clientHeight; // ok, this is a hack
     setCanvasWidth(canvasDivWidth);
     setCanvasHeight(canvasDivHeight);
   }
