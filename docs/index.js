@@ -36039,25 +36039,37 @@ Please use another name.` : formatMuiErrorMessage(18));
       props.image.height * scale
     );
   }
+  function scaleCanvas(props, dScale, pointerX, pointerY) {
+    const targetScale = props.imageScale * dScale;
+    if (targetScale < 0.1) {
+      return;
+    }
+    if (targetScale > 10) {
+      return;
+    }
+    props.imageScale = targetScale;
+    const absoluteX = pointerX * props.deviceScale;
+    const absoluteY = pointerY * props.deviceScale;
+    const relativeX = absoluteX - props.imageOffsetX;
+    const relativeY = absoluteY - props.imageOffsetY;
+    props.imageOffsetX = absoluteX - relativeX * dScale;
+    props.imageOffsetY = absoluteY - relativeY * dScale;
+  }
   function setupOnScrollEvent(props) {
     const canvas = props.canvas;
     canvas.onwheel = (e) => {
       e.preventDefault();
-      const scale = 1 - e.deltaY / 1e3;
-      const targetScale = props.imageScale * scale;
-      if (targetScale < 0.1) {
-        return;
+      if (e.ctrlKey) {
+        const dScale = 1 - e.deltaY / 500;
+        const x = e.clientX - canvas.offsetLeft;
+        const y = e.clientY - canvas.offsetTop;
+        scaleCanvas(props, dScale, x, y);
+      } else if (e.altKey) {
+        props.imageOffsetX -= e.deltaX;
+      } else {
+        props.imageOffsetX -= e.deltaX;
+        props.imageOffsetY -= e.deltaY;
       }
-      if (targetScale > 10) {
-        return;
-      }
-      props.imageScale = targetScale;
-      const absoluteX = (e.clientX - canvas.offsetLeft) * props.deviceScale;
-      const absoluteY = (e.clientY - canvas.offsetTop) * props.deviceScale;
-      const relativeX = absoluteX - props.imageOffsetX;
-      const relativeY = absoluteY - props.imageOffsetY;
-      props.imageOffsetX = absoluteX - relativeX * scale;
-      props.imageOffsetY = absoluteY - relativeY * scale;
     };
   }
   function initializeCanvas(props, canvas) {
