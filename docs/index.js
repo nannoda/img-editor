@@ -36070,8 +36070,10 @@ Please use another name.` : formatMuiErrorMessage(18));
       imageOffsetX: props.imageOffsetX || props.canvasWidth / 2 - props.image.width * (props.imageScale || 1) / 2,
       imageOffsetY: props.imageOffsetY || props.canvasHeight / 2 - props.image.height * (props.imageScale || 1) / 2
     };
-    canvas.width = props.canvasWidth;
-    canvas.height = props.canvasHeight;
+    const currentScale = window.devicePixelRatio;
+    context.scale(currentScale, currentScale);
+    canvas.width = props.canvasWidth * currentScale;
+    canvas.height = props.canvasHeight * currentScale;
     canvasUpdate(canvasProps);
     setupOnScrollEvent(canvasProps);
     return canvasProps;
@@ -36415,7 +36417,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       /* @__PURE__ */ React41.createElement(React41.StrictMode, null, /* @__PURE__ */ React41.createElement(
         ImageEditor_default,
         {
-          theme: testTheme
+          theme: testTheme,
+          image: testImage
         }
       ))
     );

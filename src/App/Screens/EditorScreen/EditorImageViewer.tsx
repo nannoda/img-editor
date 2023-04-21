@@ -72,10 +72,14 @@ function initializeCanvas(props: EditorImageViewerProps,
     imageOffsetX: props.imageOffsetX || props.canvasWidth / 2 - props.image.width * (props.imageScale || 1) / 2,
     imageOffsetY: props.imageOffsetY || props.canvasHeight / 2 - props.image.height * (props.imageScale || 1) / 2,
   }
-  canvas.width = props.canvasWidth;
-  canvas.height = props.canvasHeight;
+  const currentScale = window.devicePixelRatio;
+  context.scale(currentScale, currentScale);
+  canvas.width = props.canvasWidth * currentScale;
+  canvas.height = props.canvasHeight * currentScale;
   canvasUpdate(canvasProps);
   setupOnScrollEvent(canvasProps);
+
+
   return canvasProps;
 }
 
