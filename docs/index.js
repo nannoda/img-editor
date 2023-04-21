@@ -36367,10 +36367,15 @@ Please use another name.` : formatMuiErrorMessage(18));
       setImage(image2);
     }
     if (props.image) {
-      props.image.onload = () => {
-        console.log("ImageEditor: props.image.onload");
+      if (props.image.complete && image === void 0) {
         setImage(props.image);
-      };
+      } else {
+        console.log("ImageEditor: !props.image.complete");
+        props.image.onload = () => {
+          console.log("ImageEditor: props.image.onload");
+          setImage(props.image);
+        };
+      }
     }
     let theme = props.theme;
     if (theme === void 0) {
@@ -36426,6 +36431,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/index.ts
+  window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { isDisabled: true };
   function main() {
     return __async(this, null, function* () {
       const root = document.getElementById("root");

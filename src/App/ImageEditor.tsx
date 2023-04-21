@@ -39,9 +39,16 @@ function ImageEditor(props: ImageEditorProps) {
   }
 
   if (props.image) {
-    props.image.onload = () => {
-      console.log("ImageEditor: props.image.onload")
+
+    if (props.image.complete && image === undefined) {
+      // console.log("ImageEditor: props.image.complete")
       setImage(props.image);
+    } else {
+      console.log("ImageEditor: !props.image.complete")
+      props.image.onload = () => {
+        console.log("ImageEditor: props.image.onload")
+        setImage(props.image);
+      }
     }
   }
   let theme = props.theme;
