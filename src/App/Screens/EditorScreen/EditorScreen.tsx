@@ -26,16 +26,12 @@ export function EditorScreen(props: EditorScreenProps) {
       return;
     }
     const canvasDiv = canvasDivRef.current;
-
     const tabBox = tabBoxRef.current;
-
     const canvasDivWidth = canvasDiv.clientWidth;
-    const canvasDivHeight = canvasDiv.clientHeight - tabBox.clientHeight;
+    const canvasDivHeight = canvasDiv.clientHeight - 4; // ok, this is a hack
     setCanvasWidth(canvasDivWidth);
     setCanvasHeight(canvasDivHeight);
   }
-
-
   // add a resize listener to the window
   useEffect(() => {
     window.addEventListener("resize", handleOnDrag);
@@ -44,12 +40,14 @@ export function EditorScreen(props: EditorScreenProps) {
     };
   });
 
-
   const testNode = (
     <PanelGroup direction="horizontal" style={
       {
         width: "100%",
-        height: "100%",
+        height: "100%", // 99% to avoid growing the window
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
       }
     }>
       <Panel
@@ -94,19 +92,12 @@ export function EditorScreen(props: EditorScreenProps) {
            {
              width: "100%",
              height: "100%",
+             display: "flex",
+             flexDirection: "column",
            }
          }
     >
-      <Box ref={tabBoxRef}
-           style={
-             {
-               width: "100%",
-               display: "flex",
-               flexDirection: "row",
-
-             }
-           }
-      >
+      <Box ref={tabBoxRef}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="start"/>
           <Tab label="Item Two"/>
@@ -143,7 +134,7 @@ function TabPanel(props: TabPanelProps) {
         width: "100%",
         height: "100%",
         //
-        display: value === index ? "block" : "none",
+        // display: value === index ? "block" : "none",
 
         // overflow: "hidden",
         // visibility: value === index ? "visible" : "hidden",

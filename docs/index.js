@@ -37596,7 +37596,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       const canvasDiv = canvasDivRef.current;
       const tabBox = tabBoxRef.current;
       const canvasDivWidth = canvasDiv.clientWidth;
-      const canvasDivHeight = canvasDiv.clientHeight - tabBox.clientHeight;
+      const canvasDivHeight = canvasDiv.clientHeight - 4;
       setCanvasWidth(canvasDivWidth);
       setCanvasHeight(canvasDivHeight);
     }
@@ -37608,7 +37608,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     });
     const testNode = /* @__PURE__ */ import_react15.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal", style: {
       width: "100%",
-      height: "100%"
+      height: "100%",
+      // 99% to avoid growing the window
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center"
     } }, /* @__PURE__ */ import_react15.default.createElement(
       $c33df6d7c39fd3ee$export$2ddb90ad54e5f587,
       {
@@ -37648,21 +37652,12 @@ Please use another name.` : formatMuiErrorMessage(18));
         },
         style: {
           width: "100%",
-          height: "100%"
+          height: "100%",
+          display: "flex",
+          flexDirection: "column"
         }
       },
-      /* @__PURE__ */ import_react15.default.createElement(
-        Box_default,
-        {
-          ref: tabBoxRef,
-          style: {
-            width: "100%",
-            display: "flex",
-            flexDirection: "row"
-          }
-        },
-        /* @__PURE__ */ import_react15.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Three" }))
-      ),
+      /* @__PURE__ */ import_react15.default.createElement(Box_default, { ref: tabBoxRef }, /* @__PURE__ */ import_react15.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Three" }))),
       /* @__PURE__ */ import_react15.default.createElement(Divider_default, null),
       /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 0 }, testNode),
       /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 1 }, "Item Two"),
@@ -37678,9 +37673,9 @@ Please use another name.` : formatMuiErrorMessage(18));
         hidden: value !== index,
         style: {
           width: "100%",
-          height: "100%",
+          height: "100%"
           //
-          display: value === index ? "block" : "none"
+          // display: value === index ? "block" : "none",
           // overflow: "hidden",
           // visibility: value === index ? "visible" : "hidden",
         }
@@ -37961,7 +37956,6 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/index.ts
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { isDisabled: true };
   function main() {
     return __async(this, null, function* () {
       const root = document.getElementById("root");
