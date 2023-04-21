@@ -35,6 +35,79 @@ function canvasUpdate(props: CanvasProps) {
   );
 }
 
+function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
+  // bound *= props.deviceScale * props.imageScale;
+  const rWidth = props.canvas.width;
+  const rHeight = props.canvas.height;
+  const imageWidth = props.image.width * props.imageScale ;
+  const imageHeight = props.image.height * props.imageScale ;
+  const targetX = x;
+  const targetY = y;
+  let touchBoundX = false;
+  let touchBoundY = false;
+
+  const imageTopIsVisible = targetY < rHeight;
+  console.log("imageTopIsVisible", imageTopIsVisible);
+  if (!imageTopIsVisible) {
+    props.imageOffsetY = rHeight;
+    touchBoundY = true;
+  }
+  const imageBottomIsVisible = targetY + imageHeight > 0;
+  console.log("imageBottomIsVisible", imageBottomIsVisible);
+  if (!imageBottomIsVisible) {
+    props.imageOffsetY = 0 - imageHeight;
+    touchBoundY = true;
+  }
+  const imageLeftIsVisible = targetX < rWidth;
+  if (!imageLeftIsVisible) {
+    props.imageOffsetX = rWidth;
+    touchBoundX = true;
+  }
+  console.log("imageLeftIsVisible", imageLeftIsVisible);
+  const imageRightIsVisible = targetX + imageWidth > 0;
+  if (!imageRightIsVisible) {
+    props.imageOffsetX = 0 - imageWidth;
+    touchBoundX = true;
+  }
+  console.log("imageRightIsVisible", imageRightIsVisible);
+
+  if (!touchBoundY) {
+    props.imageOffsetY = targetY;
+  }
+  if (!touchBoundX) {
+    props.imageOffsetX = targetX;
+  }
+}
+function shiftImage(props: CanvasProps, dx: number, dy: number) {
+  const targetX = props.imageOffsetX - dx;
+  const targetY = props.imageOffsetY - dy;
+  setImageXY(props, targetX, targetY);
+  // let touchBoundX = false;
+  // let touchBoundY = false;
+  // if (targetX < bound) {
+  //   props.imageOffsetX = bound;
+  //   touchBoundX = true;
+  // }
+  // if (targetY < bound) {
+  //   props.imageOffsetY = bound;
+  //   touchBoundY = true;
+  // }
+  // if (targetX + imageWidth > rWidth - bound) {
+  //   props.imageOffsetX = rWidth - bound - imageWidth;
+  //   touchBoundX = true;
+  // }
+  // if (targetY + imageHeight > rHeight - bound) {
+  //   props.imageOffsetY = rHeight - bound - imageHeight;
+  //   touchBoundY = true;
+  // }
+  // if (!touchBoundX) {
+  //   props.imageOffsetX = targetX;
+  // }
+  // if (!touchBoundY) {
+  //   props.imageOffsetY = targetY;
+  // }
+}
+
 function scaleCanvas(props: CanvasProps,
                      dScale: number,
                      pointerX: number,
@@ -57,8 +130,9 @@ function scaleCanvas(props: CanvasProps,
   const relativeX = absoluteX - props.imageOffsetX;
   const relativeY = absoluteY - props.imageOffsetY;
 
-  props.imageOffsetX = absoluteX - relativeX * dScale;
-  props.imageOffsetY = absoluteY - relativeY * dScale;
+  // props.imageOffsetX = absoluteX - relativeX * dScale;
+  // props.imageOffsetY = absoluteY - relativeY * dScale;
+  setImageXY(props, absoluteX - relativeX * dScale, absoluteY - relativeY * dScale);
 }
 
 function setupOnScrollEvent(props: CanvasProps) {
@@ -71,10 +145,12 @@ function setupOnScrollEvent(props: CanvasProps) {
       const y = e.clientY - canvas.offsetTop;
       scaleCanvas(props, dScale, x, y);
     }else if (e.altKey) {
-      props.imageOffsetX -= e.deltaX;
+      // props.imageOffsetX -= e.deltaX;
+      shiftImage(props, e.deltaY, 0);
     }else{
-      props.imageOffsetX -= e.deltaX;
-      props.imageOffsetY -= e.deltaY;
+      // props.imageOffsetX -= e.deltaX;
+      // props.imageOffsetY -= e.deltaY;
+      shiftImage(props, e.deltaX, e.deltaY);
     }
     // const scale = 1 - e.deltaY / 1000;
     //
