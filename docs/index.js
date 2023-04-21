@@ -34916,30 +34916,25 @@ Please use another name.` : formatMuiErrorMessage(18));
         onDragEnter: (event) => {
           event.preventDefault();
           event.stopPropagation();
-          console.log("DragEnter");
           setDragging(true);
         },
         onDragLeave: (event) => {
           event.preventDefault();
           event.stopPropagation();
-          console.log("DragEnd");
           setDragging(false);
         },
         onDragOver: (event) => {
           event.preventDefault();
           event.stopPropagation();
-          console.log("DragOver");
           setDragging(true);
         },
         onDrop: (event) => {
           event.preventDefault();
           event.stopPropagation();
-          console.log("Drop");
           setDragging(false);
           const files = event.dataTransfer.files;
           if (files.length === 0) {
-            console.log("Files length is 0");
-            return;
+            throw new Error("Files length is 0");
           }
           const file = files[0];
           const reader = new FileReader();
