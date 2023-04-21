@@ -36040,6 +36040,20 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
     console.log("EditorImageViewer: canvasUpdate");
   }
+  function setupOnScrollEvent(props) {
+    const canvas = props.canvas;
+    canvas.onwheel = (event) => {
+      const dy = event.deltaY * -1 / 100;
+      const x = event.offsetX;
+      const y = event.offsetY;
+      console.log("EditorImageViewer: onwheel: dy: " + dy);
+      console.log("EditorImageViewer: onwheel: x: " + x);
+      console.log("EditorImageViewer: onwheel: y: " + y);
+      props.imageScale += dy;
+      props.imageOffsetX += (x - props.imageOffsetX) * dy;
+      props.imageOffsetY -= (y - props.imageOffsetY) * dy;
+    };
+  }
   function initializeCanvas(props, canvas) {
     console.log("EditorImageViewer: initializeCanvas");
     const context = canvas.getContext("2d");
@@ -36056,6 +36070,10 @@ Please use another name.` : formatMuiErrorMessage(18));
       imageOffsetX: props.imageOffsetX || props.canvasWidth / 2 - props.image.width * (props.imageScale || 1) / 2,
       imageOffsetY: props.imageOffsetY || props.canvasHeight / 2 - props.image.height * (props.imageScale || 1) / 2
     };
+    canvas.width = props.canvasWidth;
+    canvas.height = props.canvasHeight;
+    canvasUpdate(canvasProps);
+    setupOnScrollEvent(canvasProps);
     return canvasProps;
   }
   function EditorImageViewer(props) {
