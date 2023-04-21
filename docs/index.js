@@ -34911,7 +34911,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: dragging ? theme.palette.action.hover : "transparent"
+          backgroundColor: dragging ? theme.palette.action.hover : theme.palette.background.default
         },
         onDragEnter: (event) => {
           event.preventDefault();

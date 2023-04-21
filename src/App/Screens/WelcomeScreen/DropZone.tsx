@@ -20,7 +20,7 @@ export function DropZone(props: DropZoneProps){
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: dragging ? theme.palette.action.hover : "transparent",
+                    backgroundColor: dragging ? theme.palette.action.hover : theme.palette.background.default,
                 }
             }
             onDragEnter={
