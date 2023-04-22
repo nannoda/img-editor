@@ -25695,9 +25695,6 @@
   // src/App/Screens/WelcomeScreen/WelcomeScreen.tsx
   var import_react13 = __toESM(require_react());
 
-  // src/App/Screens/WelcomeScreen/DropZone.tsx
-  var import_react12 = __toESM(require_react());
-
   // node_modules/@mui/material/colors/index.js
   var colors_exports = {};
   __export(colors_exports, {
@@ -36304,6 +36301,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   var Tabs_default = Tabs;
 
   // src/App/Screens/WelcomeScreen/DropZone.tsx
+  var import_react12 = __toESM(require_react());
   function DropZone(props) {
     const [dragging, setDragging] = import_react12.default.useState(false);
     const theme = useTheme5();
@@ -36371,7 +36369,14 @@ Please use another name.` : formatMuiErrorMessage(18));
       if (node2) {
         items.push(node2);
         if (i !== pluginNodes.length - 1) {
-          items.push(/* @__PURE__ */ import_react13.default.createElement("br", null));
+          items.push(/* @__PURE__ */ import_react13.default.createElement(
+            Box_default,
+            {
+              style: {
+                height: "5px"
+              }
+            }
+          ));
         }
       }
     }
