@@ -61,6 +61,7 @@ export function EditorScreen(props: EditorScreenProps) {
                {
                  width: "100%",
                  height: "100%",
+                 overflow: "hidden",
                }
              }
         >
@@ -73,9 +74,17 @@ export function EditorScreen(props: EditorScreenProps) {
       </Panel>
       <PanelResizeHandle onDragging={handleOnDrag}>
         <Divider orientation="vertical"/>
+        {/*<div style={*/}
+        {/*  {*/}
+        {/*    width: "10px",*/}
+        {/*    height: "100%",*/}
+        {/*    backgroundColor: "red",*/}
+        {/*  }*/}
+        {/*}/>*/}
+
       </PanelResizeHandle>
       <Panel defaultSize={25}>
-        <Typography>Panel 2</Typography>
+        <Typography>Panel 2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2f ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli</Typography>
       </Panel>
     </PanelGroup>
   )

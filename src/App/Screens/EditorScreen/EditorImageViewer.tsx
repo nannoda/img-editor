@@ -183,14 +183,31 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
   });
 
   return (
-    <canvas
-      ref={canvasRef}
+
+    <div
       style={
         {
-          width: "100%",
-          height: "100%",
+          width: props.canvasWidth + "px",
+          height: props.canvasHeight + "px",
+          // backgroundColor: "black",
+          // overflow: "hidden",
+          // position: "relative",
+          // backgroundImage: `url(${props.image.src})`,
         }
       }
-    ></canvas>
+    >
+      <canvas
+        ref={canvasRef}
+        style={
+          {
+            width: "100%",
+            height: "100%",
+            // display: "block",
+            // border: "1px solid blue",
+
+          }
+        }
+      ></canvas>
+    </div>
   );
 }

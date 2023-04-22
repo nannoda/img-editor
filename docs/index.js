@@ -37568,14 +37568,29 @@ Please use another name.` : formatMuiErrorMessage(18));
       };
     });
     return /* @__PURE__ */ import_react14.default.createElement(
-      "canvas",
+      "div",
       {
-        ref: canvasRef,
         style: {
-          width: "100%",
-          height: "100%"
+          width: props.canvasWidth + "px",
+          height: props.canvasHeight + "px"
+          // backgroundColor: "black",
+          // overflow: "hidden",
+          // position: "relative",
+          // backgroundImage: `url(${props.image.src})`,
         }
-      }
+      },
+      /* @__PURE__ */ import_react14.default.createElement(
+        "canvas",
+        {
+          ref: canvasRef,
+          style: {
+            width: "100%",
+            height: "100%"
+            // display: "block",
+            // border: "1px solid blue",
+          }
+        }
+      )
     );
   }
 
@@ -37626,7 +37641,8 @@ Please use another name.` : formatMuiErrorMessage(18));
           ref: canvasDivRef,
           style: {
             width: "100%",
-            height: "100%"
+            height: "100%",
+            overflow: "hidden"
           }
         },
         /* @__PURE__ */ import_react15.default.createElement(
@@ -37638,7 +37654,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           }
         )
       )
-    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Panel 2")));
+    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Panel 2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2f ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli")));
     const [value, setValue] = import_react15.default.useState(0);
     const handleChange = (event, newValue) => {
       setValue(newValue);
