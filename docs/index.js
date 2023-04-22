@@ -20,18 +20,6 @@
       }
     return a;
   };
-  var __objRest = (source, exclude) => {
-    var target = {};
-    for (var prop in source)
-      if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-        target[prop] = source[prop];
-    if (source != null && __getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(source)) {
-        if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-          target[prop] = source[prop];
-      }
-    return target;
-  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -2433,9 +2421,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React48 = require_react();
+          var React49 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React48.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React49.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4040,7 +4028,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React48.Children.forEach(props.children, function(child) {
+                  React49.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12487,7 +12475,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React48.Component().refs;
+          var emptyRefsObject = new React49.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24791,7 +24779,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React48 = require_react();
+          var React49 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24817,7 +24805,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React48.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React49.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25676,10 +25664,10 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React47 = __toESM(require_react());
+  var React48 = __toESM(require_react());
 
   // src/App/ImageEditor.tsx
-  var React46 = __toESM(require_react());
+  var React47 = __toESM(require_react());
 
   // src/App/SetupDependencies.ts
   function SetupDependencies() {
@@ -36392,7 +36380,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/App/Screens/EditorScreen/EditorScreen.tsx
-  var import_react15 = __toESM(require_react());
+  var import_react16 = __toESM(require_react());
 
   // node_modules/react-resizable-panels/dist/react-resizable-panels.module.js
   var $jhddX$react = __toESM(require_react());
@@ -37455,7 +37443,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       props.canvasPainter(props);
     }
   }
-  function setImageXY(props, x, y, margin2 = 10) {
+  function setImageXY(props, x, y) {
     const rWidth = props.canvas.width;
     const rHeight = props.canvas.height;
     const imageWidth = props.image.width * props.imageScale;
@@ -37515,7 +37503,9 @@ Please use another name.` : formatMuiErrorMessage(18));
     const canvas = props.canvas;
     canvas.onwheel = (e) => {
       e.preventDefault();
+      console.log(e.deltaX);
       if (e.ctrlKey) {
+        console.log("ctrl");
         const dScale = 1 - e.deltaY / 500;
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
@@ -37527,30 +37517,29 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
     };
   }
-  function initializeCanvas(props, canvas) {
+  function initializeCanvas(props, canvasState) {
+    const currentScale = window.devicePixelRatio;
+    canvasState.ctx.scale(currentScale, currentScale);
+    canvasState.canvas.width = props.canvasWidth * currentScale;
+    canvasState.canvas.height = props.canvasHeight * currentScale;
+    canvasUpdate(canvasState);
+    setupOnScrollEvent(canvasState);
+  }
+  function createCanvasState(props, canvas) {
     console.log("EditorImageViewer: initializeCanvas");
     const context = canvas.getContext("2d");
     if (context === null) {
       throw new Error("EditorImageViewer: initializeCanvas: context is null");
     }
-    const canvasProps = {
+    return {
       canvas,
       ctx: context,
       image: props.image,
-      canvasWidth: props.canvasWidth,
-      canvasHeight: props.canvasHeight,
-      imageScale: props.imageScale || 1,
-      imageOffsetX: props.imageOffsetX || props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
-      imageOffsetY: props.imageOffsetY || props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
+      imageScale: 1,
+      imageOffsetX: props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
+      imageOffsetY: props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
       deviceScale: window.devicePixelRatio
     };
-    const currentScale = window.devicePixelRatio;
-    context.scale(currentScale, currentScale);
-    canvas.width = props.canvasWidth * currentScale;
-    canvas.height = props.canvasHeight * currentScale;
-    canvasUpdate(canvasProps);
-    setupOnScrollEvent(canvasProps);
-    return canvasProps;
   }
   function EditorImageViewer(props) {
     const canvasRef = import_react14.default.useRef(null);
@@ -37560,10 +37549,15 @@ Please use another name.` : formatMuiErrorMessage(18));
         return;
       }
       const canvas = canvasRef.current;
-      const canvasProps = initializeCanvas(props, canvas);
+      if (props.canvas.state === null) {
+        props.canvas.setState(createCanvasState(props, canvas));
+        return;
+      }
+      const canvasState = props.canvas.state;
+      initializeCanvas(props, canvasState);
       let requestId = 0;
       const callUpdate = () => {
-        canvasUpdate(canvasProps);
+        canvasUpdate(canvasState);
         requestId = requestAnimationFrame(callUpdate);
       };
       callUpdate();
@@ -37578,10 +37572,6 @@ Please use another name.` : formatMuiErrorMessage(18));
         style: {
           width: props.canvasWidth + "px",
           height: props.canvasHeight + "px"
-          // backgroundColor: "black",
-          // overflow: "hidden",
-          // position: "relative",
-          // backgroundImage: `url(${props.image.src})`,
         }
       },
       /* @__PURE__ */ import_react14.default.createElement(
@@ -37591,45 +37581,41 @@ Please use another name.` : formatMuiErrorMessage(18));
           style: {
             width: "100%",
             height: "100%"
-            // display: "block",
-            // border: "1px solid blue",
           }
         }
       )
     );
   }
 
-  // src/App/Screens/EditorScreen/EditorScreen.tsx
-  function EditorScreen(props) {
+  // src/App/Screens/EditorScreen/ImageEditWithCanvas.tsx
+  var import_react15 = __toESM(require_react());
+  function ImageEditWithCanvas(props) {
+    if (!props.image.complete) {
+      return /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Loading image...");
+    }
     const [canvasWidth, setCanvasWidth] = import_react15.default.useState(0);
     const [canvasHeight, setCanvasHeight] = import_react15.default.useState(0);
     const canvasDivRef = import_react15.default.useRef(null);
-    const tabBoxRef = import_react15.default.useRef(null);
-    function handleOnDrag() {
-      console.log("EditorScreen: handleOnDrag");
+    (0, import_react15.useEffect)(() => {
+      window.addEventListener("resize", handleCanvasSizeChange);
+      return () => {
+        window.removeEventListener("resize", handleCanvasSizeChange);
+      };
+    });
+    function handleCanvasSizeChange() {
+      console.log("EditorScreen: handleCanvasSizeChange");
       if (canvasDivRef.current === null) {
         return;
       }
-      if (tabBoxRef.current === null) {
-        return;
-      }
       const canvasDiv = canvasDivRef.current;
-      const tabBox = tabBoxRef.current;
       const canvasDivWidth = canvasDiv.clientWidth;
       const canvasDivHeight = canvasDiv.clientHeight;
       setCanvasWidth(canvasDivWidth);
       setCanvasHeight(canvasDivHeight);
     }
-    (0, import_react15.useEffect)(() => {
-      window.addEventListener("resize", handleOnDrag);
-      return () => {
-        window.removeEventListener("resize", handleOnDrag);
-      };
-    });
-    const testNode = /* @__PURE__ */ import_react15.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal", style: {
+    return /* @__PURE__ */ import_react15.default.createElement($3daa5d4c086ea816$export$1d05749f6f573bb, { direction: "horizontal", style: {
       width: "100%",
       height: "100%",
-      // 99% to avoid growing the window
       display: "flex",
       flexDirection: "row",
       justifyContent: "center"
@@ -37637,7 +37623,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       $c33df6d7c39fd3ee$export$2ddb90ad54e5f587,
       {
         onResize: () => {
-          handleOnDrag();
+          handleCanvasSizeChange();
         }
       },
       /* @__PURE__ */ import_react15.default.createElement(
@@ -37655,11 +37641,12 @@ Please use another name.` : formatMuiErrorMessage(18));
           {
             image: props.image,
             canvasWidth,
-            canvasHeight
+            canvasHeight,
+            canvas: props.canvas
           }
         )
       )
-    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react15.default.createElement(
+    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleCanvasSizeChange }, /* @__PURE__ */ import_react15.default.createElement(
       "div",
       {
         style: {
@@ -37671,18 +37658,19 @@ Please use another name.` : formatMuiErrorMessage(18));
         }
       },
       /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })
-    )), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Panel 2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2f ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli")));
-    const [value, setValue] = import_react15.default.useState(0);
+    )), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, props.panel));
+  }
+
+  // src/App/Screens/EditorScreen/EditorScreen.tsx
+  function EditorScreen(props) {
+    const [value, setValue] = import_react16.default.useState(0);
+    const [canvasState, setCanvasState] = import_react16.default.useState(null);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-    return /* @__PURE__ */ import_react15.default.createElement(
+    return /* @__PURE__ */ import_react16.default.createElement(
       Box_default,
       {
-        sx: {
-          width: "100%",
-          height: "100%"
-        },
         style: {
           width: "100%",
           height: "100%",
@@ -37690,27 +37678,32 @@ Please use another name.` : formatMuiErrorMessage(18));
           flexDirection: "column"
         }
       },
-      /* @__PURE__ */ import_react15.default.createElement(Box_default, { ref: tabBoxRef }, /* @__PURE__ */ import_react15.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react15.default.createElement(Tab_default, { label: "Item Three" }))),
-      /* @__PURE__ */ import_react15.default.createElement(Divider_default, null),
-      /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 0 }, testNode),
-      /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 1 }, "Item Two"),
-      /* @__PURE__ */ import_react15.default.createElement(TabPanel, { value, index: 2 }, "Item Three")
+      /* @__PURE__ */ import_react16.default.createElement(Box_default, null, /* @__PURE__ */ import_react16.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "Item Three" }))),
+      /* @__PURE__ */ import_react16.default.createElement(Divider_default, null),
+      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 0 }, /* @__PURE__ */ import_react16.default.createElement(
+        ImageEditWithCanvas,
+        {
+          image: props.image,
+          panel: /* @__PURE__ */ import_react16.default.createElement(Box_default, null, /* @__PURE__ */ import_react16.default.createElement(Button_default, null, "Button")),
+          canvas: {
+            state: canvasState,
+            setState: setCanvasState
+          }
+        }
+      )),
+      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 1 }, "Item Two"),
+      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 2 }, "Item Three")
     );
   }
   function TabPanel(props) {
-    const _a = props, { children, value, index } = _a, other = __objRest(_a, ["children", "value", "index"]);
-    return /* @__PURE__ */ import_react15.default.createElement(
+    const { children, value, index } = props;
+    return /* @__PURE__ */ import_react16.default.createElement(
       "div",
       {
-        role: "tabpanel",
         hidden: value !== index,
         style: {
           width: "100%",
           height: "100%"
-          //
-          // display: value === index ? "block" : "none",
-          // overflow: "hidden",
-          // visibility: value === index ? "visible" : "hidden",
         }
       },
       value === index && children
@@ -37718,7 +37711,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/App/MessageSnackbar.tsx
-  var import_react16 = __toESM(require_react());
+  var import_react17 = __toESM(require_react());
 
   // node_modules/@mui/icons-material/esm/Close.js
   var import_jsx_runtime30 = __toESM(require_jsx_runtime());
@@ -37748,13 +37741,13 @@ Please use another name.` : formatMuiErrorMessage(18));
   function MessageSnackbarPlugin() {
     return {
       getGlobalItem: () => {
-        return /* @__PURE__ */ import_react16.default.createElement(MessageSnackbar, null);
+        return /* @__PURE__ */ import_react17.default.createElement(MessageSnackbar, null);
       }
     };
   }
   function MessageSnackbar(props) {
-    const [open, setOpen] = import_react16.default.useState(false);
-    const [message, setMessage] = import_react16.default.useState("");
+    const [open, setOpen] = import_react17.default.useState(false);
+    const [message, setMessage] = import_react17.default.useState("");
     function __showMessage(error) {
       setMessage(error.message);
       setOpen(true);
@@ -37766,7 +37759,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
       setOpen(false);
     };
-    return /* @__PURE__ */ import_react16.default.createElement(
+    return /* @__PURE__ */ import_react17.default.createElement(
       Snackbar_default,
       {
         anchorOrigin: {
@@ -37777,17 +37770,17 @@ Please use another name.` : formatMuiErrorMessage(18));
         autoHideDuration: 6e3,
         onClose: handleClose,
         message,
-        action: /* @__PURE__ */ import_react16.default.createElement(import_react16.default.Fragment, null, /* @__PURE__ */ import_react16.default.createElement(IconButton_default, { size: "small", "aria-label": "close", color: "inherit", onClick: handleClose }, /* @__PURE__ */ import_react16.default.createElement(Close_default, { fontSize: "small" })))
+        action: /* @__PURE__ */ import_react17.default.createElement(import_react17.default.Fragment, null, /* @__PURE__ */ import_react17.default.createElement(IconButton_default, { size: "small", "aria-label": "close", color: "inherit", onClick: handleClose }, /* @__PURE__ */ import_react17.default.createElement(Close_default, { fontSize: "small" })))
       }
     );
   }
 
   // src/App/Screens/WelcomeScreen/OpenFilePlugin.tsx
-  var import_react17 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
   function OpenFilePlugin() {
     return {
       getWelcomeScreenItem: (props) => {
-        return /* @__PURE__ */ import_react17.default.createElement(
+        return /* @__PURE__ */ import_react18.default.createElement(
           OpenFile,
           __spreadValues({}, props)
         );
@@ -37827,11 +37820,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     });
   }
   function OpenFile(props) {
-    return /* @__PURE__ */ import_react17.default.createElement(
+    return /* @__PURE__ */ import_react18.default.createElement(
       Button_default,
       {
         variant: "outlined",
-        startIcon: /* @__PURE__ */ import_react17.default.createElement(OpenInBrowser_default, null),
+        startIcon: /* @__PURE__ */ import_react18.default.createElement(OpenInBrowser_default, null),
         onClick: () => __async(this, null, function* () {
           yield openImageButtonOnClick(props);
         })
@@ -37841,11 +37834,11 @@ Please use another name.` : formatMuiErrorMessage(18));
   }
 
   // src/App/Screens/WelcomeScreen/PasteImagePlugin.tsx
-  var import_react18 = __toESM(require_react());
+  var import_react19 = __toESM(require_react());
   function PasteImagePlugin() {
     return {
       getWelcomeScreenItem: (props) => {
-        return /* @__PURE__ */ import_react18.default.createElement(PasteButton, __spreadValues({}, props));
+        return /* @__PURE__ */ import_react19.default.createElement(PasteButton, __spreadValues({}, props));
       }
     };
   }
@@ -37881,11 +37874,11 @@ Please use another name.` : formatMuiErrorMessage(18));
     });
   }
   function PasteButton(props) {
-    return /* @__PURE__ */ import_react18.default.createElement(
+    return /* @__PURE__ */ import_react19.default.createElement(
       Button_default,
       {
         variant: "outlined",
-        startIcon: /* @__PURE__ */ import_react18.default.createElement(ContentPaste_default, null),
+        startIcon: /* @__PURE__ */ import_react19.default.createElement(ContentPaste_default, null),
         onClick: () => __async(this, null, function* () {
           try {
             yield pasteImageButtonOnClick(props);
@@ -37920,7 +37913,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     const [
       image,
       setImage
-    ] = React46.useState(void 0);
+    ] = React47.useState(void 0);
     function handleImageDone(image2) {
       console.log("ImageEditor: handleImageDone");
       setImage(image2);
@@ -37946,7 +37939,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         return plugin.getGlobalItem(props);
       }
     });
-    return /* @__PURE__ */ React46.createElement(ThemeProvider4, { theme }, /* @__PURE__ */ React46.createElement(
+    return /* @__PURE__ */ React47.createElement(ThemeProvider4, { theme }, /* @__PURE__ */ React47.createElement(
       Box_default,
       {
         style: {
@@ -37955,7 +37948,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         }
       },
       ...items,
-      image === void 0 ? /* @__PURE__ */ React46.createElement(WelcomeScreen, { onImageDone: handleImageDone, plugins }) : /* @__PURE__ */ React46.createElement(EditorScreen, { image, onEditDone: props.onEditDone, plugins })
+      image === void 0 ? /* @__PURE__ */ React47.createElement(WelcomeScreen, { onImageDone: handleImageDone, plugins }) : /* @__PURE__ */ React47.createElement(EditorScreen, { image, onEditDone: props.onEditDone, plugins })
     ));
   }
   var ImageEditor_default = ImageEditor;
@@ -37978,7 +37971,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React47.createElement(React47.StrictMode, null, /* @__PURE__ */ React47.createElement(
+      /* @__PURE__ */ React48.createElement(React48.StrictMode, null, /* @__PURE__ */ React48.createElement(
         ImageEditor_default,
         {
           theme: testTheme

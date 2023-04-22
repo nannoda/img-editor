@@ -1,25 +1,29 @@
 import React from "react";
 
-export interface EditorImageViewerProps {
+export interface CanvasStateManager {
+  state: ViewerCanvasState | null;
+  setState: (props: ViewerCanvasState | null) => void;
+}
+
+interface EditorImageViewerProps {
   image: HTMLImageElement;
   canvasWidth: number;
   canvasHeight: number;
-  imageScale?: number;
-  imageOffsetX?: number;
-  imageOffsetY?: number;
-  canvasPainter?: (props: CanvasProps) => void;
+  canvas: CanvasStateManager;
 }
 
-interface CanvasProps extends EditorImageViewerProps {
+export interface ViewerCanvasState {
+  image: HTMLImageElement;
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
   imageScale: number;
   deviceScale: number;
   imageOffsetX: number;
   imageOffsetY: number;
+  canvasPainter?: (props: ViewerCanvasState) => void;
 }
 
-function canvasUpdate(props: CanvasProps) {
+function canvasUpdate(props: ViewerCanvasState) {
   const ctx = props.ctx;
   const canvas = props.canvas;
   const width = canvas.width;
@@ -39,8 +43,7 @@ function canvasUpdate(props: CanvasProps) {
   }
 }
 
-function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
-  // bound *= props.deviceScale * props.imageScale;
+function setImageXY(props: ViewerCanvasState, x: number, y: number) {
   const rWidth = props.canvas.width;
   const rHeight = props.canvas.height;
   const imageWidth = props.image.width * props.imageScale;
@@ -77,12 +80,14 @@ function setImageXY(props:CanvasProps, x:number, y:number, margin:number=10) {
     props.imageOffsetX = targetX;
   }
 }
-function shiftImage(props: CanvasProps, dx: number, dy: number) {
+
+function shiftImage(props: ViewerCanvasState, dx: number, dy: number) {
   const targetX = props.imageOffsetX - dx;
   const targetY = props.imageOffsetY - dy;
   setImageXY(props, targetX, targetY);
 }
-function scaleCanvas(props: CanvasProps,
+
+function scaleCanvas(props: ViewerCanvasState,
                      dScale: number,
                      pointerX: number,
                      pointerY: number) {
@@ -96,67 +101,60 @@ function scaleCanvas(props: CanvasProps,
   }
 
   props.imageScale = targetScale;
-  // props.imageOffsetX = x - (x - props.imageOffsetX) * dScale;
-
   const absoluteX = pointerX * props.deviceScale;
   const absoluteY = pointerY * props.deviceScale;
 
   const relativeX = absoluteX - props.imageOffsetX;
   const relativeY = absoluteY - props.imageOffsetY;
 
-  // props.imageOffsetX = absoluteX - relativeX * dScale;
-  // props.imageOffsetY = absoluteY - relativeY * dScale;
   setImageXY(props, absoluteX - relativeX * dScale, absoluteY - relativeY * dScale);
 }
 
-function setupOnScrollEvent(props: CanvasProps) {
+function setupOnScrollEvent(props: ViewerCanvasState) {
   const canvas = props.canvas;
   canvas.onwheel = (e) => {
     e.preventDefault();
+    console.log(e.deltaX)
+    // console.log(e.deltaY)
     if (e.ctrlKey) {
+      console.log("ctrl")
       const dScale = 1 - e.deltaY / 500;
       const x = e.clientX - canvas.offsetLeft;
       const y = e.clientY - canvas.offsetTop;
       scaleCanvas(props, dScale, x, y);
-    }else if (e.altKey) {
-      // props.imageOffsetX -= e.deltaX;
+    } else if (e.altKey) {
       shiftImage(props, e.deltaY, 0);
-    }else{
-      // props.imageOffsetX -= e.deltaX;
-      // props.imageOffsetY -= e.deltaY;
+    } else {
       shiftImage(props, e.deltaX, e.deltaY);
     }
   }
 }
 
 function initializeCanvas(props: EditorImageViewerProps,
-                          canvas: HTMLCanvasElement) {
+                          canvasState: ViewerCanvasState) {
+  const currentScale = window.devicePixelRatio;
+  canvasState.ctx.scale(currentScale, currentScale);
+  canvasState.canvas.width = props.canvasWidth * currentScale;
+  canvasState.canvas.height = props.canvasHeight * currentScale;
+  canvasUpdate(canvasState);
+  setupOnScrollEvent(canvasState);
+}
+
+function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElement): ViewerCanvasState {
   console.log("EditorImageViewer: initializeCanvas")
   const context = canvas.getContext("2d");
   if (context === null) {
     throw new Error("EditorImageViewer: initializeCanvas: context is null");
   }
-
-  const canvasProps: CanvasProps = {
+  return {
     canvas: canvas,
     ctx: context,
     image: props.image,
-    canvasWidth: props.canvasWidth,
-    canvasHeight: props.canvasHeight,
-    imageScale: props.imageScale || 1,
-    imageOffsetX: props.imageOffsetX ||
-      props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
-    imageOffsetY: props.imageOffsetY ||
-      props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
+    imageScale: 1,
+    imageOffsetX: props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
+    imageOffsetY: props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
     deviceScale: window.devicePixelRatio,
-  }
-  const currentScale = window.devicePixelRatio;
-  context.scale(currentScale, currentScale);
-  canvas.width = props.canvasWidth * currentScale;
-  canvas.height = props.canvasHeight * currentScale;
-  canvasUpdate(canvasProps);
-  setupOnScrollEvent(canvasProps);
-  return canvasProps;
+  };
 }
 
 export function EditorImageViewer(props: EditorImageViewerProps) {
@@ -168,14 +166,18 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
       return;
     }
     const canvas = canvasRef.current;
-    const canvasProps = initializeCanvas(props, canvas);
+    if (props.canvas.state === null){
+      props.canvas.setState(createCanvasState(props, canvas));
+      return;
+    }
+    const canvasState = props.canvas.state as ViewerCanvasState;
+    initializeCanvas(props, canvasState);
     let requestId = 0;
     const callUpdate = () => {
-      canvasUpdate(canvasProps);
+      canvasUpdate(canvasState);
       requestId = requestAnimationFrame(callUpdate)
     }
     callUpdate();
-
     return () => {
       console.log("EditorImageViewer: useEffect: cleanup")
       cancelAnimationFrame(requestId);
@@ -183,16 +185,11 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
   });
 
   return (
-
     <div
       style={
         {
           width: props.canvasWidth + "px",
           height: props.canvasHeight + "px",
-          // backgroundColor: "black",
-          // overflow: "hidden",
-          // position: "relative",
-          // backgroundImage: `url(${props.image.src})`,
         }
       }
     >
@@ -202,9 +199,6 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
           {
             width: "100%",
             height: "100%",
-            // display: "block",
-            // border: "1px solid blue",
-
           }
         }
       ></canvas>
