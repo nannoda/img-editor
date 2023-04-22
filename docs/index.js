@@ -37654,7 +37654,19 @@ Please use another name.` : formatMuiErrorMessage(18));
           }
         )
       )
-    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Panel 2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2f ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli")));
+    ), /* @__PURE__ */ import_react15.default.createElement($971f2c37f9d2b98e$export$8829ecf6b6b15484, { onDragging: handleOnDrag }, /* @__PURE__ */ import_react15.default.createElement(
+      "div",
+      {
+        style: {
+          width: "10px",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }
+      },
+      /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })
+    )), /* @__PURE__ */ import_react15.default.createElement($c33df6d7c39fd3ee$export$2ddb90ad54e5f587, { defaultSize: 25 }, /* @__PURE__ */ import_react15.default.createElement(Typography_default, null, "Panel 2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2fewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli2f ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehi ewhflehiowehfiewhfoiwehfewhfoirwhfioewhgofirwyorwifiorwgioreylrteliwrilr3ligrteli")));
     const [value, setValue] = import_react15.default.useState(0);
     const handleChange = (event, newValue) => {
       setValue(newValue);

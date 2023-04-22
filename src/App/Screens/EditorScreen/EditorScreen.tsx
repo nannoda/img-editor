@@ -73,7 +73,20 @@ export function EditorScreen(props: EditorScreenProps) {
         </div>
       </Panel>
       <PanelResizeHandle onDragging={handleOnDrag}>
-        <Divider orientation="vertical"/>
+        <div
+            style={
+              {
+                width: "10px",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }
+            }
+        >
+          <Divider orientation="vertical" />
+        </div>
+
         {/*<div style={*/}
         {/*  {*/}
         {/*    width: "10px",*/}
