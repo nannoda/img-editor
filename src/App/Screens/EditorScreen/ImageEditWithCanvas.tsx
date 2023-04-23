@@ -82,7 +82,7 @@ export function ImageEditWithCanvas(props: ImageEditWithCanvasProps) {
               height: "100%",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "start"
             }
           }
         >

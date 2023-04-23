@@ -37657,7 +37657,7 @@ Please use another name.` : formatMuiErrorMessage(18));
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "start"
         }
       },
       /* @__PURE__ */ import_react15.default.createElement(Divider_default, { orientation: "vertical" })
