@@ -132,7 +132,9 @@ function setupOnScrollEvent(props: ViewerCanvasState) {
 }
 
 function initializeCanvas(props: EditorImageViewerProps,
-                          canvasState: ViewerCanvasState) {
+                          canvasState: ViewerCanvasState,
+                          canvas: HTMLCanvasElement
+) {
   console.log("Init canvas");
   const currentScale = window.devicePixelRatio;
   canvasState.ctx.scale(currentScale, currentScale);
@@ -142,7 +144,7 @@ function initializeCanvas(props: EditorImageViewerProps,
   setupOnScrollEvent(canvasState);
 }
 
-function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElement): ViewerCanvasState {
+function createCanvasState(props: EditorImageViewerProps | CanvasState, canvas: HTMLCanvasElement): ViewerCanvasState {
   const context = canvas.getContext("2d");
   if (context === null) {
     throw new Error("EditorImageViewer: initializeCanvas: context is null");
@@ -152,7 +154,7 @@ function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElem
     ctx: context,
     image: props.image,
     imageScale: 1,
-    imageOffsetX: props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
+    imageOffsetX:  props.canvasWidth * window.devicePixelRatio / 2 - props.image.width / 2,
     imageOffsetY: props.canvasHeight * window.devicePixelRatio / 2 - props.image.height / 2,
     deviceScale: window.devicePixelRatio,
   };
@@ -171,6 +173,9 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
       return;
     }
     const canvasState = props.canvas.state as ViewerCanvasState;
+    canvasState.canvas = canvas;
+    canvasState.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+    canvasState.image = props.image;
     initializeCanvas(props, canvasState);
     let requestId = 0;
     const callUpdate = () => {

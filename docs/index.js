@@ -37517,7 +37517,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       }
     };
   }
-  function initializeCanvas(props, canvasState) {
+  function initializeCanvas(props, canvasState, canvas) {
     console.log("Init canvas");
     const currentScale = window.devicePixelRatio;
     canvasState.ctx.scale(currentScale, currentScale);
@@ -37554,6 +37554,9 @@ Please use another name.` : formatMuiErrorMessage(18));
         return;
       }
       const canvasState = props.canvas.state;
+      canvasState.canvas = canvas;
+      canvasState.ctx = canvas.getContext("2d");
+      canvasState.image = props.image;
       initializeCanvas(props, canvasState);
       let requestId = 0;
       const callUpdate = () => {
@@ -37667,7 +37670,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     const [canvasState, setCanvasState] = import_react16.default.useState(null);
     const handleChange = (event, newValue) => {
       setValue(newValue);
-      setCanvasState(null);
     };
     return /* @__PURE__ */ import_react16.default.createElement(
       Box_default,

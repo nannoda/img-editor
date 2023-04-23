@@ -15,7 +15,7 @@ export function EditorScreen(props: EditorScreenProps) {
   const [canvasState, setCanvasState] = React.useState(null as ViewerCanvasState | null);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    setCanvasState(null);
+    // setCanvasState(null);
   };
   return (
     <Box
