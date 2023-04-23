@@ -33,7 +33,8 @@ function canvasUpdate(props: ViewerCanvasState) {
   const imageOffsetY = props.imageOffsetY;
 
   ctx.clearRect(0, 0, width, height);
-  ctx.drawImage(props.image,
+  ctx.drawImage(
+      props.image,
     imageOffsetX, imageOffsetY,
     props.image.width * scale,
     props.image.height * scale
@@ -132,6 +133,7 @@ function setupOnScrollEvent(props: ViewerCanvasState) {
 
 function initializeCanvas(props: EditorImageViewerProps,
                           canvasState: ViewerCanvasState) {
+  console.log("Init canvas");
   const currentScale = window.devicePixelRatio;
   canvasState.ctx.scale(currentScale, currentScale);
   canvasState.canvas.width = props.canvasWidth * currentScale;
@@ -141,7 +143,6 @@ function initializeCanvas(props: EditorImageViewerProps,
 }
 
 function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElement): ViewerCanvasState {
-  console.log("EditorImageViewer: initializeCanvas")
   const context = canvas.getContext("2d");
   if (context === null) {
     throw new Error("EditorImageViewer: initializeCanvas: context is null");
@@ -159,7 +160,6 @@ function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElem
 
 export function EditorImageViewer(props: EditorImageViewerProps) {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-
   React.useEffect(() => {
     console.log("EditorImageViewer: useEffect")
     if (canvasRef.current === null) {
@@ -181,6 +181,8 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
     return () => {
       console.log("EditorImageViewer: useEffect: cleanup")
       cancelAnimationFrame(requestId);
+      // props.canvas.setState(null);
+      // props.canvas.state=null;
     }
   });
 

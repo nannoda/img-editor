@@ -37518,6 +37518,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     };
   }
   function initializeCanvas(props, canvasState) {
+    console.log("Init canvas");
     const currentScale = window.devicePixelRatio;
     canvasState.ctx.scale(currentScale, currentScale);
     canvasState.canvas.width = props.canvasWidth * currentScale;
@@ -37526,7 +37527,6 @@ Please use another name.` : formatMuiErrorMessage(18));
     setupOnScrollEvent(canvasState);
   }
   function createCanvasState(props, canvas) {
-    console.log("EditorImageViewer: initializeCanvas");
     const context = canvas.getContext("2d");
     if (context === null) {
       throw new Error("EditorImageViewer: initializeCanvas: context is null");
@@ -37667,6 +37667,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     const [canvasState, setCanvasState] = import_react16.default.useState(null);
     const handleChange = (event, newValue) => {
       setValue(newValue);
+      setCanvasState(null);
     };
     return /* @__PURE__ */ import_react16.default.createElement(
       Box_default,
