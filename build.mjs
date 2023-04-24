@@ -28,11 +28,6 @@ async function main(
         })
         return
     }
-    // await buildCtx.serve({
-    //     servedir: "docs",
-    //     port: 8080,
-    //     host: "localhost",
-    // })
 }
 
 main().then(() => {
