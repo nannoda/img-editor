@@ -37977,7 +37977,8 @@ Please use another name.` : formatMuiErrorMessage(18));
       /* @__PURE__ */ React48.createElement(React48.StrictMode, null, /* @__PURE__ */ React48.createElement(
         ImageEditor_default,
         {
-          theme: testTheme
+          theme: testTheme,
+          image: testImage
         }
       ))
     );
