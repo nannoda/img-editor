@@ -13,9 +13,73 @@ export interface EditorScreenProps {
 export function EditorScreen(props: EditorScreenProps) {
   const [value, setValue] = React.useState(0);
   const [canvasState, setCanvasState] = React.useState(null as ViewerCanvasState | null);
+
+  const [plugin, setPlugin] = React.useState(null as IEditorPlugin | null);
+
+
+  const tabs: React.ReactNode[] = [];
+
+  console.log(props.plugins)
+  for (const plugin of props.plugins) {
+    if (!canvasState) {
+      console.log("EditorScreen: !canvasState")
+      break;
+    }
+    if (!plugin.getEditorScreenItem) {
+      console.log("EditorScreen: !plugin.getEditorScreenItem")
+      continue;
+    }
+    const editorScreenItem = plugin.getEditorScreenItem(
+      canvasState as ViewerCanvasState
+    );
+    console.log("EditorScreen: editorScreenItem", editorScreenItem.displayName);
+    tabs.push(
+      <Tab label={editorScreenItem.displayName}
+           onClick={
+             () => {
+               setPlugin(plugin);
+               console.log("EditorScreen: setPlugin")
+             }
+           }
+           key={editorScreenItem.displayName}
+      />
+    );
+  }
+
+  const panel = <Box style={
+    {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "row",
+
+    }
+  }>
+    {
+      (
+        () => {
+          if (!plugin) {
+            return null;
+          }
+          if (!canvasState) {
+            return null;
+          }
+          if (!plugin.getEditorScreenItem) {
+            return null;
+          }
+          const editorScreenItem = plugin.getEditorScreenItem(
+            canvasState as ViewerCanvasState
+          );
+          return (
+            editorScreenItem.toolPanel
+          );
+        }
+      )()
+    }
+  </Box>;
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    // setCanvasState(null);
   };
   return (
     <Box
@@ -30,34 +94,34 @@ export function EditorScreen(props: EditorScreenProps) {
     >
       <Box>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="start"/>
-          <Tab label="Item Two"/>
-          <Tab label="Item Three"/>
+          {tabs}
         </Tabs>
       </Box>
       <Divider/>
-      <TabPanel value={value} index={0}>
-        <ImageEditWithCanvas
-          image={props.image}
-          panel={
-          <Box>
-            <Button>Button</Button>
-          </Box>
+
+      {/*<TabPanel value={value} index={0}>*/}
+      <ImageEditWithCanvas
+        image={props.image}
+        panel={
+          // <Box>
+          //   <Button>Button</Button>
+          // </Box>
+          panel
         }
-          canvas={
-            {
-              state: canvasState,
-              setState: setCanvasState,
-            }
+        canvas={
+          {
+            state: canvasState,
+            setState: setCanvasState,
           }
-        />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+        }
+      />
+      {/*</TabPanel>*/}
+      {/*<TabPanel value={value} index={1}>*/}
+      {/*  Item Two*/}
+      {/*</TabPanel>*/}
+      {/*<TabPanel value={value} index={2}>*/}
+      {/*  Item Three*/}
+      {/*</TabPanel>*/}
     </Box>
   );
 }

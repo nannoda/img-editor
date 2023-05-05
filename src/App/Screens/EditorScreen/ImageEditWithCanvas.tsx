@@ -6,7 +6,7 @@ import React, {useEffect} from "react";
 export interface ImageEditWithCanvasProps {
   image: HTMLImageElement;
   panel: React.ReactNode;
-  canvas:CanvasStateManager;
+  canvas: CanvasStateManager;
 }
 
 export function ImageEditWithCanvas(props: ImageEditWithCanvasProps) {

@@ -2421,9 +2421,9 @@
           if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
             __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
           }
-          var React49 = require_react();
+          var React50 = require_react();
           var Scheduler = require_scheduler();
-          var ReactSharedInternals = React49.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React50.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           var suppressWarning = false;
           function setSuppressWarning(newSuppressWarning) {
             {
@@ -4028,7 +4028,7 @@
             {
               if (props.value == null) {
                 if (typeof props.children === "object" && props.children !== null) {
-                  React49.Children.forEach(props.children, function(child) {
+                  React50.Children.forEach(props.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -12475,7 +12475,7 @@
             }
           }
           var fakeInternalInstance = {};
-          var emptyRefsObject = new React49.Component().refs;
+          var emptyRefsObject = new React50.Component().refs;
           var didWarnAboutStateAssignmentForComponent;
           var didWarnAboutUninitializedState;
           var didWarnAboutGetSnapshotBeforeUpdateWithoutDidUpdate;
@@ -24779,7 +24779,7 @@
       if (true) {
         (function() {
           "use strict";
-          var React49 = require_react();
+          var React50 = require_react();
           var REACT_ELEMENT_TYPE = Symbol.for("react.element");
           var REACT_PORTAL_TYPE = Symbol.for("react.portal");
           var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -24805,7 +24805,7 @@
             }
             return null;
           }
-          var ReactSharedInternals = React49.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+          var ReactSharedInternals = React50.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
           function error(format) {
             {
               {
@@ -25664,10 +25664,10 @@
 
   // src/Binder.tsx
   var import_client = __toESM(require_client());
-  var React48 = __toESM(require_react());
+  var React49 = __toESM(require_react());
 
   // src/App/ImageEditor.tsx
-  var React47 = __toESM(require_react());
+  var React48 = __toESM(require_react());
 
   // src/App/SetupDependencies.ts
   function SetupDependencies() {
@@ -37668,6 +37668,56 @@ Please use another name.` : formatMuiErrorMessage(18));
   function EditorScreen(props) {
     const [value, setValue] = import_react16.default.useState(0);
     const [canvasState, setCanvasState] = import_react16.default.useState(null);
+    const [plugin, setPlugin] = import_react16.default.useState(null);
+    const tabs = [];
+    console.log(props.plugins);
+    for (const plugin2 of props.plugins) {
+      if (!canvasState) {
+        console.log("EditorScreen: !canvasState");
+        break;
+      }
+      if (!plugin2.getEditorScreenItem) {
+        console.log("EditorScreen: !plugin.getEditorScreenItem");
+        continue;
+      }
+      const editorScreenItem = plugin2.getEditorScreenItem(
+        canvasState
+      );
+      console.log("EditorScreen: editorScreenItem", editorScreenItem.displayName);
+      tabs.push(
+        /* @__PURE__ */ import_react16.default.createElement(
+          Tab_default,
+          {
+            label: editorScreenItem.displayName,
+            onClick: () => {
+              setPlugin(plugin2);
+              console.log("EditorScreen: setPlugin");
+            },
+            key: editorScreenItem.displayName
+          }
+        )
+      );
+    }
+    const panel = /* @__PURE__ */ import_react16.default.createElement(Box_default, { style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexDirection: "row"
+    } }, (() => {
+      if (!plugin) {
+        return null;
+      }
+      if (!canvasState) {
+        return null;
+      }
+      if (!plugin.getEditorScreenItem) {
+        return null;
+      }
+      const editorScreenItem = plugin.getEditorScreenItem(
+        canvasState
+      );
+      return editorScreenItem.toolPanel;
+    })());
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -37681,35 +37731,24 @@ Please use another name.` : formatMuiErrorMessage(18));
           flexDirection: "column"
         }
       },
-      /* @__PURE__ */ import_react16.default.createElement(Box_default, null, /* @__PURE__ */ import_react16.default.createElement(Tabs_default, { value, onChange: handleChange }, /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "start" }), /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "Item Two" }), /* @__PURE__ */ import_react16.default.createElement(Tab_default, { label: "Item Three" }))),
+      /* @__PURE__ */ import_react16.default.createElement(Box_default, null, /* @__PURE__ */ import_react16.default.createElement(Tabs_default, { value, onChange: handleChange }, tabs)),
       /* @__PURE__ */ import_react16.default.createElement(Divider_default, null),
-      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 0 }, /* @__PURE__ */ import_react16.default.createElement(
+      /* @__PURE__ */ import_react16.default.createElement(
         ImageEditWithCanvas,
         {
           image: props.image,
-          panel: /* @__PURE__ */ import_react16.default.createElement(Box_default, null, /* @__PURE__ */ import_react16.default.createElement(Button_default, null, "Button")),
+          panel: (
+            // <Box>
+            //   <Button>Button</Button>
+            // </Box>
+            panel
+          ),
           canvas: {
             state: canvasState,
             setState: setCanvasState
           }
         }
-      )),
-      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 1 }, "Item Two"),
-      /* @__PURE__ */ import_react16.default.createElement(TabPanel, { value, index: 2 }, "Item Three")
-    );
-  }
-  function TabPanel(props) {
-    const { children, value, index } = props;
-    return /* @__PURE__ */ import_react16.default.createElement(
-      "div",
-      {
-        hidden: value !== index,
-        style: {
-          width: "100%",
-          height: "100%"
-        }
-      },
-      value === index && children
+      )
     );
   }
 
@@ -37900,11 +37939,29 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
+  // src/App/Plugins/TestPlugin.tsx
+  var import_react20 = __toESM(require_react());
+  var TestPlugin = class extends EditorPlugin {
+    getEditorScreenItem(props) {
+      return {
+        displayName: "Test",
+        toolPanel: [
+          /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement("h1", null, "Test"))
+        ],
+        canvasPainter: (canvas, ctx) => {
+          ctx.fillStyle = "red";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+      };
+    }
+  };
+
   // src/App/Plugins.ts
   var defaultPlugins = [
     new MessageSnackbarPlugin(),
     new OpenFilePlugin(),
-    PasteImagePlugin()
+    PasteImagePlugin(),
+    new TestPlugin()
   ];
   var fullPlugins = [
     new MessageSnackbarPlugin(),
@@ -37921,7 +37978,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     const [
       image,
       setImage
-    ] = React47.useState(void 0);
+    ] = React48.useState(void 0);
     function handleImageDone(image2) {
       console.log("ImageEditor: handleImageDone");
       setImage(image2);
@@ -37947,7 +38004,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         return plugin.getGlobalItem(props);
       }
     });
-    return /* @__PURE__ */ React47.createElement(ThemeProvider4, { theme }, /* @__PURE__ */ React47.createElement(
+    return /* @__PURE__ */ React48.createElement(ThemeProvider4, { theme }, /* @__PURE__ */ React48.createElement(
       Box_default,
       {
         style: {
@@ -37956,7 +38013,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         }
       },
       ...items,
-      image === void 0 ? /* @__PURE__ */ React47.createElement(WelcomeScreen, { onImageDone: handleImageDone, plugins }) : /* @__PURE__ */ React47.createElement(EditorScreen, { image, onEditDone: props.onEditDone, plugins })
+      image === void 0 ? /* @__PURE__ */ React48.createElement(WelcomeScreen, { onImageDone: handleImageDone, plugins }) : /* @__PURE__ */ React48.createElement(EditorScreen, { image, onEditDone: props.onEditDone, plugins })
     ));
   }
   var ImageEditor_default = ImageEditor;
@@ -37979,7 +38036,7 @@ Please use another name.` : formatMuiErrorMessage(18));
   function bindElement(element) {
     const root = (0, import_client.createRoot)(element);
     root.render(
-      /* @__PURE__ */ React48.createElement(React48.StrictMode, null, /* @__PURE__ */ React48.createElement(
+      /* @__PURE__ */ React49.createElement(React49.StrictMode, null, /* @__PURE__ */ React49.createElement(
         ImageEditor_default,
         {
           theme: testTheme,

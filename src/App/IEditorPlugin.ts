@@ -1,7 +1,7 @@
 import React from "react";
 import {WelcomeScreenProps} from "./Screens/WelcomeScreen/WelcomeScreen";
 import {ImageEditorProps} from "./ImageEditor";
-import {EditorScreenProps} from "./Screens/EditorScreen/EditorScreen";
+import {ViewerCanvasState} from "./Screens/EditorScreen/EditorImageViewer";
 
 export interface EditorScreenItem {
   readonly displayName: string;
@@ -14,5 +14,5 @@ export interface IEditorPlugin {
   readonly getGlobalItem?: (props: ImageEditorProps) => React.ReactNode;
   readonly getWelcomeScreenItem?: (props: WelcomeScreenProps) => React.ReactNode;
   readonly getSettingsScreenItem?: () => React.ReactNode;
-  readonly getEditorScreenItem?: (props: EditorScreenProps) => EditorScreenItem;
+  readonly getEditorScreenItem?: (props: ViewerCanvasState) => EditorScreenItem;
 }
