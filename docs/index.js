@@ -37699,10 +37699,10 @@ Please use another name.` : formatMuiErrorMessage(18));
       );
     }
     const panel = /* @__PURE__ */ import_react16.default.createElement(Box_default, { style: {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      flexDirection: "row"
+      // width: "100%",
+      // height: "100%",
+      // display: "flex",
+      // flexDirection: "row",
     } }, (() => {
       if (!plugin) {
         return null;
@@ -37737,12 +37737,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         ImageEditWithCanvas,
         {
           image: props.image,
-          panel: (
-            // <Box>
-            //   <Button>Button</Button>
-            // </Box>
-            panel
-          ),
+          panel,
           canvas: {
             state: canvasState,
             setState: setCanvasState

@@ -48,10 +48,10 @@ export function EditorScreen(props: EditorScreenProps) {
 
   const panel = <Box style={
     {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      flexDirection: "row",
+      // width: "100%",
+      // height: "100%",
+      // display: "flex",
+      // flexDirection: "row",
 
     }
   }>
@@ -98,14 +98,9 @@ export function EditorScreen(props: EditorScreenProps) {
         </Tabs>
       </Box>
       <Divider/>
-
-      {/*<TabPanel value={value} index={0}>*/}
       <ImageEditWithCanvas
         image={props.image}
         panel={
-          // <Box>
-          //   <Button>Button</Button>
-          // </Box>
           panel
         }
         canvas={
@@ -115,13 +110,6 @@ export function EditorScreen(props: EditorScreenProps) {
           }
         }
       />
-      {/*</TabPanel>*/}
-      {/*<TabPanel value={value} index={1}>*/}
-      {/*  Item Two*/}
-      {/*</TabPanel>*/}
-      {/*<TabPanel value={value} index={2}>*/}
-      {/*  Item Three*/}
-      {/*</TabPanel>*/}
     </Box>
   );
 }

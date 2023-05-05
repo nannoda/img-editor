@@ -5,7 +5,7 @@ import {ViewerCanvasState} from "./Screens/EditorScreen/EditorImageViewer";
 
 export interface EditorScreenItem {
   readonly displayName: string;
-  readonly toolPanel: React.ReactNode[];
+  readonly toolPanel: React.ReactNode;
   readonly canvasPainter: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
 }
 
