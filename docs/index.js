@@ -37698,12 +37698,7 @@ Please use another name.` : formatMuiErrorMessage(18));
         )
       );
     }
-    const panel = /* @__PURE__ */ import_react16.default.createElement(Box_default, { style: {
-      // width: "100%",
-      // height: "100%",
-      // display: "flex",
-      // flexDirection: "row",
-    } }, (() => {
+    const panel = /* @__PURE__ */ import_react16.default.createElement(Box_default, { style: {} }, (() => {
       if (!plugin) {
         return null;
       }
