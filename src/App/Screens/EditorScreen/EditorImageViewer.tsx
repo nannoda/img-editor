@@ -144,7 +144,7 @@ function initializeCanvas(props: EditorImageViewerProps,
   setupOnScrollEvent(canvasState);
 }
 
-function createCanvasState(props: EditorImageViewerProps | CanvasState, canvas: HTMLCanvasElement): ViewerCanvasState {
+function createCanvasState(props: EditorImageViewerProps, canvas: HTMLCanvasElement): ViewerCanvasState {
   const context = canvas.getContext("2d");
   if (context === null) {
     throw new Error("EditorImageViewer: initializeCanvas: context is null");
@@ -176,7 +176,7 @@ export function EditorImageViewer(props: EditorImageViewerProps) {
     canvasState.canvas = canvas;
     canvasState.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     canvasState.image = props.image;
-    initializeCanvas(props, canvasState);
+    initializeCanvas(props, canvasState, canvas);
     let requestId = 0;
     const callUpdate = () => {
       canvasUpdate(canvasState);

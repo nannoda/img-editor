@@ -1,19 +1,16 @@
-import {EditorPlugin} from "../../EditorPlugin";
-import {WelcomeScreenProps} from "./WelcomeScreen";
+import {IEditorPlugin} from "../IEditorPlugin";
+import {WelcomeScreenProps} from "../Screens/WelcomeScreen/WelcomeScreen";
 import {OpenInBrowser} from "@mui/icons-material";
 import {Button} from "@mui/material";
 import React from "react";
-
-export function OpenFilePlugin(): EditorPlugin {
-  return {
-    getWelcomeScreenItem: (props) => {
-      return <OpenFile
-        {...props}
-      />
-    }
+import {EditorPlugin} from "../EditorPlugin";
+export class OpenFilePlugin extends EditorPlugin{
+  getWelcomeScreenItem(props: WelcomeScreenProps) {
+    return <OpenFile
+      {...props}
+    />
   }
 }
-
 
 async function openImageButtonOnClick(props: WelcomeScreenProps) {
   const input = document.createElement('input');

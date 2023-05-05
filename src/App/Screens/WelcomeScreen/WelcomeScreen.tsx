@@ -1,16 +1,13 @@
 import React from 'react';
-import {Box, Button, IconButton, Snackbar, Typography} from "@mui/material";
-import {Close, ContentPaste, OpenInBrowser} from "@mui/icons-material";
-import {blue} from '@mui/material/colors';
+import {Box} from "@mui/material";
 import {DropZone} from "./DropZone";
-import {showError} from "../../MessageSnackbar";
-import {EditorPlugin} from "../../EditorPlugin";
+import {IEditorPlugin} from "../../IEditorPlugin";
 
 export interface WelcomeScreenProps {
     onImageDone: (
         image: HTMLImageElement,
     ) => void;
-    plugins: EditorPlugin[];
+    plugins: IEditorPlugin[];
 }
 
 export function WelcomeScreen(props: WelcomeScreenProps) {

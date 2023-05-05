@@ -1,13 +1,10 @@
 import * as React from 'react';
-import {useEffect} from "react";
 import {SetupDependencies} from "./SetupDependencies";
 import {WelcomeScreen} from "./Screens/WelcomeScreen/WelcomeScreen";
 import {EditorScreen} from "./Screens/EditorScreen/EditorScreen";
 import {Box, createTheme, Theme, ThemeProvider, useTheme} from "@mui/material";
-import {EditorPlugin} from "./EditorPlugin";
-import {MessageSnackbarPlugin} from "./MessageSnackbar";
-import {OpenFilePlugin} from "./Screens/WelcomeScreen/OpenFilePlugin";
-import {PasteImagePlugin} from "./Screens/WelcomeScreen/PasteImagePlugin";
+import {IEditorPlugin} from "./IEditorPlugin";
+import {defaultPlugins} from "./Plugins";
 
 SetupDependencies();
 
@@ -15,20 +12,10 @@ export interface ImageEditorProps {
   image?: HTMLImageElement;
   theme?: Theme;
   onEditDone?: (image: HTMLImageElement) => void;
-  plugins?: EditorPlugin[];
+  plugins?: IEditorPlugin[];
 }
 
-const defaultPlugins: EditorPlugin[] = [
-  MessageSnackbarPlugin(),
-  OpenFilePlugin(),
-  PasteImagePlugin(),
-];
 
-const fullPlugins: EditorPlugin[] = [
-  MessageSnackbarPlugin(),
-  OpenFilePlugin(),
-  PasteImagePlugin(),
-];
 
 function ImageEditor(props: ImageEditorProps) {
   if (props.image === undefined) {
@@ -38,7 +25,6 @@ function ImageEditor(props: ImageEditorProps) {
   const [image,
     setImage] =
     React.useState(undefined as HTMLImageElement | undefined);
-
   function handleImageDone(image: HTMLImageElement) {
     console.log("ImageEditor: handleImageDone")
     setImage(image);

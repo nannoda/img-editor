@@ -16,11 +16,17 @@ export interface MessageSnackbarProps {
 
 }
 
-export function MessageSnackbarPlugin():EditorPlugin{
-  return {
-    getGlobalItem: () => {
-      return <MessageSnackbar/>
-    }
+// export function MessageSnackbarPlugin(): IEditorPlugin {
+//   return {
+//     name: "MessageSnackbar",
+//     getGlobalItem: () => {
+//       return <MessageSnackbar/>
+//     }
+//   }
+// }
+export class MessageSnackbarPlugin extends EditorPlugin {
+  getGlobalItem() {
+    return <MessageSnackbar/>
   }
 }
 
@@ -57,7 +63,7 @@ function MessageSnackbar(props: MessageSnackbarProps) {
       action={
         <React.Fragment>
           <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-            <Close fontSize="small" />
+            <Close fontSize="small"/>
           </IconButton>
         </React.Fragment>
       }

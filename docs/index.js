@@ -37557,7 +37557,7 @@ Please use another name.` : formatMuiErrorMessage(18));
       canvasState.canvas = canvas;
       canvasState.ctx = canvas.getContext("2d");
       canvasState.image = props.image;
-      initializeCanvas(props, canvasState);
+      initializeCanvas(props, canvasState, canvas);
       let requestId = 0;
       const callUpdate = () => {
         canvasUpdate(canvasState);
@@ -37734,6 +37734,13 @@ Please use another name.` : formatMuiErrorMessage(18));
     d: "M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6-4 4h3v6h2v-6h3l-4-4z"
   }), "OpenInBrowser");
 
+  // src/App/EditorPlugin.ts
+  var EditorPlugin = class {
+    get name() {
+      return this.constructor.name;
+    }
+  };
+
   // src/App/MessageSnackbar.tsx
   var _showError;
   var showError = (error) => {
@@ -37741,13 +37748,11 @@ Please use another name.` : formatMuiErrorMessage(18));
       _showError(error);
     }
   };
-  function MessageSnackbarPlugin() {
-    return {
-      getGlobalItem: () => {
-        return /* @__PURE__ */ import_react17.default.createElement(MessageSnackbar, null);
-      }
-    };
-  }
+  var MessageSnackbarPlugin = class extends EditorPlugin {
+    getGlobalItem() {
+      return /* @__PURE__ */ import_react17.default.createElement(MessageSnackbar, null);
+    }
+  };
   function MessageSnackbar(props) {
     const [open, setOpen] = import_react17.default.useState(false);
     const [message, setMessage] = import_react17.default.useState("");
@@ -37778,18 +37783,16 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
-  // src/App/Screens/WelcomeScreen/OpenFilePlugin.tsx
+  // src/App/Plugins/OpenFilePlugin.tsx
   var import_react18 = __toESM(require_react());
-  function OpenFilePlugin() {
-    return {
-      getWelcomeScreenItem: (props) => {
-        return /* @__PURE__ */ import_react18.default.createElement(
-          OpenFile,
-          __spreadValues({}, props)
-        );
-      }
-    };
-  }
+  var OpenFilePlugin = class extends EditorPlugin {
+    getWelcomeScreenItem(props) {
+      return /* @__PURE__ */ import_react18.default.createElement(
+        OpenFile,
+        __spreadValues({}, props)
+      );
+    }
+  };
   function openImageButtonOnClick(props) {
     return __async(this, null, function* () {
       const input = document.createElement("input");
@@ -37836,7 +37839,7 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
-  // src/App/Screens/WelcomeScreen/PasteImagePlugin.tsx
+  // src/App/Plugins/PasteImagePlugin.tsx
   var import_react19 = __toESM(require_react());
   function PasteImagePlugin() {
     return {
@@ -37897,18 +37900,20 @@ Please use another name.` : formatMuiErrorMessage(18));
     );
   }
 
-  // src/App/ImageEditor.tsx
-  SetupDependencies();
+  // src/App/Plugins.ts
   var defaultPlugins = [
-    MessageSnackbarPlugin(),
-    OpenFilePlugin(),
+    new MessageSnackbarPlugin(),
+    new OpenFilePlugin(),
     PasteImagePlugin()
   ];
   var fullPlugins = [
-    MessageSnackbarPlugin(),
-    OpenFilePlugin(),
+    new MessageSnackbarPlugin(),
+    new OpenFilePlugin(),
     PasteImagePlugin()
   ];
+
+  // src/App/ImageEditor.tsx
+  SetupDependencies();
   function ImageEditor(props) {
     if (props.image === void 0) {
       console.log("ImageEditor: image is undefined");

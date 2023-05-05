@@ -1,13 +1,13 @@
 import React from "react";
 import {Box, Button, Divider, Tab, Tabs} from "@mui/material";
-import {EditorPlugin} from "../../EditorPlugin";
+import {IEditorPlugin} from "../../IEditorPlugin";
 import {ImageEditWithCanvas} from "./ImageEditWithCanvas";
 import {ViewerCanvasState} from "./EditorImageViewer";
 
 export interface EditorScreenProps {
   image: HTMLImageElement;
   onEditDone?: (image: HTMLImageElement) => void;
-  plugins: EditorPlugin[];
+  plugins: IEditorPlugin[];
 }
 
 export function EditorScreen(props: EditorScreenProps) {

@@ -1,11 +1,11 @@
-import {EditorPlugin} from "../../EditorPlugin";
+import {IEditorPlugin} from "../IEditorPlugin";
 import React from "react";
 import {ContentPaste} from "@mui/icons-material";
-import {showError} from "../../MessageSnackbar";
+import {showError} from "../MessageSnackbar";
 import {Button} from "@mui/material";
-import {WelcomeScreenProps} from "./WelcomeScreen";
+import {WelcomeScreenProps} from "../Screens/WelcomeScreen/WelcomeScreen";
 
-export function PasteImagePlugin(): EditorPlugin {
+export function PasteImagePlugin(): IEditorPlugin {
   return {
     getWelcomeScreenItem: (props: WelcomeScreenProps) => {
       return <PasteButton {...props} />;
